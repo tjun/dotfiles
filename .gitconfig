@@ -1,0 +1,74 @@
+[user]
+	name = Junichiro Takagi
+	email = t.junichiro@gmail.com
+[color]
+	ui = auto
+[push]
+	default = tracking
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+	pager = less -r
+	autocrlf = input
+	safecrlf = true
+[merge]
+	ff = false
+	tool = vimdiff
+[alias]
+	st = status
+	sh = show
+	co = checkout
+	ci = commit -v
+	br = branch
+	ad = add -p
+	ls = log --stat
+	di = diff
+	dc = diff --cached
+	s = status --short --branch
+	d = diff
+	grep = grep --line-number --show-function --color --heading --break
+	lp = log --decorate --stat --patch
+    hist = log --pretty=format:\\\"%h %ad | %s%d [%an]\\\" --graph --date=short
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	branch-root = merge-base master HEAD
+	review = !tig --reverse -w $(git branch-root)..HEAD
+	ap = add -p
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[pager]
+[tig "bind"]
+    main = B @hub browse -- commit/%(commit)
+    diff = B @hub browse -- commit/%(commit)
+    tree = B @hub browse -- tree/%(commit)/%(directory)
+    blob = B @hub browse -- tree/%(commit)/%(file)
+[branch]
+	autosetuprebase = always
+[pull]
+	rebase = preserve
+[ghq]
+	root = /Users/tjun/dev/src
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+
+[url "github:"]
+  insteadOf = https://github.com
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[pager]
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less
+[diff]
+	compactionHeuristic = true
+[commit]
+	verbose = true
+[http]
+	sslVerify = true
+[http "https://gopkg.in"]
+	followRedirects = true
