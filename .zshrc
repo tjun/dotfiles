@@ -15,6 +15,10 @@ if [[ -f ~/.zplug/init.zsh ]]; then
         echo
     fi
     zplug load
+else
+   echo "install zplug with the following command:"
+   echo "curl -sL zplug.sh/installer | zsh"
+   return
 fi
 
 if ! is_tmux_running && shell_has_started_interactively; then
