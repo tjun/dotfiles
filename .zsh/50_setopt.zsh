@@ -40,7 +40,7 @@ setopt sh_word_split
 # ~$ < file1 > file3        # copy file1 to file3
 # ~$ < file1 > file3 | cat  # copy and put to stdout
 # ~$ cat file1 > file3 > /dev/stdin  # tee
-s# etopt multios
+# setopt multios
 
 # Automatically delete slash complemented by supplemented by inserting a space.
 setopt auto_remove_slash

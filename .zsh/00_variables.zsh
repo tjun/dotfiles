@@ -2,9 +2,9 @@
 export PATH=/usr/local/bin:$PATH
 
 if [ -x "`which go`" ]; then
-    export GOROOT=`go env GOROOT`
-    export GOPATH=$HOME/dev
-    export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
+  export GOROOT=`go env GOROOT`
+  export GOPATH=$HOME/dev
+  export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
 fi
 
 if [ -e $HOME/.nodebrew ]; then
@@ -27,8 +27,9 @@ if [ -x "`which kubectl`" ]; then
   source <(kubectl completion zsh)
 fi
 
-if [ -e /usr/local/share/zsh/site-functions/_git ]; then
-  source /usr/local/share/zsh/site-functions/_git
+
+if [ -e /usr/local/share/git-core/contrib/diff-highlight/diff-highlight ]; then
+ export PATH=$PATH:/usr/local/share/git-core/contrib/diff-highlight
 fi
 
 export EDITOR='vim'
