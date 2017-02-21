@@ -22,6 +22,7 @@ if [ -x "`which hub`" ]; then
     zplug "glidenote/hub-zsh-completion"
 fi
 
+OEDO_COLORSCHEME=mita
 zplug 'tjun/oedo.zsh', use:"oedo.zsh"
 
 

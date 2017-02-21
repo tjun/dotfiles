@@ -67,7 +67,7 @@ setopt print_exit_value
 #setopt xtrace
 
 # Confirm when executing 'rm *'
-setopt rm_star_wait
+#setopt rm_star_wait
 
 # Let me know immediately when terminating job
 setopt notify
