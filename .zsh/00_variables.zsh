@@ -21,6 +21,7 @@ if [ -e $HOME/gcp/google-cloud-sdk ]; then
   source $HOME/gcp/google-cloud-sdk/completion.zsh.inc
   source $HOME/gcp/google-cloud-sdk/path.zsh.inc
   export PATH=$PATH:~/gcp/google-cloud-sdk/bin
+  export PATH=$PATH:~/gcp/google-cloud-sdk/platform/google_appengine
 fi
 
 if [ -x "`which kubectl`" ]; then
