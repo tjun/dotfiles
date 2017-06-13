@@ -17,6 +17,10 @@ if [ -e $HOME/.rbenv ]; then
   eval "$(rbenv init -)"
 fi
 
+if [ -x "`which pyenv`" ]; then
+  eval "$(pyenv init -)"
+fi
+
 if [ -e $HOME/gcp/google-cloud-sdk ]; then
   source $HOME/gcp/google-cloud-sdk/completion.zsh.inc
   source $HOME/gcp/google-cloud-sdk/path.zsh.inc
