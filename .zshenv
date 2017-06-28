@@ -12,6 +12,7 @@ fpath=( \
     ~/.zsh/Completion(N-/) \
     ~/.zsh/functions(N-/) \
     ~/.zsh/plugins/zsh-completions(N-/) \
+    /usr/local/share/zsh/functions(N-/) \
     /usr/local/share/zsh/site-functions(N-/) \
     $fpath \
     )
