@@ -119,5 +119,8 @@ alias t="tree -C"
 
 alias l="ls -l"
 
-alias docker-kill-all='docker kill $(docker ps -a)'
-alias docker-rm-all='docker rm $(docker ps -a -q)'
+if has "docker"; then
+  alias docker-kill-all='docker kill $(docker ps -a)'
+  alias docker-rm-all='docker rm $(docker ps -aq)'
+  alias docker-delete-all-volume='docker volume rm $(docker volume ls -qf dangling=true)'
+fi
