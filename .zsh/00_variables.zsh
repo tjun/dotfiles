@@ -17,8 +17,11 @@ if [ -e $HOME/.rbenv ]; then
   eval "$(rbenv init -)"
 fi
 
-if [ -x "`which pyenv`" ]; then
-  eval "$(pyenv init -)"
+if [ -e $HOME/.pyenv ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PATH:$PYENV_ROOT/bin:$PYENV_ROOT/shims"
+  # eval "$(pyenv init -)" (# 必要に応じて設定)
+  # eval "$(pyenv virtualenv-init -)" (# 必要に応じて設定)
 fi
 
 if [ -e $HOME/gcp/google-cloud-sdk ]; then
