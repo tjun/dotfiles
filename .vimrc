@@ -57,14 +57,6 @@ autocmd BufWritePre * :%s/\s\+$//ge
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/vundle.git/
-call vundle#rc()
-
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/unite.vim'
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'sudo.vim'
-
 filetype plugin indent on
 syntax enable
 
