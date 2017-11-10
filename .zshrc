@@ -7,13 +7,13 @@ if [[ -f ~/.zplug/init.zsh ]]; then
     # For development version of zplug
     source ~/.zplug/init.zsh
 
-    if ! zplug check --verbose; then
-        printf "Install? [y/N]: "
-        if read -q; then
-            echo; zplug install
-        fi
-        echo
-    fi
+#    if ! zplug check --verbose; then
+#        printf "Install? [y/N]: "
+#        if read -q; then
+#            echo; zplug install
+#        fi
+#        echo
+#    fi
     zplug load
 else
    echo "install zplug with the following command:"
