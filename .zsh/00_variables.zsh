@@ -25,7 +25,7 @@ if [ -e $HOME/.pyenv ]; then
 fi
 
 if [ -e $HOME/gcp/google-cloud-sdk ]; then
-  zplug "$HOME/gcp/google-cloud-sdk/completion.zsh.inc", from:local,defer:2
+  zplug "$HOME/gcp/google-cloud-sdk/completion.zsh.inc", from:"local", defer:2
   # source $HOME/gcp/google-cloud-sdk/completion.zsh.inc
   source $HOME/gcp/google-cloud-sdk/path.zsh.inc
   export PATH=$PATH:~/gcp/google-cloud-sdk/bin
