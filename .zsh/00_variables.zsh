@@ -20,12 +20,13 @@ fi
 if [ -e $HOME/.pyenv ]; then
   export PYENV_ROOT="$HOME/.pyenv"
   export PATH="$PATH:$PYENV_ROOT/bin:$PYENV_ROOT/shims"
-  # eval "$(pyenv init -)" (# 必要に応じて設定)
-  # eval "$(pyenv virtualenv-init -)" (# 必要に応じて設定)
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
 fi
 
 if [ -e $HOME/gcp/google-cloud-sdk ]; then
-  source $HOME/gcp/google-cloud-sdk/completion.zsh.inc
+  zplug "$HOME/gcp/google-cloud-sdk/completion.zsh.inc", from:local,defer:2
+  # source $HOME/gcp/google-cloud-sdk/completion.zsh.inc
   source $HOME/gcp/google-cloud-sdk/path.zsh.inc
   export PATH=$PATH:~/gcp/google-cloud-sdk/bin
   export PATH=$PATH:~/gcp/google-cloud-sdk/platform/google_appengine
