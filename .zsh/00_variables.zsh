@@ -41,6 +41,10 @@ if [ -e /usr/local/share/git-core/contrib/diff-highlight/diff-highlight ]; then
  export PATH=$PATH:/usr/local/share/git-core/contrib/diff-highlight
 fi
 
+if [ -e /Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin/java ]; then
+  export PATH=$PATH:/Library/Internet\ Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin/java
+fi
+
 export EDITOR='vim'
 export LESS='-i -M -R'
 export HOMEBREW_ANALYTICS_DEBUG=1
