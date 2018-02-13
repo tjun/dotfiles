@@ -17,11 +17,8 @@ if [ -e $HOME/.rbenv ]; then
   eval "$(rbenv init -)"
 fi
 
-if [ -e $HOME/.pyenv ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PATH:$PYENV_ROOT/bin:$PYENV_ROOT/shims"
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
+if [ -x "`which python3`" ]; then
+  export PATH=$PATH:/usr/local/lib/python3.6/site-packages
 fi
 
 if [ -e $HOME/gcp/google-cloud-sdk ]; then
