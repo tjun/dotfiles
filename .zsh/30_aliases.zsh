@@ -36,6 +36,7 @@ alias lr='ls -lR'          # Recursive ls
 # The ubiquitous 'll': directories first, with alphanumeric sorting:
 #alias ll='ls -lv --group-directories-first'
 
+alias g='git'
 alias cp="${ZSH_VERSION:+nocorrect} cp -i"
 alias mv="${ZSH_VERSION:+nocorrect} mv -i"
 alias mkdir="${ZSH_VERSION:+nocorrect} mkdir"
@@ -43,7 +44,6 @@ alias mkdir="${ZSH_VERSION:+nocorrect} mkdir"
 autoload -Uz zmv
 alias zmv='noglob zmv -W'
 
-alias du='du -h'
 alias job='jobs -l'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -57,13 +57,15 @@ else
 fi
 
 alias vi="vim"
+alias emacs="TERM=xterm-256color emacs -nw"
+alias e='emacs'
 
 # Use plain vim.
 alias nvim='vim -N -u NONE -i NONE'
 
-# The first word of each simple command, if unquoted, is checked to see 
-# if it has an alias. [...] If the last character of the alias value is 
-# a space or tab character, then the next command word following the 
+# The first word of each simple command, if unquoted, is checked to see
+# if it has an alias. [...] If the last character of the alias value is
+# a space or tab character, then the next command word following the
 # alias is also checked for alias expansion
 alias sudo='sudo '
 if is_osx; then
@@ -124,3 +126,4 @@ if has "docker"; then
   alias docker-rm-all='docker rm $(docker ps -aq)'
   alias docker-delete-all-volume='docker volume rm $(docker volume ls -qf dangling=true)'
 fi
+

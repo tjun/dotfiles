@@ -113,3 +113,4 @@ peco-src () {
     zle clear-screen
 }
 
+function git(){hub "$@"}
