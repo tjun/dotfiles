@@ -20,8 +20,8 @@
 ;; package.el
 ;;_______________________________________________________________________
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
 ;; line number format
@@ -245,6 +245,8 @@
 ;;______________________________________________________________________
  (require 'hlinum)
 
+(require 'helm-config)
+(helm-mode 1)
 
 ;;
 ;; ag
@@ -283,7 +285,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (toml-mode terraform-mode yaml-mode web-mode recentf-ext popwin markdown-mode hlinum go-mode git-gutter-fringe direx auto-complete ag))))
+    (f helm toml-mode terraform-mode yaml-mode web-mode recentf-ext popwin markdown-mode hlinum go-mode git-gutter-fringe direx auto-complete ag))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
