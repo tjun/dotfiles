@@ -54,8 +54,6 @@
 	smudge = git-lfs smudge %f
 	required = true
 
-[url "github:"]
-  insteadOf = https://github.com
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52

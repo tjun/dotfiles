@@ -1,3 +1,6 @@
+(set-language-environment 'Japanese)
+(prefer-coding-system 'utf-8)
+
 ; -*- Mode: Emacs-Lisp ; Coding: utf-8 -*-
 ;; ------------------------------------------------------------------------
 ;; @ load-path
@@ -162,8 +165,9 @@
              (local-set-key (kbd "C-c i") 'go-goto-imports)
              (local-set-key (kbd "C-c d") 'godoc)))
 (add-hook 'before-save-hook 'gofmt-before-save)
-
-
+(require 'go-autocomplete)
+(require 'auto-complete-config)
+(ac-config-default)
 
 ;;
 ;; markdown-mode
@@ -289,7 +293,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yaml-mode web-mode recentf-ext popwin markdown-mode hlinum go-mode git-gutter-fringe direx auto-complete ag))))
+    (toml-mode terraform-mode yaml-mode web-mode recentf-ext popwin markdown-mode hlinum go-mode git-gutter-fringe direx auto-complete ag))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -113,4 +113,10 @@ peco-src () {
     zle clear-screen
 }
 
-function git(){hub "$@"}
+git () {
+    hub "$@"
+}
+
+panewrap () {
+    printf "\033]2;%s\033\\" "$1"; "$@";
+}
