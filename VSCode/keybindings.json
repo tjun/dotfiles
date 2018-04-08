@@ -1,0 +1,46 @@
+// ~/Library/Application\ Support/Code/User/keybindings.json
+// Place your key bindings in this file to overwrite the defaults
+[
+  {
+    "key": "ctrl+x f",
+    "command": "workbench.action.quickOpen"
+  },
+  {
+    "key": "ctrl+x ctrl+f",
+    "command": "workbench.action.quickOpen"
+  },
+  {
+    "key": "ctrl+z n",
+    "command": "workbench.action.nextEditor"
+  },
+  {
+    "key": "ctrl+tab",
+    "command": "workbench.action.nextEditor"
+  },
+  {
+    "key": "ctrl+z p",
+    "command": "workbench.action.previousEditor"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "workbench.action.previousEditor"
+  },
+  {
+    "key": "ctrl+x 3",
+    "command": "workbench.action.splitEditor"
+  },
+  {
+    "key": "ctrl+t",
+    "command": "workbench.action.navigateEditorGroups"
+  },
+  {
+    "key": "ctrl+space",
+    "command": "emacs.exitMarkMode",
+    "when": "editorHasSelection && editorTextFocus"
+  },
+  {
+    "key": "escape",
+    "command": "emacs.exitMarkMode",
+    "when": "editorHasSelection && editorTextFocus"
+  }
+]
