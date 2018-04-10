@@ -105,14 +105,19 @@
 
 ;; recentf menu items
 (setq recentf-max-menu-items 20)
-
-;; recentf max save items
 (setq recentf-max-saved-items 3000)
+(setq recentf-auto-cleanup 'never)
+(setq recentf-exclude '("/recentf" "COMMIT_EDITMSG" "/.?TAGS" "^/sudo:" "/\\.emacs\\.d/\\.cask/"))
+(setq recentf-auto-save-timer (run-with-idle-timer 30 t 'recentf-save-list))
+
+(global-set-key (kbd "C-x f") 'helm-recentf)
+(global-set-key (kbd "C-x C-f") 'helm-recentf)
+
+(recentf-mode 1)
 
 ;; Add dired to recentf
 (require 'recentf-ext)
 
-;; use recent open file
 (recentf-mode t)
 
 (setq history-length 10000)
@@ -139,7 +144,7 @@
 (global-set-key (kbd "C-j")     'newline-and-indent)
 (global-set-key (kbd "C-t")     'next-multiframe-window)
 (global-set-key (kbd "C-;")     'comment-dwim)
-(global-set-key (kbd "C-c ;")   'comment-or-uncomment-region)
+(global-set-key (kbd "C-;")     'comment-or-uncomment-region)
 ;(global-set-key (kbd "M-r")     'replace-string)
 ;(global-set-key (kbd "C-q")     'undo)
 
@@ -243,10 +248,64 @@
 ;;
 ;; hlinum (add background color for current line num)
 ;;______________________________________________________________________
- (require 'hlinum)
+(require 'hlinum)
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(linum-highlight-face ((t (:foreground "black" :background "snow")))))
+
+(set-face-foreground 'linum-highlight-face "black")
+(set-face-background 'linum-highlight-face "snow")
+
+(hlinum-activate)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(global-linum-mode t)
+ '(package-selected-packages
+   (quote
+    (helm-ghq f helm toml-mode terraform-mode yaml-mode web-mode recentf-ext popwin markdown-mode hlinum go-mode git-gutter-fringe direx auto-complete ag))))
+
+;;
+;; helm
+;;______________________________________________________________________
+(require 'helm)
 (require 'helm-config)
 (helm-mode 1)
+(helm-autoresize-mode t)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+(define-key helm-find-files-map (kbd "C-h") 'delete-backward-char)
+
+(global-set-key (kbd "C-x b") 'helm-mini)
+(setq helm-buffers-fuzzy-matching t
+      helm-recentf-fuzzy-match    t)
+
+(set-face-attribute 'helm-selection nil
+		     :background "brightmagenta"
+		     :foreground "black");
+
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
+(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+
+(setq helm-ff-file-name-history-use-recentf t)
+
+(defadvice helm-ff-kill-or-find-buffer-fname (around execute-only-if-exist activate)
+  "Execute command only if CANDIDATE exists"
+  (when (file-exists-p candidate)
+    ad-do-it))
+
+;; helm-ghq
+(define-key global-map (kbd "C-]")     'helm-ghq)
 
 ;;
 ;; ag
@@ -276,19 +335,6 @@
 (push '(direx:direx-mode :position left :width 40 :dedicated t)
       popwin:special-display-config)
 
-(global-set-key (kbd "C-x C-h") 'my/dired-jump)
+(global-set-key (kbd "C-x C-j") 'my/dired-jump)
+(global-set-key (kbd "C-x RET") 'my/dired-jump)
 ; (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory-other-window)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (f helm toml-mode terraform-mode yaml-mode web-mode recentf-ext popwin markdown-mode hlinum go-mode git-gutter-fringe direx auto-complete ag))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
