@@ -2,6 +2,7 @@
 {
     "editor.tabSize": 2,
     "editor.renderIndentGuides": true,
+    "editor.renderControlCharacters": true,
     "editor.renderWhitespace": "boundary",
     "editor.wordWrapColumn": 200,
     "editor.wrappingIndent": "indent",

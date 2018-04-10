@@ -10,7 +10,7 @@
     "command": "workbench.action.quickOpen"
   },
   {
-    "key": "ctrl+z n",
+    "key": "ctrl+x n",
     "command": "workbench.action.nextEditor"
   },
   {
@@ -18,7 +18,7 @@
     "command": "workbench.action.nextEditor"
   },
   {
-    "key": "ctrl+z p",
+    "key": "ctrl+x p",
     "command": "workbench.action.previousEditor"
   },
   {
