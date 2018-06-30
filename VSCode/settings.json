@@ -10,4 +10,5 @@
     "explorer.autoReveal": false,
     "go.autocompleteUnimportedPackages": true,
     "go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
+    "explorer.confirmDelete": false,
 }

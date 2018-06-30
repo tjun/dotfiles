@@ -36,6 +36,9 @@ if [ -x "`which kubectl`" ]; then
   source <(kubectl completion zsh)
 fi
 
+if [ -e $HOME/gcp/kubernetes/bin ]; then
+  export PATH=$PATH:~/gcp/kubernetes/bin
+fi
 
 if [ -e /usr/local/share/git-core/contrib/diff-highlight/diff-highlight ]; then
  export PATH=$PATH:/usr/local/share/git-core/contrib/diff-highlight
