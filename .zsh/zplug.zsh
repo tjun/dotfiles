@@ -12,7 +12,9 @@ zplug "zsh-users/zsh-completions", lazy:true
 zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
-zplug 'Valodim/zsh-curl-completion'
+#zplug 'Valodim/zsh-curl-completion'
+
+zplug "superbrothers/zsh-kubectl-prompt", defer:2
 
 if [ -x "`which docker`" ]; then
     zplug "felixr/docker-zsh-completion", lazy:true

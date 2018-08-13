@@ -1,4 +1,3 @@
-// ~/Library/Application\ Support/Code/User/settings.json
 {
     "editor.tabSize": 2,
     "editor.renderIndentGuides": true,
@@ -11,4 +10,5 @@
     "go.autocompleteUnimportedPackages": true,
     "go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
     "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
 }
