@@ -127,3 +127,4 @@ if has "docker"; then
   alias docker-delete-all-volume='docker volume rm $(docker volume ls -qf dangling=true)'
 fi
 
+alias kg="kubectl get"
