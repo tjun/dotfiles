@@ -86,5 +86,3 @@ if [[ $UID == 0 ]]; then
     export SAVEHIST=0
 fi
 
-
-

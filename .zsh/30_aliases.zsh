@@ -37,9 +37,9 @@ alias lr='ls -lR'          # Recursive ls
 #alias ll='ls -lv --group-directories-first'
 
 alias g='git'
-alias cp="${ZSH_VERSION:+nocorrect} cp -i"
-alias mv="${ZSH_VERSION:+nocorrect} mv -i"
-alias mkdir="${ZSH_VERSION:+nocorrect} mkdir"
+#alias cp="${ZSH_VERSION:+nocorrect} cp -i"
+#alias mv="${ZSH_VERSION:+nocorrect} mv -i"
+#alias mkdir="${ZSH_VERSION:+nocorrect} mkdir"
 
 autoload -Uz zmv
 alias zmv='noglob zmv -W'
@@ -127,4 +127,3 @@ if has "docker"; then
   alias docker-delete-all-volume='docker volume rm $(docker volume ls -qf dangling=true)'
 fi
 
-alias kg="kubectl get"

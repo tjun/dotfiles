@@ -32,8 +32,15 @@ if [ -e $HOME/gcp/go_appengine ]; then
   export PATH=$PATH:~/gcp/go_appengine
 fi
 
+if [ -e $HOME/gcp/google-cloud-sdk/platform/google_appengine ]; then
+  export PATH=$HOME/gcp/google-cloud-sdk/platform/google_appengine:$PATH
+fi
+
 if [ -x "`which kubectl`" ]; then
   source <(kubectl completion zsh)
+  alias k=kubectl
+  alias kg="kubectl get"
+  complete -o default -F __start_kubectl k
 fi
 
 if [ -e $HOME/gcp/kubernetes/bin ]; then
@@ -53,3 +60,4 @@ export LESS='-i -M -R'
 export HOMEBREW_ANALYTICS_DEBUG=1
 
 export LANG=ja_JP.UTF-8
+PURE_PROMPT_SYMBOL=>

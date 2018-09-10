@@ -1,7 +1,9 @@
-ZPLUG_SUDO_PASSWORD=
 ZPLUG_PROTOCOL=ssh
 
 zplug "zplug/zplug", hook-build:'zplug --self-manage'
+zplug "mafredri/zsh-async", from:github
+PURE_PROMPT_SYMBOL="❯"
+zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 
 zplug "~/.zsh", from:local, use:"<->_*.zsh"
 
@@ -15,6 +17,8 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 #zplug 'Valodim/zsh-curl-completion'
 
 zplug "superbrothers/zsh-kubectl-prompt", defer:2
+RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+
 
 if [ -x "`which docker`" ]; then
     zplug "felixr/docker-zsh-completion", lazy:true
@@ -25,5 +29,5 @@ if [ -x "`which hub`" ]; then
 fi
 
 #OEDO_COLORSCHEME=mita
-zplug 'tjun/oedo.zsh', use:"oedo.zsh"
+#zplug 'tjun/oedo.zsh', use:"oedo.zsh"
 
