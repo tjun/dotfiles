@@ -11,4 +11,5 @@
     "go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
+    "workbench.iconTheme": "vscode-icons",
 }
