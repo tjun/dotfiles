@@ -38,8 +38,6 @@ fi
 
 if [ -x "`which kubectl`" ]; then
   source <(kubectl completion zsh)
-  alias k=kubectl
-  alias kg="kubectl get"
   complete -o default -F __start_kubectl k
 fi
 
