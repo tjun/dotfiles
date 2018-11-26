@@ -58,4 +58,4 @@ export LESS='-i -M -R'
 export HOMEBREW_ANALYTICS_DEBUG=1
 
 export LANG=ja_JP.UTF-8
-PURE_PROMPT_SYMBOL=>
+
