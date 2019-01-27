@@ -8,8 +8,10 @@ fi
 
 if has 'git'; then
     alias ga='git add -p'
+    alias gcm='git ci -m'
     alias gs='git status'
     alias gp='git pull'
+    alias gps='git push origin HEAD'
     alias gl='git log -p'
     alias gm='git co master'
 fi
