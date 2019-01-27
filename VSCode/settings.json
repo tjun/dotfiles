@@ -9,7 +9,16 @@
     "explorer.autoReveal": false,
     "go.autocompleteUnimportedPackages": true,
     "go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
+    "go.alternateTools": {
+        "go-langserver": "bingo",
+    },
+    "go.languageServerExperimentalFeatures": {
+        "format": true,
+        "autoComplete": true
+    },
+    "go.useLanguageServer": true,
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "workbench.iconTheme": "vscode-icons",
+    "go.lintOnSave": "file",
 }

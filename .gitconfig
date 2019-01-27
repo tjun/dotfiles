@@ -33,7 +33,8 @@
 	branch-root = merge-base master HEAD
 	review = !tig --reverse -w $(git branch-root)..HEAD
 	ap = add -p
-	see = browse
+    see = !hub browse
+    prc = !hub pull-request -c
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
