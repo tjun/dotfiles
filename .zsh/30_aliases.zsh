@@ -7,6 +7,7 @@ if is_osx; then
 fi
 
 if has 'git'; then
+    alias ga='git add -p'
     alias gs='git status'
     alias gp='git pull'
     alias gl='git log -p'
