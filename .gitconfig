@@ -28,13 +28,15 @@
 	d = diff
 	grep = grep --line-number --show-function --color --heading --break
 	lp = log --decorate --stat --patch
-    hist = log --pretty=format:\\\"%h %ad | %s%d [%an]\\\" --graph --date=short
-    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	hist = log --pretty=format:\\\"%h %ad | %s%d [%an]\\\" --graph --date=short
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
 	branch-root = merge-base master HEAD
 	review = !tig --reverse -w $(git branch-root)..HEAD
+	current-branch = rev-parse --abbrev-ref HEAD
+	pull-dry-run  = !"git fetch origin; B=$(git rev-parse --abbrev-ref HEAD); git diff --stat --summary ${B}..origin/${B}"
 	ap = add -p
-    see = !hub browse
-    prc = !hub pull-request -c
+	see = !hub browse
+	prc = !hub pull-request -c
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f

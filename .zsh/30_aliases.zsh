@@ -10,10 +10,12 @@ if has 'git'; then
     alias ga='git add -p'
     alias gcm='git ci -m'
     alias gs='git status'
-    alias gp="git pull origin $(git rev-parse --abbrev-ref HEAD)"
+    alias gp='git pull origin $(git rev-parse --abbrev-ref HEAD)'
     alias gps='git push origin HEAD'
     alias gl='git log -p'
     alias gm='git co master'
+    alias gnb='git co -b'
+    alias gcn='git current-branch'
 fi
 
 if (( $+commands[gls] )); then
