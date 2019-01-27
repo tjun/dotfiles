@@ -7,7 +7,10 @@ if is_osx; then
 fi
 
 if has 'git'; then
-    alias gst='git status'
+    alias gs='git status'
+    alias gp='git pull'
+    alias gl='git log -p'
+    alias gm='git co master'
 fi
 
 if (( $+commands[gls] )); then
@@ -137,4 +140,3 @@ fi
 if has "bat"; then
   alias cat='bat'
 fi
-
