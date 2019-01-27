@@ -15,7 +15,7 @@ if has 'git'; then
     alias gl='git log -p'
     alias gm='git co master'
     alias gnb='git co -b'
-    alias gcn='git current-branch'
+    alias gcb='git current-branch'
 fi
 
 if (( $+commands[gls] )); then
