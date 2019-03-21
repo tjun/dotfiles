@@ -11,7 +11,7 @@ if has 'git'; then
     alias gcm='git ci -m'
     alias gs='git status'
     alias gp='git pull origin $(git rev-parse --abbrev-ref HEAD)'
-    alias gps='git push origin HEAD'
+    alias gps='git push origin HEAD && g see'
     alias gl='git log -p'
     alias gm='git co master'
     alias gnb='git co -b'
