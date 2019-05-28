@@ -17,6 +17,10 @@ if [ -e $HOME/.rbenv ]; then
   eval "$(rbenv init -)"
 fi
 
+if [ -e $HOME/.cargo ]; then
+  source $HOME/.cargo/env
+fi
+
 if [ -x "`which python3`" ]; then
   export PATH=$PATH:/usr/local/lib/python3.6/site-packages
 fi
