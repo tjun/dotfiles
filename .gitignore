@@ -1,5 +1,6 @@
 .DS_Store
 *~
+.vscode
 .config/*
 .emacs.d/ac-comphist.dat
 .emacs.d/history
