@@ -22,5 +22,6 @@
     "go.lintOnSave": "file",
     "yaml.format.enable": false,
     "yaml.format.proseWrap": "never",
-    "go.useLanguageServer": true
+    "rust.all_features": true,
+    "editor.formatOnPaste": true
 }

@@ -19,6 +19,7 @@ fi
 
 if [ -e $HOME/.cargo ]; then
   source $HOME/.cargo/env
+  export RUST_BACKTRACE=1
 fi
 
 if [ -x "`which python3`" ]; then
