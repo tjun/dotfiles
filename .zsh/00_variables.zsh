@@ -9,7 +9,7 @@ fi
 
 if [ -e $HOME/.nodebrew ]; then
   export PATH=$HOME/.nodebrew/current/bin:$PATH
-  nodebrew use v6.11.3
+  nodebrew use v6.17.1
 fi
 
 if [ -e $HOME/.rbenv ]; then

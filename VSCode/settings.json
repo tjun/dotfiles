@@ -23,5 +23,7 @@
     "yaml.format.enable": false,
     "yaml.format.proseWrap": "never",
     "rust.all_features": true,
-    "editor.formatOnPaste": true
+    "editor.formatOnPaste": true,
+    "go.formatTool": "goimports",
+    "go.useLanguageServer": true
 }
