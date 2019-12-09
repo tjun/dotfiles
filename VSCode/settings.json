@@ -25,5 +25,20 @@
     "rust.all_features": true,
     "editor.formatOnPaste": true,
     "go.formatTool": "goimports",
-    "go.useLanguageServer": true
+    "go.useLanguageServer": true,
+    "vsicons.dontShowNewVersionMessage": true,
+    "C_Cpp.formatting": "Disabled",
+    "terraform.indexing": {
+        "enabled": false,
+        "liveIndexing": false,
+        "delay": 500,
+        "exclude": [
+            ".terraform/**/*",
+            "**/.terraform/**/*"
+        ]
+    },
+    "terraform.languageServer": {
+        "enabled": true,
+        "args": []
+    }
 }
