@@ -49,7 +49,7 @@
 [branch]
 	autosetuprebase = always
 [pull]
-	rebase = preserve
+	rebase = merges
 [ghq]
 	root = ~/dev/src
 [filter "lfs"]
@@ -58,7 +58,7 @@
 	required = true
 
 [url "github.com:"]
-   insteadOf = https://github.com
+	insteadOf = https://github.com
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52
