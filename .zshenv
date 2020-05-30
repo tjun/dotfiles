@@ -2,7 +2,6 @@ typeset -gx -U path
 path=( \
     /usr/local/bin(N-/) \
     ~/bin(N-/) \
-    ~/.zplug/bin(N-/) \
     "$path[@]" \
     )
 
@@ -10,22 +9,21 @@ path=( \
 typeset -gx -U fpath
 fpath=( \
     ~/.zsh/Completion(N-/) \
-    ~/.zsh/functions(N-/) \
-    ~/.zsh/plugins/zsh-completions(N-/) \
+    # ~/.zsh/functions(N-/) \
     /usr/local/share/zsh/functions(N-/) \
     /usr/local/share/zsh/site-functions(N-/) \
     $fpath \
     )
 
 # autoload
-autoload -Uz run-help
-autoload -Uz add-zsh-hook
-autoload -Uz colors && colors
-autoload -Uz compinit && compinit -u
-autoload -Uz is-at-least
+# autoload -Uz run-help
+# autoload -Uz colors && colors
+# autoload -Uz compinit && compinit -u
+# autoload -Uz is-at-least
+autoload -U promptinit; promptinit
 
 # LANGUAGE must be set by en_US
-export LANGUAGE="en_US.UTF-8"
+export LANGUAGE="ja_JP.UTF-8"
 export LANG="${LANGUAGE}"
 export LC_ALL="${LANGUAGE}"
 export LC_CTYPE="${LANGUAGE}"
