@@ -44,7 +44,7 @@ zinit light-mode for \
 # zinit snippet "${HOME}/.zsh/10_utils.zsh"
 zinit snippet "${HOME}/.zsh/30_aliases.zsh"
 zinit snippet "${HOME}/.zsh/50_setopt.zsh"
-# zinit snippet "${HOME}/.zsh/70_misc.zsh"
+zinit snippet "${HOME}/.zsh/70_misc.zsh"
 
 # Two regular plugins loaded without investigating.
 zplugin ice wait'0' atload'_zsh_autosuggest_start'

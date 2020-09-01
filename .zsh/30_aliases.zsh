@@ -59,7 +59,7 @@ if [ -x "`which docker`" ]; then
 fi
 
 if [ -x "`which kubectl`" ]; then
-  alias k=kubectl
+  alias k="nocorrect kubectl"
   alias kg="kubectl get "
   alias kgy="kubectl get -o yaml "
   alias kd="kubectl describe "
@@ -67,6 +67,10 @@ fi
 
 if [ -x "`which bat`" ]; then
   alias cat='bat'
+fi
+
+if [ -x "`which gojq`" ]; then
+  alias jq='gojq'
 fi
 
 function ghq-fzf() {
