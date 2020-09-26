@@ -40,7 +40,11 @@
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
-[pager]
+[core]
+  pager = delta --theme='Monokai Extended'
+[interactive]
+  diffFilter = delta --color-only
+
 [tig "bind"]
     main = B @hub browse -- commit/%(commit)
     diff = B @hub browse -- commit/%(commit)
@@ -64,10 +68,6 @@
 	oldHighlight = red bold 52
 	newNormal = green bold
 	newHighlight = green bold 22
-[pager]
-	log = diff-highlight | less
-	show = diff-highlight | less
-	diff = diff-highlight | less
 [diff]
 	compactionHeuristic = true
 [commit]
