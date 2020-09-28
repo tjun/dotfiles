@@ -36,6 +36,13 @@ if [ -e $HOME/gcp/google-cloud-sdk ]; then
   export PATH=$PATH:~/gcp/google-cloud-sdk/bin
 fi
 
+if [ -e $HOME/google-cloud-sdk ]; then
+  #zplug "$HOME/gcp/google-cloud-sdk/completion.zsh.inc", from:"local", defer:2
+  source $HOME/google-cloud-sdk/completion.zsh.inc
+  source $HOME/google-cloud-sdk/path.zsh.inc
+  export PATH=$PATH:~/google-cloud-sdk/bin
+fi
+
 # if [ -e $HOME/gcp/go_appengine ]; then
 #   export PATH=$PATH:~/gcp/go_appengine
 # fi

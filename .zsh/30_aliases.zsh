@@ -6,11 +6,12 @@ alias gcm='git ci -m'
 alias gs='git status'
 alias gp='git pull origin $(git rev-parse --abbrev-ref HEAD)'
 alias gps='git push origin HEAD'
-alias gpso='gps && g see'
+alias gpso='gps && gh repo view --web'
 alias gl='git log -p'
 alias gm='git co master'
 alias gnb='git co -b'
 alias gcb='git current-branch'
+alias gsee='gh repo view --web'
 
 # Common aliases
 # alias ..='cd ..'
