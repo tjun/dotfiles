@@ -1,6 +1,7 @@
 [user]
 	name = Junichiro Takagi
 	email = t.junichiro@gmail.com
+	signingkey = 5FB3B6DD00ECAACE
 [color]
 	ui = auto
 [push]
@@ -18,7 +19,7 @@
 	st = status
 	sh = show
 	co = checkout
-	ci = commit -v
+	ci = commit -S -v
 	br = branch
 	ad = add -p
 	ls = log --stat

@@ -15,10 +15,14 @@ fi
 #   nodebrew use v6.17.1
 # fi
 
-# if [ -e $HOME/.rbenv ]; then
-#   export PATH="$HOME/.rbenv/bin:$PATH"
-#   eval "$(rbenv init -)"
-# fi
+if [ -e $HOME/.rbenv ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
+
+if [ -e /usr/local/opt/mysql-client/bin ]; then
+  export PATH="$PATH:/usr/local/opt/mysql-client/bin"
+fi
 
 # if [ -e $HOME/.cargo ]; then
 #   source $HOME/.cargo/env
@@ -48,11 +52,15 @@ fi
 # fi
 
 if [ -e $HOME/gcp/google-cloud-sdk/platform/google_appengine ]; then
-  export PATH=$HOME/gcp/google-cloud-sdk/platform/google_appengine:$PATH
+  export PATH=$PATH:$HOME/gcp/google-cloud-sdk/platform/google_appengine
 fi
 
 if [ -e $HOME/gcp/kubernetes/bin ]; then
   export PATH=$PATH:~/gcp/kubernetes/bin
+fi
+
+if [ -e $GOPATH/src/github.com/flutter/flutter ]; then
+  export PATH=$PATH:$GOPATH/src/github.com/flutter/flutter/bin
 fi
 
 # if [ -e $HOME/.krew/bin ]; then
