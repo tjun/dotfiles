@@ -18,6 +18,7 @@
 [alias]
 	st = status
 	sh = show
+	sw = switch
 	co = checkout
 	ci = commit -S -v
 	br = branch
@@ -36,7 +37,7 @@
 	current-branch = rev-parse --abbrev-ref HEAD
 	pull-dry-run  = !"git fetch origin; B=$(git rev-parse --abbrev-ref HEAD); git diff --stat --summary ${B}..origin/${B}"
 	ap = add -p
-	see = !hub browse
+	see = !gh repo view --web
 	prc = !hub pull-request -c
 [filter "media"]
 	clean = git-media-clean %f
