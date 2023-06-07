@@ -1,80 +1,84 @@
 [user]
-	name = Junichiro Takagi
-	email = t.junichiro@gmail.com
-	signingkey = 5FB3B6DD00ECAACE
-[color]
-	ui = auto
-[push]
-	default = tracking
-[core]
-	editor = vim
-	excludesfile = ~/.gitignore
-	pager = less -r
-	autocrlf = input
-	safecrlf = true
-[merge]
-	ff = false
-	tool = vimdiff
-[alias]
-	st = status
-	sh = show
-	sw = switch
-	co = checkout
-	ci = commit -S -v
-	br = branch
-	ad = add -p
-	ls = log --stat
-	di = diff
-	dc = diff --cached
-	s = status --short --branch
-	d = diff
-	grep = grep --line-number --show-function --color --heading --break
-	lp = log --decorate --stat --patch
-	hist = log --pretty=format:\\\"%h %ad | %s%d [%an]\\\" --graph --date=short
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-	branch-root = merge-base master HEAD
-	review = !tig --reverse -w $(git branch-root)..HEAD
-	current-branch = rev-parse --abbrev-ref HEAD
-	pull-dry-run  = !"git fetch origin; B=$(git rev-parse --abbrev-ref HEAD); git diff --stat --summary ${B}..origin/${B}"
-	ap = add -p
-	see = !gh repo view --web
-	prc = !hub pull-request -c
-[filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
-[core]
-  pager = delta --theme='Monokai Extended'
-[interactive]
-  diffFilter = delta --color-only
+    name = Junichiro Takagi
+    email = t.junichiro@gmail.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIkuyA2HV9iVpZn9oaZjD+J4Yzk4XXtD7BmpYsWuKoQp tjun@mc-TV33NQC7D4
 
-[tig "bind"]
-    main = B @hub browse -- commit/%(commit)
-    diff = B @hub browse -- commit/%(commit)
-    tree = B @hub browse -- tree/%(commit)/%(directory)
-    blob = B @hub browse -- tree/%(commit)/%(file)
+[color]
+    ui = auto
+[push]
+    default = tracking
+[core]
+    editor = vim
+    excludesfile = ~/.gitignore
+    pager = delta --syntax-theme='DarkNeon'
+    autocrlf = input
+    safecrlf = true
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+# side-by-side = true
+    line-numbers = true
+
+[merge]
+    conflictstyle = diff3
+    ff = false
+    # tool = vscode
+# [mergetool "vscode"]
+#     cmd = code --wait $MERGED
+[diff]
+    colorMoved = default
+    # tool = vscode
+# [difftool "vscode"]
+#     cmd = code --wait --diff $LOCAL $REMOTE
+[alias]
+    st = status
+    sh = show
+    sw = switch
+    co = checkout
+    ci = commit -S -v
+    br = branch
+    ad = add -p
+    di = diff
+    dc = diff --cached
+    merge = merge -S
+    revert = revert -S
+    s = status --short --branch
+    d = diff
+    grep = grep --line-number --show-function --color --heading --break
+    current-branch = rev-parse --abbrev-ref HEAD
+    ap = add -p
+    see = !gh repo view --web
+#    main = !"git fetch origin; B=$(git rev-parse --abbrev-ref HEAD); git diff --stat --summary ${B}..origin/${B}"
+    main = !"git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'"
 [branch]
-	autosetuprebase = always
+    autosetuprebase = always
 [pull]
-	rebase = merges
+    rebase = merges
 [ghq]
-	root = ~/dev/src
+    root = ~/dev/src
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
 
 [url "github.com:"]
-	insteadOf = https://github.com
+    insteadOf = https://github.com
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22
 [diff]
-	compactionHeuristic = true
+    compactionHeuristic = true
 [commit]
-	verbose = true
+    verbose = true
 [http]
-	sslVerify = true
+    sslVerify = true
 [http "https://gopkg.in"]
-	followRedirects = true
+    followRedirects = true
+[gpg]
+	format = ssh
+[init]
+	defaultBranch = main

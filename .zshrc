@@ -1,97 +1,132 @@
-umask 022
-limit coredumpsize 0
-bindkey -e
+bindkey -e # emacs bind
+export HOMEBREW_ANALYTICS_DEBUG=1
+export EDITOR='vim'
 
-if [[ -z "$TMUX" ]] && [[ -z "$STY" ]]; then
-  # tmux が起動していなければ起動します。
-  # tmux を起動した場合は tmux.rc.zsh の中で exit を呼ぶので、このコードブロックの外側は実行されません。
-  . "${HOME}/.zsh/exports.rc.zsh"
-  . "${HOME}/.zsh/tmux.rc.zsh"
+setopt auto_cd
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt auto_list
+setopt auto_menu
+setopt auto_remove_slash
+setopt auto_param_keys
+setopt auto_param_slash
+setopt mark_dirs
+
+HISTFILE=$HOME/.zsh-history
+HISTSIZE=1000000
+SAVEHIST=1000000
+setopt share_history
+setopt hist_ignore_all_dups
+setopt hist_reduce_blanks
+setopt hist_ignore_space
+setopt hist_save_no_dups
+setopt inc_append_history
+setopt extended_history
+
+setopt no_beep
+setopt no_list_beep
+setopt no_hist_beep
+setopt no_flow_control
+
+# setopt print_exit_value
+setopt notify
+# zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+alias g='git'
+alias ga='git add -p'
+alias gdc='git dc'
+alias gcm='git ci -m'
+alias gs='git status'
+alias gsw='git swtich'
+alias gp='git pull -S origin $(git rev-parse --abbrev-ref HEAD)'
+alias gps='git push origin HEAD'
+alias gpso='gps && gh pr create --web'
+alias gl='git log -p'
+alias gm='git co $(git main)'
+alias gnb='git co -b'
+alias gcb='git current-branch'
+alias gsee='gh repo view --web'
+
+alias l="ls -l"
+alias ls='ls -GF'
+alias lla='ls -lAF' # Show hidden all files
+alias ll='ls -lAF'  # Show long file information
+alias la='ls -AF'   # Show hidden files
+
+# sheldon
+eval "$(sheldon source)"
+
+if [ -x "$(which go)" ]; then
+  export GOROOT=$(go env GOROOT)
+  export GOPATH=$HOME/dev
+  export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
 fi
 
-### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+if [ -e $HOME/.cargo/env ]; then
+  source $HOME/.cargo/env
 fi
 
-# autoload -Uz compinit && compinit -u
-
-source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-# autoload -Uz add-zsh-hook
-# autoload -Uz cdr
-# autoload -Uz chpwd_recent_dirs
-# autoload -Uz run-help
-autoload -Uz colors && colors
-# autoload -Uz is-at-least
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-bin-gem-node
-
-### End of Zinit's installer chunk
-
-# zinit snippet "${HOME}/.zsh/00_variables.zsh"
-# zinit snippet "${HOME}/.zsh/10_utils.zsh"
-zinit snippet "${HOME}/.zsh/30_aliases.zsh"
-zinit snippet "${HOME}/.zsh/50_setopt.zsh"
-zinit snippet "${HOME}/.zsh/70_misc.zsh"
-
-# Two regular plugins loaded without investigating.
-zplugin ice wait'0' atload'_zsh_autosuggest_start'
-zinit light zsh-users/zsh-autosuggestions
-
-zplugin ice atinit"zpcompinit; zpcdreplay"
-zinit light zdharma/fast-syntax-highlighting
-zplugin ice blockf; zinit light zsh-users/zsh-completions
-
-# Plugin history-search-multi-word loaded with investigating.
-zinit load zdharma/history-search-multi-word
-
-zinit light 'sei40kr/zsh-tmux-rename'
-
-zinit light "superbrothers/zsh-kubectl-prompt"
-RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
-
-# Load the pure theme, with zsh-async library that's bundled with it.
-# zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
-zinit ice zinit ice pick"async.zsh" src"pure.zsh" atload'!prompt_pure_precmd' lucid nocd
-zinit light 'sindresorhus/pure'
-
-# Scripts that are built at install (there's single default make target, "install",
-# and it constructs scripts by `cat'ing a few files). The make'' ice could also be:
-# `make"install PREFIX=$ZPFX"`, if "install" wouldn't be the only, default target.
-# zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
-# zinit light tj/git-extras
-
-# Handle completions without loading any plugin, see "clist" command.
-# This one is to be ran just once, in interactive session.
-# zinit creinstall %HOME/.zsh
-
-if [ -x "`which docker`" ]; then
-    zinit ice wait'!0'; zinit light "felixr/docker-zsh-completion"
+if [ -e $HOME/google-cloud-sdk ]; then
+  #zplug "$HOME/gcp/google-cloud-sdk/completion.zsh.inc", from:"local", defer:2
+  source $HOME/google-cloud-sdk/completion.zsh.inc
+  source $HOME/google-cloud-sdk/path.zsh.inc
+  export PATH=$PATH:~/google-cloud-sdk/bin
 fi
 
-if [ -x "`which hub`" ]; then
-    zinit ice wait'!0'; zinit load "glidenote/hub-zsh-completion"
-fi
-
-if [ -x "`which kubectl`" ]; then
+if [ -x "$(which kubectl)" ]; then
+  alias k="nocorrect kubectl"
+  alias kg="kubectl get "
+  alias kgy="kubectl get -o yaml "
+  alias kd="kubectl describe "
   source <(kubectl completion zsh)
   complete -o default -F __start_kubectl k
 fi
 
-# zinit load  "chrissicool/zsh-256color"
-# 利用可能なエイリアスを使わずにコマンドを実行した際に通知するプラグインです。
-zplugin light 'djui/alias-tips'
-# fzf を使ったウィジェットが複数バンドルされたプラグインです。
-zplugin light 'mollifier/anyframe'
+RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+# KUBE_PS1_SYMBOL_ENABLE='false'
+# RPROMPT='$(kube_ps1)'
+
+if [ -x "$(which bat)" ]; then
+  alias cat='bat'
+fi
+
+if [ -x "$(which dog)" ]; then
+  alias dig='dog'
+fi
+
+if [ -x "$(which gojq)" ]; then
+  alias jq='gojq'
+  alias yq='gojq --yaml-input --yaml-output'
+fi
+
+if [ -x "$(which fzf)" ]; then
+  export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+  export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
+fi
+
+if [ -x "$(which navi)" ]; then
+  eval "$(navi widget zsh)" # ctrl-g to launch a widget
+fi
+
+if [ -x "$(which zoxide)" ]; then
+  eval "$(zoxide init zsh)"
+  alias cd='z'
+fi
+
+if [ -x "$(which pyenv)" ]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$HOME/.local/bin:$PATH"
+  eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
+fi
+
+function ghq-fzf() {
+  local src=$(ghq list | fzf --preview "ls -laTp $(ghq root)/{} | tail -n+4 | awk '{print \$9\"/\"\$6\"/\"\$7 \" \" \$10}'")
+  if [ -n "$src" ]; then
+    BUFFER="cd $(ghq root)/$src"
+    zle accept-line
+  fi
+  zle -R -c
+}
+zle -N ghq-fzf
+bindkey '^]' ghq-fzf
