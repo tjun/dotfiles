@@ -47,12 +47,6 @@ alias gnb='git co -b'
 alias gcb='git current-branch'
 alias gsee='gh repo view --web'
 
-alias l="ls -l"
-alias ls='ls -GF'
-alias lla='ls -lAF' # Show hidden all files
-alias ll='ls -lAF'  # Show long file information
-alias la='ls -AF'   # Show hidden files
-
 # sheldon
 eval "$(sheldon source)"
 
@@ -65,6 +59,19 @@ fi
 if [ -e $HOME/.cargo/env ]; then
   source $HOME/.cargo/env
 fi
+
+if [ -x "$(which eza)" ]; then
+  alias la="eza -a --oneline"
+  alias ll="eza -l --git -g -h"
+  alias l="eza -l --git -h --no-user --no-permissions --no-time"
+  alias ls="eza"
+else
+  alias l="ls -l"
+  alias ls='ls -GF'
+  alias ll='ls -lAF'  # Show long file information
+  alias la='ls -AF'   # Show hidden files
+fi
+
 
 if [ -e $HOME/google-cloud-sdk ]; then
   #zplug "$HOME/gcp/google-cloud-sdk/completion.zsh.inc", from:"local", defer:2

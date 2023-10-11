@@ -44,6 +44,7 @@
     dc = diff --cached
     merge = merge -S
     revert = revert -S
+    rebase = rebase -S
     s = status --short --branch
     d = diff
     grep = grep --line-number --show-function --color --heading --break
