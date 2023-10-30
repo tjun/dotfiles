@@ -47,6 +47,11 @@ alias gnb='git co -b'
 alias gcb='git current-branch'
 alias gsee='gh repo view --web'
 
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
 # sheldon
 eval "$(sheldon source)"
 

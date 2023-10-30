@@ -1,7 +1,6 @@
 [user]
     name = Junichiro Takagi
     email = t.junichiro@gmail.com
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIkuyA2HV9iVpZn9oaZjD+J4Yzk4XXtD7BmpYsWuKoQp tjun@mc-TV33NQC7D4
 
 [color]
     ui = auto
@@ -10,7 +9,7 @@
 [core]
     editor = vim
     excludesfile = ~/.gitignore
-    pager = delta --syntax-theme='DarkNeon'
+    pager = delta --syntax-theme='Coldark-Dark'
     autocrlf = input
     safecrlf = true
 [interactive]
