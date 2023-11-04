@@ -1,5 +1,4 @@
 bindkey -e # emacs bind
-export HOMEBREW_ANALYTICS_DEBUG=1
 export EDITOR='vim'
 
 setopt auto_cd
@@ -52,14 +51,22 @@ then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
-# sheldon
-eval "$(sheldon source)"
-
-if [ -x "$(which go)" ]; then
+# if WSL
+if [[ -f /proc/version ]] && grep -iq Microsoft /proc/version; then
+  eval $(ssh-agent -s)
+  alias pbcopy="/mnt/c/windows/system32/clip.exe"
+  export GOROOT=/usr/local/go
+  export GOPATH=$HOME/dev
+  export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+else
+  export HOMEBREW_ANALYTICS_DEBUG=1
   export GOROOT=$(go env GOROOT)
   export GOPATH=$HOME/dev
   export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
 fi
+
+# sheldon
+eval "$(sheldon source)"
 
 if [ -e $HOME/.cargo/env ]; then
   source $HOME/.cargo/env
@@ -91,9 +98,9 @@ if [ -x "$(which kubectl)" ]; then
   alias kd="kubectl describe "
   source <(kubectl completion zsh)
   complete -o default -F __start_kubectl k
+  RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 fi
 
-RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 # KUBE_PS1_SYMBOL_ENABLE='false'
 # RPROMPT='$(kube_ps1)'
 
