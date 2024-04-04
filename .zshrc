@@ -139,6 +139,6 @@ zle -N ghq-fzf
 bindkey '^]' ghq-fzf
 
 # add local settings
-if [ -e $HOME/.zshrc.local ]; then
+if [ -e $HOME/.zshrc-local ]; then
   source ~/.zshrc-local
 fi
