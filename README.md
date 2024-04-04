@@ -18,14 +18,12 @@ brew bundle
 TBD
 
 # link dotfiles
-
-# copy and update files
-cp .gitconfig.local ~/ # and add sigining key
-cp .ssh/config ~/.ssh/ # and add ssh key path
-
-# link files
 ln -s ~/dev/src/github.com/tjun/dotfiles/{.zshrc,.zprofile,.inputrc,.vimrc,.gitconfig,.gitignore,.wezterm.lua} ~/
 ln -s ~/dev/src/github.com/tjun/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json # after launching karabiner-elements
+
+# copy and update files
+cp .gitconfig.local ~/ # and add sigining key path
+cp .ssh/config ~/.ssh/ # and add ssh key path
 
 # install zsh plugins
 sheldon lock
