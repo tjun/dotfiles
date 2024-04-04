@@ -29,6 +29,10 @@ setopt no_flow_control
 
 # setopt print_exit_value
 setopt notify
+
+autoload -Uz compinit && compinit
+autoload -Uz bashcompinit && bashcompinit
+
 # zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 alias g='git'

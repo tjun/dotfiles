@@ -24,8 +24,8 @@ cp .gitconfig.local ~/ # and add sigining key
 cp .ssh/config ~/.ssh/ # and add ssh key path
 
 # link files
-ln -s 
-
+ln -s ~/dev/src/github.com/tjun/dotfiles/{.zshrc,.zprofile,.inputrc,.vimrc,.gitconfig,.gitignore,.wezterm.lua} ~/
+ln -s ~/dev/src/github.com/tjun/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json # after launching karabiner-elements
 
 # install zsh plugins
 sheldon lock
