@@ -1,7 +1,9 @@
 [user]
     name = Junichiro Takagi
     email = t.junichiro@gmail.com
-    signingkey = TBD
+
+[include]
+    path = .gitconfig.local
 
 [color]
     ui = auto

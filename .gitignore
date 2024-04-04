@@ -2,8 +2,3 @@
 *~
 .vscode
 .config/*
-.emacs.d/ac-comphist.dat
-.emacs.d/history
-.emacs.d/network-security.data
-.emacs.d/recentf
-.emacs.d/elpa/archives
