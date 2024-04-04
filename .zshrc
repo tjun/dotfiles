@@ -101,29 +101,13 @@ if [ -x "$(which kubectl)" ]; then
   RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 fi
 
-# KUBE_PS1_SYMBOL_ENABLE='false'
-# RPROMPT='$(kube_ps1)'
-
 if [ -x "$(which bat)" ]; then
   alias cat='bat'
-fi
-
-if [ -x "$(which dog)" ]; then
-  alias dig='dog'
 fi
 
 if [ -x "$(which gojq)" ]; then
   alias jq='gojq'
   alias yq='gojq --yaml-input --yaml-output'
-fi
-
-if [ -x "$(which fzf)" ]; then
-  export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-  export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
-fi
-
-if [ -x "$(which navi)" ]; then
-  eval "$(navi widget zsh)" # ctrl-g to launch a widget
 fi
 
 if [ -x "$(which zoxide)" ]; then
@@ -138,6 +122,11 @@ if [ -x "$(which pyenv)" ]; then
   eval "$(pyenv init -)"
 fi
 
+if [ -x "$(which fzf)" ]; then
+  export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+  export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
+fi
+
 function ghq-fzf() {
   local src=$(ghq list | fzf --preview "ls -laTp $(ghq root)/{} | tail -n+4 | awk '{print \$9\"/\"\$6\"/\"\$7 \" \" \$10}'")
   if [ -n "$src" ]; then
@@ -148,3 +137,8 @@ function ghq-fzf() {
 }
 zle -N ghq-fzf
 bindkey '^]' ghq-fzf
+
+# add local settings
+if [ -e $HOME/.zshrc.local ]; then
+  source ~/.zshrc-local
+fi

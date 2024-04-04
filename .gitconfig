@@ -3,7 +3,10 @@
     email = t.junichiro@gmail.com
 
 [include]
-    path = .gitconfig.local
+    # A local gitconfig, outside of version control.
+    # If the file doesn't exist it is silently ignored
+    # Write signing keys and other secrets here.
+    path = ~/.gitconfig-local
 
 [color]
     ui = auto
