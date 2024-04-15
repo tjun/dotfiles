@@ -88,11 +88,9 @@ else
   alias la='ls -AF'   # Show hidden files
 fi
 
-
-if [ -e $HOME/google-cloud-sdk ]; then
-  source $HOME/google-cloud-sdk/completion.zsh.inc
-  source $HOME/google-cloud-sdk/path.zsh.inc
-  export PATH=$PATH:~/google-cloud-sdk/bin
+if [ -x "$(which gcloud)" ]; then
+  source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+  source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 fi
 
 if [ -x "$(which kubectl)" ]; then
