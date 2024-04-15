@@ -23,19 +23,16 @@ brew "xh"
 brew "zola"
 brew "zoxide"
 brew "zsh"
-cask "1password"
 cask "appcleaner"
-cask "discord"
 cask "eul"
 cask "google-cloud-sdk"
-cask "imageoptim"
-cask "karabiner-elements"
-cask "notion"
-cask "raycast"
-cask "slack"
-cask "visual-studio-code"
+# cask "imageoptim"
 cask "wezterm"
-cask "zoom"
+
+if File.exists?(".Brewfile.local")
+  instance_eval(File.read(".Brewfile.local"))
+end
+
 vscode "arahata.linter-actionlint"
 vscode "bbenoist.nix"
 vscode "dhoeric.ansible-vault"

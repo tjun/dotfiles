@@ -1,0 +1,8 @@
+cask "1password"
+cask "discord"
+cask "karabiner-elements"
+cask "notion"
+cask "raycast"
+cask "slack"
+cask "visual-studio-code"
+cask "zoom"
