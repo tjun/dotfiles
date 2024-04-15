@@ -33,7 +33,7 @@ setopt notify
 autoload -Uz compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
 
-# zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 alias g='git'
 alias ga='git add -p'
