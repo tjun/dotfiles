@@ -33,6 +33,7 @@ setopt notify
 autoload -Uz compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
 
+# auto complate with case insensitive
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 alias g='git'
