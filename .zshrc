@@ -90,6 +90,7 @@ else
 fi
 
 if [ -x "$(which gcloud)" ]; then
+  PATH=$PATH:$(brew --prefix)/share/google-cloud-sdk/bin
   source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
   source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 fi
@@ -111,6 +112,10 @@ fi
 if [ -x "$(which gojq)" ]; then
   alias jq='gojq'
   alias yq='gojq --yaml-input --yaml-output'
+fi
+
+if [ -x "$(which mise)" ]; then
+  eval "$(mise activate zsh)"
 fi
 
 if [ -x "$(which zoxide)" ]; then
