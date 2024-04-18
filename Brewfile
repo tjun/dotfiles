@@ -29,7 +29,7 @@ brew "zsh"
 cask "appcleaner"
 cask "eul"
 cask "google-cloud-sdk"
-# cask "imageoptim"
+cask "imageoptim"
 cask "wezterm"
 
 if File.exists?(".Brewfile.local")
