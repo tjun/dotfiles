@@ -3,3 +3,5 @@
 .vscode
 .config/*
 Brewfile.lock.json
+.mise.toml
+
