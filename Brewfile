@@ -20,6 +20,7 @@ brew "jq"
 brew "kubectx"
 brew "mise"
 brew "ripgrep"
+brew "shellcheck"
 brew "sheldon"
 brew "wget"
 brew "xh"
@@ -32,7 +33,7 @@ cask "google-cloud-sdk"
 cask "imageoptim"
 cask "wezterm"
 
-if File.exists?(".Brewfile.local")
+if File.exist?(".Brewfile.local")
   instance_eval(File.read(".Brewfile.local"))
 end
 
@@ -45,6 +46,7 @@ vscode "github.copilot"
 vscode "github.copilot-chat"
 vscode "github.vscode-github-actions"
 vscode "golang.go"
+vscode "hashicorp.hcl"
 vscode "hashicorp.terraform"
 vscode "lfs.vscode-emacs-friendly"
 vscode "ms-azuretools.vscode-docker"

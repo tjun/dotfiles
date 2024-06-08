@@ -47,7 +47,7 @@ github = "zsh-users/zsh-completions"
 apply = ["defer"]
 proto = "ssh"
 
-[plugins.zsh-kubectl-prompt]
-github = "superbrothers/zsh-kubectl-prompt"
-apply = ["defer"]
-proto = "ssh"
+# [plugins.zsh-kubectl-prompt]
+# github = "superbrothers/zsh-kubectl-prompt"
+# apply = ["defer"]
+# proto = "ssh"

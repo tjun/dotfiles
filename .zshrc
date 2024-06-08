@@ -102,7 +102,7 @@ if [ -x "$(which kubectl)" ]; then
   alias kd="kubectl describe "
   source <(kubectl completion zsh)
   complete -o default -F __start_kubectl k
-  RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+  #RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 fi
 
 if [ -x "$(which bat)" ]; then
