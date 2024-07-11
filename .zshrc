@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 bindkey -e # emacs bind
 export EDITOR='vim'
 
@@ -128,6 +130,10 @@ if [ -x "$(which pyenv)" ]; then
   export PATH="$PYENV_ROOT/bin:$HOME/.local/bin:$PATH"
   eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
+fi
+
+if [ -e "/opt/homebrew/opt/libpq/bin" ]; then
+  export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 fi
 
 if [ -x "$(which fzf)" ]; then
