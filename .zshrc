@@ -60,7 +60,7 @@ fi
 
 # if WSL
 if [[ -f /proc/version ]] && grep -iq Microsoft /proc/version; then
-  eval $(ssh-agent -s)
+  eval "$(ssh-agent -s)"
   alias pbcopy="/mnt/c/windows/system32/clip.exe"
   export GOROOT=/usr/local/go
   export GOPATH=$HOME/dev
@@ -127,13 +127,13 @@ fi
 
 if [ -x "$(which pyenv)" ]; then
   export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$HOME/.local/bin:$PATH"
+  export PATH="${PYENV_ROOT}/bin:$HOME/.local/bin:$PATH"
   eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
 fi
 
-if [ -e "/opt/homebrew/opt/libpq/bin" ]; then
-  export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+if [ -e "/opt/homebrew/opt/libpq/bin" ];then
+  export PATH="${PATH}:/opt/homebrew/opt/libpq/bin"
 fi
 
 if [ -x "$(which fzf)" ]; then

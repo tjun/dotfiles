@@ -17,8 +17,7 @@ config.font = wezterm.font("Menlo", {weight="Regular", stretch="Normal", style="
 config.font_size = 13.0
 config.color_scheme = 'Flatland'
 config.color_scheme = 'Edge Dark (base16)'
-
-
+config.window_background_opacity = 0.9
 
 -- and finally, return the configuration to wezterm
 return config
