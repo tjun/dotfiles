@@ -21,11 +21,13 @@ brew "kubectx"
 brew "libpq"
 brew "mise"
 brew "mpdecimal" # required by google-cloud-sdk
+brew "podman"
 brew "readline" # required by google-cloud-sdk
 brew "ripgrep"
 brew "shellcheck"
 brew "sheldon"
 brew "sqlite" # required by google-cloud-sdk
+brew "terraform-docs"
 brew "wget"
 brew "xh"
 brew "zola"
