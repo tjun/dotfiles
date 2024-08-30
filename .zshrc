@@ -111,6 +111,10 @@ if [ -x "$(which kubectl)" ]; then
   #RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 fi
 
+if [ -x "$(which atuin)" ]; then
+  eval "$(atuin init zsh)"
+fi
+
 if [ -x "$(which bat)" ]; then
   alias cat='bat'
 fi
