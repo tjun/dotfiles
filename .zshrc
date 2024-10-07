@@ -72,6 +72,8 @@ else
   export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
 fi
 
+# ssh-agent
+eval "$(ssh-agent)"
 # sheldon
 eval "$(sheldon source)"
 
@@ -132,6 +134,7 @@ if [ -x "$(which zoxide)" ]; then
   eval "$(zoxide init zsh)"
   alias cd='z'
 fi
+alias cdu='cd $(git rev-parse --show-toplevel)'
 
 if [ -x "$(which pyenv)" ]; then
   export PYENV_ROOT="$HOME/.pyenv"
