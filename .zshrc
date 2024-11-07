@@ -1,5 +1,11 @@
 #!/bin/zsh
 
+# PATHの重複を防ぐ
+typeset -U PATH path
+
+# ファイル作成時のデフォルトパーミッション設定
+umask 022
+
 bindkey -e # emacs bind
 export EDITOR='vim'
 
@@ -32,7 +38,14 @@ setopt no_flow_control
 # setopt print_exit_value
 setopt notify
 
-autoload -Uz compinit && compinit
+autoload -Uz compinit
+if [ $(date +'%j') != $(/usr/bin/stat -f '%Sm' -t '%j' ${ZDOTDIR:-$HOME}/.zcompdum* 2>/dev/null) ]; then
+  compinit
+else
+  compinit -C
+fi
+
+
 autoload -Uz bashcompinit && bashcompinit
 
 # auto complate with case insensitive
@@ -43,7 +56,7 @@ alias ga='git add -p'
 alias gdc='git dc'
 alias gcm='git ci -m'
 alias gs='git status'
-alias gsw='git swtich'
+alias gsw='git switch'
 alias gp='git pull -S origin $(git rev-parse --abbrev-ref HEAD)'
 alias gps='git push origin HEAD'
 alias gpso='gps && gh pr create --web'
@@ -73,7 +86,10 @@ else
 fi
 
 # ssh-agent
-eval "$(ssh-agent)"
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    eval "$(ssh-agent -s)"
+fi
+
 # sheldon
 eval "$(sheldon source)"
 
@@ -130,9 +146,14 @@ if [ -x "$(which mise)" ]; then
   eval "$(mise activate zsh)"
 fi
 
+if [ -x "$(which tenv)" ]; then
+  source "$HOME/.tenv/completion.zsh"
+fi
+
 if [ -x "$(which zoxide)" ]; then
   eval "$(zoxide init zsh)"
   alias cd='z'
+  alias d='zi'
 fi
 alias cdu='cd $(git rev-parse --show-toplevel)'
 

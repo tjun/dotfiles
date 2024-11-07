@@ -29,6 +29,7 @@ brew "ripgrep"
 brew "shellcheck"
 brew "sheldon"
 brew "sqlite" # required by google-cloud-sdk
+brew "tenv"
 brew "terraform-docs"
 brew "wget"
 brew "xh"
