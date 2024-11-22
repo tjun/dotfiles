@@ -58,6 +58,7 @@
     merge = merge -S
     revert = revert -S
     rebase = rebase -S
+    rs = restore
     s = status --short --branch
     d = diff
     grep = grep --line-number --show-function --color --heading --break
