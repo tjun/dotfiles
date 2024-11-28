@@ -1,0 +1,57 @@
+# ghostty config
+# print current config ghostty +show-config
+# print default config ghostty +show-config --default --docs
+
+# Empty values reset the configuration to the default value
+font-family =
+
+# theme
+# list themes with ghostty +list-themes
+theme = Bright Lights
+
+background-opacity = 0.9
+
+cursor-style = block
+shell-integration = zsh
+
+# The style of the macOS titlebar. Available values are: "native",
+# "transparent", "tabs", and "hidden".
+macos-titlebar-style = hidden
+
+macos-titlebar-proxy-icon = hidden
+
+keybind = super+shift+right=new_split:right
+keybind = super+shift+down=new_split:down
+keybind = super+right=goto_split:right
+keybind = super+left=goto_split:left
+keybind = super+down=goto_split:bottom
+keybind = super+up=goto_split:top
+keybind = super+shift+r=reload_config
+
+# Colors can be changed by setting the 16 colors of `palette`, which each color
+# being defined as regular and bold.
+#
+# black
+# palette = 0=#1d2021
+# palette = 8=#7c6f64
+# red
+# palette = 1=#cc241d
+# palette = 9=#fb4934
+# green
+# palette = 2=#98971a
+# palette = 10=#b8bb26
+# yellow
+# palette = 3=#d79921
+# palette = 11=#fabd2f
+# blue
+# palette = 4=#458588
+# palette = 12=#83a598
+# purple
+# palette = 5=#b16286
+# palette = 13=#d3869b
+# aqua
+# palette = 6=#689d6a
+# palette = 14=#8ec07c
+# white
+# palette = 7=#a89984
+# palette = 15=#fbf1c7
