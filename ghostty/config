@@ -1,12 +1,12 @@
 # ghostty config
-# print current config ghostty +show-config
-# print default config ghostty +show-config --default --docs
+# print current config: ghostty +show-config
+# print default config: ghostty +show-config --default --docs
 
 # Empty values reset the configuration to the default value
 font-family =
 
 # theme
-# list themes with ghostty +list-themes
+# list themes: ghostty +list-themes
 theme = Bright Lights
 
 background-opacity = 0.9
