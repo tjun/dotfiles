@@ -19,10 +19,10 @@ shell = "zsh"
 # [plugins.base16]
 # github = "chriskempson/base16-shell"
 
-[plugins.pure]
-github = "sindresorhus/pure"
-use = ["async.zsh", "pure.zsh"]
-proto = "ssh"
+# [plugins.pure]
+# github = "sindresorhus/pure"
+# use = ["async.zsh", "pure.zsh"]
+# proto = "ssh"
 
 [plugins.zsh-defer]
 github = "romkatv/zsh-defer"

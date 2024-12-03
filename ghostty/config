@@ -11,14 +11,16 @@ theme = Bright Lights
 
 background-opacity = 0.9
 
+## cursor-style: block / bar / underline / block_hollow
 cursor-style = block
-shell-integration = zsh
+cursor-color = #fabd2f
+# shell-integration = zsh
 
 # The style of the macOS titlebar. Available values are: "native",
 # "transparent", "tabs", and "hidden".
-macos-titlebar-style = hidden
+macos-titlebar-style = transparent
 
-macos-titlebar-proxy-icon = hidden
+# macos-titlebar-proxy-icon = hidden
 
 keybind = super+shift+right=new_split:right
 keybind = super+shift+down=new_split:down
@@ -36,7 +38,8 @@ keybind = super+shift+r=reload_config
 # palette = 8=#7c6f64
 # red
 # palette = 1=#cc241d
-# palette = 9=#fb4934
+palette = 1=#f14777
+palette = 9=#fb4934
 # green
 # palette = 2=#98971a
 # palette = 10=#b8bb26

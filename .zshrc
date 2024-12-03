@@ -30,6 +30,7 @@ setopt hist_save_no_dups
 setopt inc_append_history
 setopt extended_history
 
+setopt prompt_subst
 setopt no_beep
 setopt no_list_beep
 setopt no_hist_beep
@@ -188,4 +189,22 @@ bindkey '^]' ghq-fzf
 # add local settings
 if [ -e $HOME/.zshrc-local ]; then
   source ~/.zshrc-local
+fi
+
+# prompt
+function parse_git_branch() {
+  if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+    ref=$(git symbolic-ref HEAD 2>/dev/null) || return 1
+    echo "(${ref#refs/heads/})"
+  else
+    echo ""
+  fi
+}
+
+function prompt_color() {
+  PS1=$'\n'"%F{green}%~%f \$(parse_git_branch)"$'\n'"→ %F{grey}"
+}
+
+if [ -n "$PS1" ]; then
+  prompt_color
 fi
