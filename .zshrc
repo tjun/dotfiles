@@ -68,6 +68,8 @@ alias gnb='git switch -c'
 alias gcb='git current-branch'
 alias gsee='gh repo view --web'
 
+alias gca='gcloud auth login --update-adc'
+
 if type brew &>/dev/null
 then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
@@ -202,7 +204,7 @@ function parse_git_branch() {
 }
 
 function prompt_color() {
-  PS1=$'\n'"%F{green}%~%f \$(parse_git_branch)"$'\n'"→ %F{grey}"
+  PS1=$'\n'"%F{yellow}%~%f %F{grey}\$(parse_git_branch)%f"$'\n'"→ "
 }
 
 if [ -n "$PS1" ]; then
