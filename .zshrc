@@ -67,6 +67,7 @@ alias gm='git co $(git main)'
 alias gnb='git switch -c'
 alias gcb='git current-branch'
 alias gsee='gh repo view --web'
+alias gf='git fetch origin'
 
 alias gca='gcloud auth login --update-adc'
 
