@@ -88,6 +88,7 @@ else
   export GOROOT=$(go env GOROOT)
   export GOPATH=$HOME/dev
   export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
+  export GODEBUG=asyncpreemptoff=1 # To fix terraform issue
 fi
 
 # ssh-agent
