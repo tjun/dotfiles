@@ -3,23 +3,30 @@
 # print default config: ghostty +show-config --default --docs
 
 # Empty values reset the configuration to the default value
-font-family =
+# font-family =
+font-feature = -dlig
 
 # theme
 # list themes: ghostty +list-themes
-theme = Bright Lights
+theme = xcodedarkhc
 
 background-opacity = 0.9
 
 ## cursor-style: block / bar / underline / block_hollow
 cursor-style = block
 cursor-color = #fabd2f
-# shell-integration = zsh
+cursor-opacity = 0.7
+cursor-style-blink = false
+
+shell-integration = zsh
+shell-integration-features = no-cursor
+
+window-inherit-working-directory = true
+mouse-hide-while-typing = true
 
 # The style of the macOS titlebar. Available values are: "native",
 # "transparent", "tabs", and "hidden".
 macos-titlebar-style = transparent
-
 # macos-titlebar-proxy-icon = hidden
 
 keybind = super+shift+right=new_split:right
@@ -38,8 +45,8 @@ keybind = super+shift+r=reload_config
 # palette = 8=#7c6f64
 # red
 # palette = 1=#cc241d
-palette = 1=#f14777
-palette = 9=#fb4934
+# palette = 1=#f14777
+# palette = 9=#fb4934
 # green
 # palette = 2=#98971a
 # palette = 10=#b8bb26
