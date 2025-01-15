@@ -21,6 +21,7 @@ brew "jnv"
 brew "jq"
 brew "kubectx"
 brew "libpq"
+brew "marp-cli"
 brew "mise"
 brew "mpdecimal" # required by google-cloud-sdk
 brew "podman"

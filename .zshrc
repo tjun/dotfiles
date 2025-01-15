@@ -170,8 +170,12 @@ if [ -x "$(which pyenv)" ]; then
   eval "$(pyenv init -)"
 fi
 
-if [ -e "/opt/homebrew/opt/libpq/bin" ];then
-  export PATH="${PATH}:/opt/homebrew/opt/libpq/bin"
+# if [ -e "/opt/homebrew/opt/libpq/bin" ];then
+#   export PATH="${PATH}:/opt/homebrew/opt/libpq/bin"
+# fi
+
+if [ -e "/opt/homebrew/opt/postgresql@16/bin" ];then
+  export PATH="${PATH}:/opt/homebrew/opt/postgresql@16/bin"
 fi
 
 if [ -x "$(which fzf)" ]; then
