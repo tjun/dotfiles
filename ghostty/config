@@ -4,6 +4,7 @@
 
 # Empty values reset the configuration to the default value
 # font-family =
+font-family = Comic Mono
 font-feature = -dlig
 
 # theme
@@ -27,14 +28,25 @@ mouse-hide-while-typing = true
 # The style of the macOS titlebar. Available values are: "native",
 # "transparent", "tabs", and "hidden".
 macos-titlebar-style = transparent
-# macos-titlebar-proxy-icon = hidden
+# macos-titlebar-style = hidden
 
+quick-terminal-position = left
+quick-terminal-screen = main
+quick-terminal-animation-duration = 0
+
+keybind = global:f12=toggle_quick_terminal
 keybind = super+shift+right=new_split:right
 keybind = super+shift+down=new_split:down
 keybind = super+right=goto_split:right
 keybind = super+left=goto_split:left
 keybind = super+down=goto_split:bottom
 keybind = super+up=goto_split:top
+
+keybind = super+shift+s=new_split:right
+keybind = super+l=goto_split:right
+keybind = super+shift+l=goto_split:left
+keybind = super+j=goto_split:bottom
+keybind = super+k=goto_split:top
 keybind = super+shift+r=reload_config
 
 # Colors can be changed by setting the 16 colors of `palette`, which each color
