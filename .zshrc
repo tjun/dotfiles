@@ -68,6 +68,7 @@ alias gnb='git switch -c'
 alias gcb='git current-branch'
 alias gsee='gh repo view --web'
 alias gf='git fetch origin'
+alias gb='git recent-branch'
 
 alias gca='gcloud auth login --update-adc'
 

@@ -11,20 +11,33 @@
 [color]
     ui = auto
 
+[column]
+    ui = auto
+
+[branch]
+    sort = -committerdate
+    autosetuprebase = always
 [core]
     editor = vim
     excludesfile = ~/.gitignore
     difftool = true
     autocrlf = input
     safecrlf = true
+    fsmonitor = true
+    untrackedcache = true
+# read https://tech.mirrativ.stream/entry/2025/02/25/100000
 
 [push]
     default = tracking
+    autoSetupRemote = true
+    followTags = true
 [pull]
     rebase = merges
+[fetch]
+        prune = true
+        pruneTags = true
+        all = true
 
-[branch]
-    autosetuprebase = always
 [init]
 	defaultBranch = main
 
@@ -33,10 +46,14 @@
     gpgsign = true
 
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
     ff = false
 
 [diff]
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
     tool = difftastic
 [difftool]
     prompt = false
@@ -66,6 +83,8 @@
     ap = add -p
     see = !gh repo view --web
     main = !"git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'"
+    recent-branch = for-each-ref --sort=-committerdate refs/heads/ --count=5 --format='%(refname:short)'
+    fw = "!f() { git fetch origin $1 && git switch $1; }; f"
 
 [filter "lfs"]
     clean = git-lfs clean %f
@@ -82,3 +101,7 @@
     root = ~/dev/src
 [gpg]
 	format = ssh
+[tag]
+    sort = version:refname
+[help]
+    autocorrect = prompt

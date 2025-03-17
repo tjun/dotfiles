@@ -37,6 +37,7 @@ brew "xh"
 brew "zola"
 brew "zoxide"
 brew "zsh"
+
 cask "appcleaner"
 # cask "cursor"
 cask "eul"
@@ -44,6 +45,7 @@ cask "ghostty"
 cask "google-cloud-sdk"
 cask "imageoptim"
 cask "podman-desktop"
+cask "qlmarkdown"
 cask "wezterm"
 
 if File.exist?(".Brewfile.local")
