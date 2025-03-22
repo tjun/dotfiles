@@ -46,7 +46,6 @@ else
   compinit -C
 fi
 
-
 autoload -Uz bashcompinit && bashcompinit
 
 # auto complate with case insensitive

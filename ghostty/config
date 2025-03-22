@@ -3,21 +3,25 @@
 # print default config: ghostty +show-config --default --docs
 
 # Empty values reset the configuration to the default value
-# font-family =
-font-family = Comic Mono
-font-feature = -dlig
+# font-family = Comic Mono
+font-feature = "-calt"
+font-feature = "-dlig"
+font-feature = "-liga"
+
 
 # theme
 # list themes: ghostty +list-themes
-theme = xcodedarkhc
+# theme = xcodedarkhc
+theme = catppuccin-mocha
 
 background-opacity = 0.9
+background-blur-radius = 20
 
 ## cursor-style: block / bar / underline / block_hollow
 cursor-style = block
 cursor-color = #fabd2f
-cursor-opacity = 0.7
-cursor-style-blink = false
+cursor-opacity = 0.5
+cursor-style-blink = true
 
 shell-integration = zsh
 shell-integration-features = no-cursor
@@ -28,11 +32,14 @@ mouse-hide-while-typing = true
 # The style of the macOS titlebar. Available values are: "native",
 # "transparent", "tabs", and "hidden".
 macos-titlebar-style = transparent
-# macos-titlebar-style = hidden
 
-quick-terminal-position = left
-quick-terminal-screen = main
-quick-terminal-animation-duration = 0
+window-padding-x = 10
+window-padding-y = 5
+window-padding-balance = true
+
+# quick-terminal-position = left
+# quick-terminal-screen = main
+# quick-terminal-animation-duration = 0
 
 keybind = global:f12=toggle_quick_terminal
 keybind = super+shift+right=new_split:right
