@@ -51,6 +51,20 @@ autoload -Uz bashcompinit && bashcompinit
 # auto complate with case insensitive
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
+function git-nb() {
+  if [ $# -eq 2 ]; then
+    branch="${USER}/$1/$2"
+  elif [ $# -eq 1 ]; then
+    branch="${USER}/$1"
+  else
+    echo "Usage: git nb [type] name   or   git nb name"
+    return 1
+  fi
+
+  echo "Creating branch: $branch"
+  git switch -c "$branch"
+}
+
 alias g='git'
 alias ga='git add -p'
 alias gdc='git dc'
@@ -63,7 +77,8 @@ alias gps='git push origin HEAD'
 alias gpso='gps && gh pr create --web'
 alias gl='git log -p'
 alias gm='git co $(git main)'
-alias gnb='git switch -c'
+alias gnb='git-nb'
+alias gnbf='git bf'
 alias gcb='git current-branch'
 alias gsee='gh repo view --web'
 alias gf='git fetch origin'
