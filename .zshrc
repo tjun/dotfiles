@@ -198,6 +198,16 @@ if [ -x "$(which fzf)" ]; then
   export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
 fi
 
+# git で remote branch を track する
+function gpr() {
+  if [ -z "$1" ]; then
+    echo "Usage: gprtrack <remote-branch-name>"
+    return 1
+  fi
+  git fetch origin
+  git switch --track origin/$1
+}
+
 function ghq-fzf() {
   local src=$(ghq list | fzf --preview "ls -laTp $(ghq root)/{} | tail -n+4 | awk '{print \$9\"/\"\$6\"/\"\$7 \" \" \$10}'")
   if [ -n "$src" ]; then
@@ -208,6 +218,22 @@ function ghq-fzf() {
 }
 zle -N ghq-fzf
 bindkey '^]' ghq-fzf
+
+function git-branch-fzf() {
+  # ローカルブランチをコミット日時が新しい順にソートして取得
+  local branches=$(git branch --sort=-committerdate --format='%(refname:short)' | head -n 50)
+  # fzf でブランチを選択
+  local target_branch=$(echo "$branches" | fzf)
+
+  # ブランチが選択されたら switch するコマンドをBUFFERに入れる
+  if [ -n "$target_branch" ]; then
+    BUFFER="git switch $target_branch"
+    zle accept-line
+  fi
+  zle -R -c
+}
+zle -N git-branch-fzf
+bindkey '^[' git-branch-fzf
 
 # add local settings
 if [ -e $HOME/.zshrc-local ]; then

@@ -4,6 +4,9 @@
 
 # Empty values reset the configuration to the default value
 # font-family = Comic Mono
+# font-family = "SF Mono"
+font-family = "HackGen Console NF"
+
 font-feature = "-calt"
 font-feature = "-dlig"
 font-feature = "-liga"

@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "terraform-doc": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "ghcr.io/tjun/terraform-doc-mcp:1.0.2"
+      ],
+      "env": {}
+    }
+  }
+}

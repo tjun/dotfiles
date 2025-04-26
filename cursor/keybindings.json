@@ -17,5 +17,9 @@
         "key": "cmd+n",
         "command": "-composer.createNew",
         "when": "composerFocused || focusedView =~ /^workbench.panel.aichat.view/"
+    },
+    {
+        "key": "cmd+i",
+        "command": "composerMode.agent"
     }
 ]
