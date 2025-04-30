@@ -136,9 +136,9 @@ if [ -x "$(which gcloud)" ]; then
   source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 fi
 
-if [ -x "$(which podman)" ]; then
-  alias docker="podman"
-fi
+#if [ -x "$(which podman)" ]; then
+#  alias docker="podman"
+#fi
 
 if [ -x "$(which kubectl)" ]; then
   alias k="nocorrect kubectl"
