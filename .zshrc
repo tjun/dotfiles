@@ -51,6 +51,17 @@ autoload -Uz bashcompinit && bashcompinit
 # auto complate with case insensitive
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
+if [ -x "$(which zoxide)" ]; then
+  eval "$(zoxide init zsh)"
+  alias cd='z'
+  alias d='zi'
+fi
+
 function git-nb() {
   if [ $# -eq 2 ]; then
     branch="${USER}/$1/$2"
@@ -63,6 +74,17 @@ function git-nb() {
 
   echo "Creating branch: $branch"
   git switch -c "$branch"
+}
+
+function gwa() {
+  local branch="$1"
+  local ph=".git/wts/${branch}"
+
+  # Git aliasを呼び出してワークツリー追加
+  git wa "$branch"
+
+  # 作成されたディレクトリへ移動
+  cd "$ph"
 }
 
 alias g='git'
@@ -83,13 +105,11 @@ alias gcb='git current-branch'
 alias gsee='gh repo view --web'
 alias gf='git fetch origin'
 alias gb='git recent-branch'
-
+alias gpr='git fw'
+alias gwl='git worktree list'
+# alias cdu='cd $(git rev-parse --show-toplevel)'
+alias cdu='cd $(git rev-parse --git-common-dir | sed "s/\/\.git$//")'
 alias gca='gcloud auth login --update-adc'
-
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-fi
 
 # if WSL
 if [[ -f /proc/version ]] && grep -iq Microsoft /proc/version; then
@@ -171,13 +191,6 @@ if [ -x "$(which tenv)" ]; then
   source "$HOME/.tenv/completion.zsh"
 fi
 
-if [ -x "$(which zoxide)" ]; then
-  eval "$(zoxide init zsh)"
-  alias cd='z'
-  alias d='zi'
-fi
-alias cdu='cd $(git rev-parse --show-toplevel)'
-
 if [ -x "$(which pyenv)" ]; then
   export PYENV_ROOT="$HOME/.pyenv"
   export PATH="${PYENV_ROOT}/bin:$HOME/.local/bin:$PATH"
@@ -198,15 +211,15 @@ if [ -x "$(which fzf)" ]; then
   export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
 fi
 
-# git で remote branch を track する
-function gpr() {
-  if [ -z "$1" ]; then
-    echo "Usage: gprtrack <remote-branch-name>"
-    return 1
-  fi
-  git fetch origin
-  git switch --track origin/$1
-}
+# # git で remote branch を track する
+# function gpr() {
+#   if [ -z "$1" ]; then
+#     echo "Usage: gprtrack <remote-branch-name>"
+#     return 1
+#   fi
+#   git fetch origin
+#   git switch --track origin/$1
+# }
 
 function ghq-fzf() {
   local src=$(ghq list | fzf --preview "ls -laTp $(ghq root)/{} | tail -n+4 | awk '{print \$9\"/\"\$6\"/\"\$7 \" \" \$10}'")

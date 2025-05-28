@@ -85,6 +85,7 @@
     main = !"git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'"
     recent-branch = for-each-ref --sort=-committerdate refs/heads/ --count=5 --format='%(refname:short)'
     fw = "!f() { git fetch origin $1 && git switch $1; }; f"
+    wa = "!f() { git worktree add .git/wts/$1 -b $1 main; }; f"
 
 [filter "lfs"]
     clean = git-lfs clean %f
