@@ -76,17 +76,6 @@ function git-nb() {
   git switch -c "$branch"
 }
 
-function gwa() {
-  local branch="$1"
-  local ph=".git/wts/${branch}"
-
-  # Git aliasを呼び出してワークツリー追加
-  git wa "$branch"
-
-  # 作成されたディレクトリへ移動
-  cd "$ph"
-}
-
 alias g='git'
 alias ga='git add -p'
 alias gdc='git dc'
@@ -107,6 +96,7 @@ alias gf='git fetch origin'
 alias gb='git recent-branch'
 alias gpr='git fw'
 alias gwl='git worktree list'
+alias gwa='git wa'
 # alias cdu='cd $(git rev-parse --show-toplevel)'
 alias cdu='cd $(git rev-parse --git-common-dir | sed "s/\/\.git$//")'
 alias gca='gcloud auth login --update-adc'
@@ -232,21 +222,19 @@ function ghq-fzf() {
 zle -N ghq-fzf
 bindkey '^]' ghq-fzf
 
-function git-branch-fzf() {
+function b() {
   # ローカルブランチをコミット日時が新しい順にソートして取得
-  local branches=$(git branch --sort=-committerdate --format='%(refname:short)' | head -n 50)
+  local branches=$(git branch --sort=-committerdate | head -n 80)
   # fzf でブランチを選択
   local target_branch=$(echo "$branches" | fzf)
 
-  # ブランチが選択されたら switch するコマンドをBUFFERに入れる
+  # ブランチが選択されたら処理を実行
   if [ -n "$target_branch" ]; then
-    BUFFER="git switch $target_branch"
-    zle accept-line
+    # 先頭の*やスペースを削除
+    target_branch=$(echo "$target_branch" | sed 's/^[ *]*//')
+    git switch "$target_branch"
   fi
-  zle -R -c
 }
-zle -N git-branch-fzf
-bindkey '^[' git-branch-fzf
 
 # add local settings
 if [ -e $HOME/.zshrc-local ]; then
