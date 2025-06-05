@@ -1,4 +1,13 @@
+tap "cue-lang/tap"
+tap "minamijoyo/hcledit"
+tap "suzuki-shunsuke/pinact"
 brew "awscli"
+brew "azure-cli"
+brew "cue-lang/tap/cue"
+brew "minamijoyo/hcledit/hcledit"
+brew "postgresql@16"
+brew "suzuki-shunsuke/pinact/pinact"
+
 
 # cask "1password"
 cask "discord"
