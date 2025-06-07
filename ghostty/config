@@ -59,6 +59,9 @@ keybind = super+j=goto_split:bottom
 keybind = super+k=goto_split:top
 keybind = super+shift+r=reload_config
 
+# keybind = shift+enter=text:\r
+# keybind = shift+enter=text:\x1b[13;2u
+
 # Colors can be changed by setting the 16 colors of `palette`, which each color
 # being defined as regular and bold.
 #

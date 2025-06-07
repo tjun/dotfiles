@@ -11,21 +11,27 @@ if wezterm.config_builder then
 end
 
 -- This is where you actually apply your config choices
--- config.font = wezterm.font 'JetBrains Mono'
-config.font = wezterm.font("Menlo", {weight="Regular", stretch="Normal", style="Normal"})
--- config.font = wezterm.font("Cica", {weight="Regular", stretch="Normal", style="Normal"})
-config.font_size = 13.0
--- config.use_ime = true
+-- config.font = wezterm.font("Menlo", {weight="Regular", stretch="Normal", style="Normal"})
+config.font = wezterm.font_with_fallback({
+  "JetBrains Mono",            -- 英語
+  "HackGen Console NF",        -- 日本語
+})
 
-config.color_scheme = 'Flatland'
+config.font_size = 14.0
+-- config.use_ime = true
+config.freetype_load_target = "Light"
+
+config.default_cursor_style = "BlinkingBlock"
+
+config.color_scheme = 'nord'
 -- config.color_scheme = 'Edge Dark (base16)'
 -- config.color_scheme = 'AdventureTime'
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.8
 config.macos_window_background_blur = 20
 
 config.window_decorations = "RESIZE"
 
-config.hide_tab_bar_if_only_one_tab = true
+config.scrollback_lines = 10000
 
 -- タブバーの透過
 config.window_frame = {
@@ -38,10 +44,10 @@ config.window_frame = {
 --   colors = { "#1f1d45" }, -- AdventureTime
 -- }
 
+config.hide_tab_bar_if_only_one_tab = true
 -- タブの追加ボタンを非表示
 config.show_new_tab_button_in_tab_bar = false
-
--- タブの閉じるボタンを非表示
+-- タブの閉じるボタンを非表示: まだ使えない
 -- config.show_close_tab_button_in_tabs = false
 
 -- タブ同士の境界線を非表示
@@ -68,7 +74,6 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     { Text = title },
   }
 end)
-
 
 config.disable_default_key_bindings = true
 config.keys = require("keybinds").keys
