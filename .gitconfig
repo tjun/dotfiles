@@ -106,3 +106,5 @@
     sort = version:refname
 [help]
     autocorrect = prompt
+[advice]
+	statusHints = false
