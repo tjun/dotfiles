@@ -47,7 +47,7 @@ cask "google-cloud-sdk"
 cask "imageoptim"
 cask "podman-desktop"
 cask "qlmarkdown"
-cask "wezterm"
+cask "wezterm@nightly"
 
 if File.exist?(".Brewfile.local")
   instance_eval(File.read(".Brewfile.local"))

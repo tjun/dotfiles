@@ -224,7 +224,7 @@ bindkey '^]' ghq-fzf
 
 function b() {
   # ローカルブランチをコミット日時が新しい順にソートして取得
-  local branches=$(git branch --sort=-committerdate | head -n 80)
+  local branches=$(git branch --sort=-committerdate | head -n 50)
   # fzf でブランチを選択
   local target_branch=$(echo "$branches" | fzf)
 
@@ -232,9 +232,13 @@ function b() {
   if [ -n "$target_branch" ]; then
     # 先頭の*やスペースを削除
     target_branch=$(echo "$target_branch" | sed 's/^[ *]*//')
-    git switch "$target_branch"
+    BUFFER="git switch $target_branch"
+    zle accept-line
   fi
+  zle -R -c
 }
+zle -N b
+bindkey '^[' b
 
 # add local settings
 if [ -e $HOME/.zshrc-local ]; then
