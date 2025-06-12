@@ -58,7 +58,7 @@ fi
 
 if [ -x "$(which zoxide)" ]; then
   eval "$(zoxide init zsh)"
-  alias cd='z'
+  # alias cd='z'
   alias d='zi'
 fi
 
