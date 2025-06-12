@@ -47,8 +47,8 @@ config.window_frame = {
 config.hide_tab_bar_if_only_one_tab = true
 -- タブの追加ボタンを非表示
 config.show_new_tab_button_in_tab_bar = false
--- タブの閉じるボタンを非表示: まだ使えない
--- config.show_close_tab_button_in_tabs = false
+-- タブの閉じるボタンを非表示
+config.show_close_tab_button_in_tabs = false
 
 -- タブ同士の境界線を非表示
 -- config.colors = {
