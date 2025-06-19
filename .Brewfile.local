@@ -8,12 +8,5 @@ brew "minamijoyo/hcledit/hcledit"
 brew "postgresql@16"
 brew "suzuki-shunsuke/pinact/pinact"
 
-
-# cask "1password"
 cask "discord"
-cask "karabiner-elements"
-cask "notion"
-cask "raycast"
-# cask "slack"
-cask "visual-studio-code"
-cask "zoom"
+
