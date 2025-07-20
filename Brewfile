@@ -1,12 +1,12 @@
 tap "homebrew/bundle"
-tap "aquaproj/aqua"
 brew "actionlint"
-brew "aquaproj/aqua/aqua"
+brew "aqua"
 brew "atuin"
 brew "bat"
 brew "curl"
 brew "colima"
 brew "difftastic"
+brew "direnv"
 brew "docker"
 # need to create a symlink for ~/.docker/cli-plugins/docker-buildx
 # to /opt/homebrew/Cellar/docker-buildx/<version>/bin/docker-buildx
