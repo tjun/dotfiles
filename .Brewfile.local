@@ -6,7 +6,7 @@ brew "azure-cli"
 brew "cue-lang/tap/cue"
 brew "minamijoyo/hcledit/hcledit"
 brew "postgresql@16"
-brew "suzuki-shunsuke/pinact/pinact"
+brew "pinact"
 
 cask "discord"
 
