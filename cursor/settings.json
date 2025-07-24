@@ -1,96 +1,93 @@
 // ~/Library/Application\ Support/Cursor/User/settings.json
 {
-    "cursor.cpp.enablePartialAccepts": true,
-    "editor.tabSize": 2,
-    "editor.cursorStyle": "block",
-    "editor.guides.indentation": true,
-    "editor.renderControlCharacters": true,
-    "editor.renderWhitespace": "boundary",
-    "editor.wordWrapColumn": 200,
-    "editor.wrappingIndent": "indent",
+  "cursor.cpp.enablePartialAccepts": true,
+  "editor.tabSize": 2,
+  "editor.cursorStyle": "block",
+  "editor.guides.indentation": true,
+  "editor.renderControlCharacters": true,
+  "editor.renderWhitespace": "boundary",
+  "editor.wordWrapColumn": 200,
+  "editor.wrappingIndent": "indent",
+  "editor.formatOnSave": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.formatOnPaste": true,
+  "explorer.autoReveal": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.insertFinalNewline": true,
+  "git.openRepositoryInParentFolders": "always",
+  "security.workspace.trust.untrustedFiles": "open",
+  "go.lintOnSave": "file",
+  "go.lintTool": "golangci-lint",
+  "go.useLanguageServer": true,
+  "go.alternateTools": {
+    "go-langserver": "gopls"
+  },
+  "[go]": {
+    "editor.snippetSuggestions": "none",
     "editor.formatOnSave": true,
-    "editor.inlineSuggest.enabled": true,
-    "editor.formatOnPaste": true,
-    "explorer.autoReveal": false,
-    "explorer.confirmDelete": false,
-    "explorer.confirmDragAndDrop": false,
-    "files.insertFinalNewline": true,
-    "git.openRepositoryInParentFolders": "always",
-    "security.workspace.trust.untrustedFiles": "open",
-    "go.lintOnSave": "file",
-    "go.lintTool": "golangci-lint",
-    "go.useLanguageServer": true,
-    "go.alternateTools": {
-        "go-langserver": "gopls"
-    },
-    "[go]": {
-        "editor.snippetSuggestions": "none",
-        "editor.formatOnSave": true,
-        "editor.codeActionsOnSave": {
-            "source.organizeImports": "explicit"
-        }
-    },
-    "gopls": {
-        "usePlaceholders": true
-    },
-    "go.toolsManagement.autoUpdate": true,
-    "[dockerfile]": {
-        "editor.defaultFormatter": "ms-azuretools.vscode-docker"
-    },
-    "[python]": {
-        "editor.formatOnType": true
-    },
-    "[terraform]": {
-        "editor.defaultFormatter": "hashicorp.terraform",
-        "editor.formatOnSave": true,
-        "editor.formatOnSaveMode": "file"
-    },
-    "[terraform-vars]": {
-        "editor.defaultFormatter": "hashicorp.terraform",
-        "editor.formatOnSave": true,
-        "editor.formatOnSaveMode": "file"
-    },
-    "terraform.languageServer.enable": true,
-    "terminal.integrated.env.osx": {
-        "FIG_NEW_SESSION": "1"
-    },
-    "debug.allowBreakpointsEverywhere": true,
-    "http.proxyAuthorization": null,
-    "makefile.configureOnOpen": false,
-    "redhat.telemetry.enabled": true,
-    "[yaml]": {
-        "editor.defaultFormatter": "redhat.vscode-yaml",
-        "editor.autoIndent": "full",
-        "editor.insertSpaces": true,
-        "editor.tabSize": 2,
-        "editor.detectIndentation": false, // 他ファイルの設定に引っ張られないように
-        "editor.formatOnSave": true,
-        "editor.formatOnPaste": true
-    },
-    "yaml.schemas": {
-        "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.{yml,yaml}"
-    },
-    "linter-actionlint.config": {
-        "capabilities": [],
-        "command": [
-            "actionlint",
-            "-format",
-            "'{{json .}}'",
-            "--stdin-filename",
-            "$file",
-            "-"
-        ],
-        "configFiles": [
-            "actionlint.yaml",
-            "actionlint.yml"
-        ],
-        "enabled": true,
-        "languages": [
-            "yaml"
-        ],
-        "name": "actionlint",
-        "url": "https://github.com/rhysd/actionlint"
-    },
-    "workbench.colorTheme": "Cursor Dark Midnight",
-    "workbench.iconTheme": "catppuccin-macchiato",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  "gopls": {
+    "usePlaceholders": true
+  },
+  "go.toolsManagement.autoUpdate": true,
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
+  },
+  "[terraform-vars]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
+  },
+  "terraform.languageServer.enable": true,
+  "terminal.integrated.env.osx": {
+    "FIG_NEW_SESSION": "1"
+  },
+  "debug.allowBreakpointsEverywhere": true,
+  "http.proxyAuthorization": null,
+  "makefile.configureOnOpen": false,
+  "redhat.telemetry.enabled": true,
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.autoIndent": "full",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false, // 他ファイルの設定に引っ張られないように
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+  },
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.{yml,yaml}"
+  },
+  "linter-actionlint.config": {
+    "capabilities": [],
+    "command": [
+      "actionlint",
+      "-format",
+      "'{{json .}}'",
+      "--stdin-filename",
+      "$file",
+      "-"
+    ],
+    "configFiles": ["actionlint.yaml", "actionlint.yml"],
+    "enabled": true,
+    "languages": ["yaml"],
+    "name": "actionlint",
+    "url": "https://github.com/rhysd/actionlint"
+  },
+  "workbench.colorTheme": "Cursor Dark Midnight",
+  "workbench.iconTheme": "catppuccin-macchiato",
+  "ruff.configuration": ""
 }

@@ -188,6 +188,10 @@ if [ -x "$(which pyenv)" ]; then
   eval "$(pyenv init -)"
 fi
 
+if [ -x "$(which direnv)" ]; then
+  eval "$(direnv hook zsh)"
+fi
+
 # if [ -e "/opt/homebrew/opt/libpq/bin" ];then
 #   export PATH="${PATH}:/opt/homebrew/opt/libpq/bin"
 # fi
