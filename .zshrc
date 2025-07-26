@@ -141,9 +141,9 @@ else
 fi
 
 if [ -x "$(which gcloud)" ]; then
-  PATH=$PATH:$HOME/google-cloud-sdk/bin
-  source "$HOME/google-cloud-sdk/path.zsh.inc"
-  source "$HOME/google-cloud-sdk/completion.zsh.inc"
+  PATH=$PATH:$(brew --prefix)/share/google-cloud-sdk/bin
+  source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+  source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 fi
 
 #if [ -x "$(which podman)" ]; then
