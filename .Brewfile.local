@@ -5,6 +5,7 @@ brew "awscli"
 brew "azure-cli"
 brew "cue-lang/tap/cue"
 brew "minamijoyo/hcledit/hcledit"
+brew "protobuf"
 brew "postgresql@16"
 brew "pinact"
 
