@@ -66,7 +66,37 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     foreground = "#FFFFFF"
   end
 
-  local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "   "
+  -- Get the current working directory
+  local cwd = tab.active_pane.current_working_dir
+  local title = ""
+  
+  if cwd then
+    -- Convert file URI to path
+    local path = cwd.file_path
+    
+    -- Check if it's a GitHub repository by looking for github.com in the path
+    local github_match = string.match(path, "github%.com/[^/]+/([^/]+)")
+    
+    if github_match then
+      -- Use the repository name as title
+      title = github_match
+    else
+      -- Check if it's in any git repository
+      local home = os.getenv("HOME")
+      if home and path:sub(1, #home) == home then
+        -- Replace home directory with ~
+        path = "~" .. path:sub(#home + 1)
+      end
+      
+      -- Get the last directory name
+      title = string.match(path, "([^/]+)/?$") or path
+    end
+  else
+    -- Fallback to pane title if cwd is not available
+    title = tab.active_pane.title
+  end
+
+  title = "   " .. wezterm.truncate_right(title, max_width - 1) .. "   "
 
   return {
     { Background = { Color = background } },
