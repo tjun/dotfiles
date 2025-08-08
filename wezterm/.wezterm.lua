@@ -26,7 +26,7 @@ config.default_cursor_style = "BlinkingBlock"
 config.color_scheme = 'nord'
 -- config.color_scheme = 'Edge Dark (base16)'
 -- config.color_scheme = 'AdventureTime'
-config.window_background_opacity = 0.8
+config.window_background_opacity = 0.9
 config.macos_window_background_blur = 20
 
 config.window_decorations = "RESIZE"
@@ -69,14 +69,23 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
   -- Get the current working directory
   local cwd = tab.active_pane.current_working_dir
   local title = ""
-  
-  if cwd then
+
+  -- Check if SSH is the foreground process
+  local process_name = tab.active_pane.foreground_process_name
+  local is_ssh = process_name and string.find(process_name, "ssh$")
+
+  if is_ssh then
+    -- Extract hostname from pane title when SSH is running
+    local pane_title = tab.active_pane.title or ""
+    local hostname = string.match(pane_title, "@([^%s:]+)") or string.match(pane_title, "^([^@%s]+)$") or "remote"
+    title = "🌐 " .. hostname
+  elseif cwd then
     -- Convert file URI to path
     local path = cwd.file_path
-    
+
     -- Check if it's a GitHub repository by looking for github.com in the path
     local github_match = string.match(path, "github%.com/[^/]+/([^/]+)")
-    
+
     if github_match then
       -- Use the repository name as title
       title = github_match
