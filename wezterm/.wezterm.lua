@@ -23,7 +23,8 @@ config.freetype_load_target = "Light"
 
 config.default_cursor_style = "BlinkingBlock"
 
-config.color_scheme = 'nord'
+-- config.color_scheme = 'nord'
+config.color_scheme = 'Tokyo Night Storm (Gogh)'
 -- config.color_scheme = 'Edge Dark (base16)'
 -- config.color_scheme = 'AdventureTime'
 config.window_background_opacity = 0.9
@@ -96,7 +97,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
         -- Replace home directory with ~
         path = "~" .. path:sub(#home + 1)
       end
-      
+
       -- Get the last directory name
       title = string.match(path, "([^/]+)/?$") or path
     end
