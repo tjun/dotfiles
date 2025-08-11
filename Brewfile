@@ -34,6 +34,7 @@ brew "marp-cli"
 brew "mise"
 brew "mpdecimal" # required by google-cloud-sdk
 brew "podman"
+brew "protobuf"
 brew "readline" # required by google-cloud-sdk
 brew "ripgrep"
 brew "shellcheck"
