@@ -202,6 +202,10 @@ if [ -e "/opt/homebrew/opt/postgresql@16/bin" ];then
   export PATH="${PATH}:/opt/homebrew/opt/postgresql@16/bin"
 fi
 
+if [ -e "${HOME}/.bun/bin" ];then
+  export PATH="${HOME}/.bun/bin:$PATH"
+fi
+
 if [ -x "$(which fzf)" ]; then
   export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
   export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
