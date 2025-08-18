@@ -202,24 +202,10 @@ if [ -e "/opt/homebrew/opt/postgresql@16/bin" ];then
   export PATH="${PATH}:/opt/homebrew/opt/postgresql@16/bin"
 fi
 
-if [ -e "${HOME}/.bun/bin" ];then
-  export PATH="${HOME}/.bun/bin:$PATH"
-fi
-
 if [ -x "$(which fzf)" ]; then
   export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
   export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
 fi
-
-# # git で remote branch を track する
-# function gpr() {
-#   if [ -z "$1" ]; then
-#     echo "Usage: gprtrack <remote-branch-name>"
-#     return 1
-#   fi
-#   git fetch origin
-#   git switch --track origin/$1
-# }
 
 function ghq-fzf() {
   local src=$(ghq list | fzf --preview "ls -laTp $(ghq root)/{} | tail -n+4 | awk '{print \$9\"/\"\$6\"/\"\$7 \" \" \$10}'")
@@ -231,24 +217,6 @@ function ghq-fzf() {
 }
 zle -N ghq-fzf
 bindkey '^]' ghq-fzf
-
-function b() {
-  # ローカルブランチをコミット日時が新しい順にソートして取得
-  local branches=$(git branch --sort=-committerdate | head -n 50)
-  # fzf でブランチを選択
-  local target_branch=$(echo "$branches" | fzf)
-
-  # ブランチが選択されたら処理を実行
-  if [ -n "$target_branch" ]; then
-    # 先頭の*やスペースを削除
-    target_branch=$(echo "$target_branch" | sed 's/^[ *]*//')
-    BUFFER="git switch $target_branch"
-    zle accept-line
-  fi
-  zle -R -c
-}
-zle -N b
-bindkey '^[' b
 
 # add local settings
 if [ -e $HOME/.zshrc-local ]; then
