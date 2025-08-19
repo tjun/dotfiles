@@ -24,7 +24,7 @@ config.freetype_load_target = "Light"
 config.default_cursor_style = "BlinkingBlock"
 
 -- config.color_scheme = 'nord'
-config.color_scheme = 'Tokyo Night Storm (Gogh)'
+config.color_scheme = 'Tokyo Night Storm'
 -- config.color_scheme = 'Edge Dark (base16)'
 -- config.color_scheme = 'AdventureTime'
 config.window_background_opacity = 0.9
