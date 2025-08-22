@@ -162,9 +162,11 @@ if [ -x "$(which kubectl)" ]; then
   #RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 fi
 
-if [ -x "$(which atuin)" ]; then
-  eval "$(atuin init zsh)"
-fi
+#if [ -x "$(which atuin)" ]; then
+#  eval "$(atuin init zsh)"
+#fi
+
+
 
 if [ -x "$(which bat)" ]; then
   alias cat='bat'
@@ -200,6 +202,10 @@ fi
 
 if [ -e "/opt/homebrew/opt/postgresql@16/bin" ];then
   export PATH="${PATH}:/opt/homebrew/opt/postgresql@16/bin"
+fi
+
+if [ -e "~/.local/bin" ]; then
+  export PATH="~/.local/bin:$PATH"
 fi
 
 if [ -x "$(which fzf)" ]; then

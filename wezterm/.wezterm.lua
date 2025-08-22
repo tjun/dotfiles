@@ -17,7 +17,7 @@ config.font = wezterm.font_with_fallback({
   "HackGen Console NF",        -- 日本語
 })
 
-config.font_size = 14.0
+config.font_size = 12.0
 -- config.use_ime = true
 config.freetype_load_target = "Light"
 
@@ -45,7 +45,7 @@ config.window_frame = {
 --   colors = { "#1f1d45" }, -- AdventureTime
 -- }
 
-config.hide_tab_bar_if_only_one_tab = true
+-- config.hide_tab_bar_if_only_one_tab = true
 -- タブの追加ボタンを非表示
 config.show_new_tab_button_in_tab_bar = false
 -- タブの閉じるボタンを非表示
@@ -118,7 +118,38 @@ end)
 config.disable_default_key_bindings = true
 config.keys = require("keybinds").keys
 config.key_tables = require("keybinds").key_tables
-config.leader = { key = "q", mods = "CTRL", timeout_milliseconds = 2000 }
 
+config.leader = { key = "z", mods = "CTRL", timeout_milliseconds = 1000 }
+
+local act = wezterm.action
+config.keys = {
+  {
+    key = "c", mods = "CMD", action = act.CopyTo("Clipboard"),
+  },
+  {
+    key = "v", mods = "CMD", action = act.PasteFrom("Clipboard"),
+  },
+  -- create a new tab
+  {
+    key = 't', mods = 'CMD',
+    action = act.SpawnTab 'CurrentPaneDomain',
+  },
+  { key = 'Tab', mods = 'CTRL', action = act.ActivateTabRelative(1) },
+  { key = 'Tab', mods = 'SHIFT|CTRL', action = act.ActivateTabRelative(-1) },
+
+  -- create a new split
+  {
+    key = 'c', mods = 'LEADER',
+    action = act.SplitPane {
+      direction = 'Right', size = { Percent = 50 },
+    },
+  },
+  {
+    key = 'n', mods = 'LEADER', action = act.ActivatePaneDirection 'Right',
+  },
+  {
+    key = 'p', mods = 'LEADER', action = act.ActivatePaneDirection 'Left',
+  },
+}
 -- and finally, return the configuration to wezterm
 return config
