@@ -204,8 +204,8 @@ if [ -e "/opt/homebrew/opt/postgresql@16/bin" ];then
   export PATH="${PATH}:/opt/homebrew/opt/postgresql@16/bin"
 fi
 
-if [ -e "~/.local/bin" ]; then
-  export PATH="~/.local/bin:$PATH"
+if [ -e "${HOME}/.local/bin" ]; then
+  export PATH="${HOME}/.local/bin:$PATH"
 fi
 
 if [ -x "$(which fzf)" ]; then

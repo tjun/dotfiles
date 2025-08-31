@@ -1,7 +1,65 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "model": "opus",
+  "permissions": {
+    "allow": [
+      "Bash(cd:*)",
+      "Bash(fd:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(open:*)",
+      "Bash(rg:*)",
+      "Bash(time:*)",
+      "Bash(tree:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh pr view:*)",
+      "WebFetch(domain:github.com)",
+      "WebSearch",
+      "mcp__serena__find_file",
+      "mcp__serena__get_symbols_overview",
+      "mcp__serena__list_dir",
+      "mcp__serena__search_for_pattern"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/dev/bin/claude-notification.sh"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/dev/bin/claude-notification.sh"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/dev/bin/claude-notification.sh"
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
-    "command": "bunx claude-code-tamagotchi statusline",
+    "command": "npx -y ccstatusline@latest",
     "padding": 0
   }
 }
