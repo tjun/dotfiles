@@ -119,7 +119,7 @@ config.disable_default_key_bindings = true
 config.keys = require("keybinds").keys
 config.key_tables = require("keybinds").key_tables
 
-config.leader = { key = "z", mods = "CTRL", timeout_milliseconds = 1000 }
+config.leader = { key = "t", mods = "CTRL", timeout_milliseconds = 1000 }
 
 local act = wezterm.action
 config.keys = {
