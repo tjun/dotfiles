@@ -14,6 +14,7 @@ brew "docker"
 # or use `docker buildx install` after installing docker-buildx
 # see
 brew "docker-buildx"
+brew "docker-credential-helper"
 brew "docker-compose"
 brew "duckdb"
 brew "eza"
