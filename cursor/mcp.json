@@ -1,20 +1,7 @@
 {
   "mcpServers": {
-    "terraform": {
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "hashicorp/terraform-mcp-server"
-      ]
-    },
     "deepwiki": {
       "url": "https://mcp.deepwiki.com/sse"
-    },
-    "linear": {
-      "command": "npx",
-      "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"]
     }
   }
 }

@@ -89,5 +89,6 @@
   },
   "workbench.colorTheme": "Cursor Dark Midnight",
   "workbench.iconTheme": "catppuccin-macchiato",
-  "ruff.configuration": ""
+  "ruff.configuration": "",
+  "editor.fontSize": 11
 }

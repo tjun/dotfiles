@@ -35,6 +35,7 @@ brew "libpq"
 brew "marp-cli"
 brew "mise"
 brew "mpdecimal" # required by google-cloud-sdk
+brew "go-parquet-tools"
 brew "podman"
 brew "protobuf"
 brew "readline" # required by google-cloud-sdk
@@ -67,6 +68,6 @@ cask "wezterm@nightly"
 cask "zoom"
 # cask "podman-desktop"
 
-if File.exist?(".Brewfile.local")
-  instance_eval(File.read(".Brewfile.local"))
+if File.exist?("#{ENV['HOME']}/.Brewfile.local")
+  instance_eval(File.read("#{ENV['HOME']}/.Brewfile.local"))
 end
