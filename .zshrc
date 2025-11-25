@@ -246,3 +246,6 @@ function prompt_color() {
 if [ -n "$PS1" ]; then
   prompt_color
 fi
+
+# Added by Antigravity
+export PATH="/Users/tjun/.antigravity/antigravity/bin:$PATH"

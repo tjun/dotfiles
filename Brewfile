@@ -52,6 +52,7 @@ brew "zoxide"
 brew "zsh"
 
 cask "1password"
+cask "antigravity"
 cask "appcleaner"
 cask "eul"
 cask "karabiner-elements"
