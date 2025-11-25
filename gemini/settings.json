@@ -1,0 +1,20 @@
+{
+  "general": {
+    "preferredEditor": "vscode"
+  },
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    },
+    "allowedCommands": [
+      "ls",
+      "tree",
+      "gh pr diff",
+      "gh pr view",
+      "git status"
+    ]
+  },
+  "ui": {
+    "theme": "Ayu Light"
+  }
+}

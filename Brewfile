@@ -45,6 +45,7 @@ brew "sheldon"
 brew "sqlite" # required by google-cloud-sdk
 brew "tenv"
 brew "terraform-docs"
+brew "tree"
 brew "wget"
 brew "xh"
 brew "zola"
