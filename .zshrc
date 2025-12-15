@@ -102,6 +102,7 @@ alias cdu='cd $(git rev-parse --git-common-dir | sed "s/\/\.git$//")'
 alias gca='gcloud auth login --update-adc'
 
 alias update-serena='uvx --from git+https://github.com/oraios/serena serena project index $(pwd)'
+alias anti='open -a /Applications/Antigravity.app --args --ignore-gpu-blacklist --enable-gpu-rasterization --enable-zero-copy --disable-gpu-driver-bug-workarounds --enable-native-gpu-memory-buffers'
 
 # if WSL
 if [[ -f /proc/version ]] && grep -iq Microsoft /proc/version; then

@@ -1,6 +1,8 @@
 {
   "general": {
-    "preferredEditor": "vscode"
+    "preferredEditor": "vscode",
+    "previewFeatures": true,
+    "enablePromptCompletion": true
   },
   "security": {
     "auth": {
@@ -15,6 +17,17 @@
     ]
   },
   "ui": {
-    "theme": "Ayu Light"
+    "theme": "Ayu Light",
+    "footer": {
+      "hideContextPercentage": false
+    }
+  },
+  "output": {
+    "format": "text"
+  },
+  "tools": {
+    "shell": {
+      "showColor": true
+    }
   }
 }

@@ -1,12 +1,12 @@
 # GEMINI.md - Global rules
 
-- Please provide all answers in Japanese.
-- Write code comments that explain intent and rationale, not obvious facts or descriptions of code changes.
+1. Please provide all answers in Japanese.
+2. Write code comments that explain intent and rationale, not obvious facts or descriptions of code changes.
 
 
 ## Git & GitHub
 
-- use git commit with one line simple message, conventional commit style.
-- Write PR body in Japanese
-- after creating a PR, open a PR page with `gh pr view --web` command.
+3. use git commit with one line simple message, conventional commit style.
+4. Write PR body in Japanese
+5. after creating a PR, open a PR page with `gh pr view --web` command.
 
