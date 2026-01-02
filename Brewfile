@@ -1,4 +1,6 @@
 tap "homebrew/bundle"
+tap "FelixKratz/formulae" # for sketchybar
+
 brew "actionlint"
 brew "aqua"
 brew "atuin"
@@ -33,16 +35,16 @@ brew "jq"
 brew "kubectx"
 brew "libpq"
 brew "marp-cli"
+brew "mcap"
 brew "mise"
 brew "mpdecimal" # required by google-cloud-sdk
 brew "go-parquet-tools"
 brew "podman"
 brew "protobuf"
-brew "readline" # required by google-cloud-sdk
 brew "ripgrep"
 brew "shellcheck"
 brew "sheldon"
-brew "sqlite" # required by google-cloud-sdk
+brew "sketchybar"
 brew "tenv"
 brew "terraform-docs"
 brew "tree"
@@ -57,8 +59,6 @@ cask "antigravity"
 cask "appcleaner"
 cask "eul"
 cask "karabiner-elements"
-# cask "ghostty"
-# cask "google-cloud-sdk"
 cask "gcloud-cli"
 cask "imageoptim"
 cask "notion"
@@ -68,7 +68,6 @@ cask "slack"
 cask "visual-studio-code"
 cask "wezterm@nightly"
 cask "zoom"
-# cask "podman-desktop"
 
 if File.exist?("#{ENV['HOME']}/.Brewfile.local")
   instance_eval(File.read("#{ENV['HOME']}/.Brewfile.local"))
