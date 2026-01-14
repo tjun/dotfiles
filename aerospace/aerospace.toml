@@ -1,0 +1,118 @@
+# AeroSpace config
+# 3分割レイアウト用設定
+
+config-version = 2
+
+after-startup-command = ['exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0', 'exec-and-forget sketchybar']
+
+# Notify Sketchybar about workspace change
+exec-on-workspace-change = ['/bin/bash', '-c',
+    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+]
+
+start-at-login = true
+
+# タイルレイアウトをデフォルトに
+default-root-container-layout = 'tiles'
+
+# 横長モニターでは水平方向に並べる
+default-root-container-orientation = 'horizontal'
+
+# フォーカス移動時にマウスも追従
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# 永続ワークスペース
+persistent-workspaces = ["1", "2", "3"]
+
+# ウィンドウ間のギャップ
+[gaps]
+    inner.horizontal = 10
+    inner.vertical = 10
+    outer.left = 10
+    outer.bottom = 10
+    outer.top = [{monitor."LG ULTRAFINE" = 35}, 10]
+    outer.right = 10
+
+[key-mapping]
+    preset = 'qwerty'
+
+# メインのキーバインド
+[mode.main.binding]
+    # フォーカス移動 (vim風)
+    alt-h = 'focus left'
+    alt-j = 'focus down'
+    alt-k = 'focus up'
+    alt-l = 'focus right'
+
+    # ウィンドウ移動
+    alt-shift-h = 'move left'
+    alt-shift-j = 'move down'
+    alt-shift-k = 'move up'
+    alt-shift-l = 'move right'
+
+    # リサイズ
+    alt-minus = 'resize smart -50'
+    alt-equal = 'resize smart +50'
+
+    # レイアウト切り替え
+    alt-slash = 'layout tiles horizontal vertical'
+    alt-comma = 'layout accordion horizontal vertical'
+
+    # ワークスペース切り替え
+    alt-1 = 'workspace 1'
+    alt-2 = 'workspace 2'
+    alt-3 = 'workspace 3'
+
+    # ウィンドウをワークスペースへ移動
+    alt-shift-1 = 'move-node-to-workspace 1'
+    alt-shift-2 = 'move-node-to-workspace 2'
+    alt-shift-3 = 'move-node-to-workspace 3'
+
+    # 直前のワークスペースに戻る
+    alt-tab = 'workspace-back-and-forth'
+
+    # serviceモードへ
+    alt-shift-semicolon = 'mode service'
+
+# serviceモード
+[mode.service.binding]
+    esc = ['reload-config', 'mode main']
+    r = ['flatten-workspace-tree', 'mode main']
+    f = ['layout floating tiling', 'mode main']
+    backspace = ['close-all-windows-but-current', 'mode main']
+    alt-shift-h = ['join-with left', 'mode main']
+    alt-shift-j = ['join-with down', 'mode main']
+    alt-shift-k = ['join-with up', 'mode main']
+    alt-shift-l = ['join-with right', 'mode main']
+
+# アプリごとの自動配置ルール
+# Slack → ワークスペース1
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = 'move-node-to-workspace 1'
+
+# WezTerm → ワークスペース1
+[[on-window-detected]]
+if.app-id = 'com.github.wez.wezterm'
+run = 'move-node-to-workspace 1'
+
+# Cursor (VS Code系) → ワークスペース1
+[[on-window-detected]]
+if.app-id = 'com.todesktop.230313mzl4w4u92'
+run = 'move-node-to-workspace 1'
+
+# VS Code → ワークスペース1
+[[on-window-detected]]
+if.app-id = 'com.microsoft.VSCode'
+run = 'move-node-to-workspace 1'
+
+# Notion → ワークスペース1
+[[on-window-detected]]
+if.app-id = 'notion.id'
+run = 'move-node-to-workspace 1'
+
+# Chrome → ワークスペース1
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = 'move-node-to-workspace 1'
+
