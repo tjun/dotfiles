@@ -97,11 +97,8 @@ alias gb='git recent-branch'
 alias gpr='git fw'
 alias gwl='git worktree list'
 alias gwa='git wa'
-# alias cdu='cd $(git rev-parse --show-toplevel)'
 alias cdu='cd $(git rev-parse --git-common-dir | sed "s/\/\.git$//")'
 alias gca='gcloud auth login --update-adc'
-
-alias update-serena='uvx --from git+https://github.com/oraios/serena serena project index $(pwd)'
 
 # if WSL
 if [[ -f /proc/version ]] && grep -iq Microsoft /proc/version; then
@@ -155,10 +152,6 @@ if (( $+commands[gcloud] )); then
   zsh-defer source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 fi
 
-#if [ -x "$(which podman)" ]; then
-#  alias docker="podman"
-#fi
-
 # kubectl (completionをキャッシュ化) - 現在未使用
 # if (( $+commands[kubectl] )); then
 #   alias k="nocorrect kubectl"
@@ -173,12 +166,6 @@ fi
 #   zsh-defer source "$_kubectl_cache"
 #   zsh-defer complete -o default -F __start_kubectl k
 # fi
-
-#if [ -x "$(which atuin)" ]; then
-#  eval "$(atuin init zsh)"
-#fi
-
-
 
 if (( $+commands[bat] )); then
   alias cat='bat'
