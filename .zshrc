@@ -40,10 +40,10 @@ setopt no_flow_control
 setopt notify
 
 autoload -Uz compinit
-if [ $(date +'%j') != $(/usr/bin/stat -f '%Sm' -t '%j' ${ZDOTDIR:-$HOME}/.zcompdum* 2>/dev/null) ]; then
-  compinit
-else
+if [[ -z ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
   compinit -C
+else
+  compinit
 fi
 
 autoload -Uz bashcompinit && bashcompinit
@@ -146,7 +146,7 @@ else
 fi
 
 # gcloud (遅延読み込み)
-if (( $+commands[gcloud] )); then
+if (( $+commands[gcloud] )) && type brew &>/dev/null; then
   PATH=$PATH:$(brew --prefix)/share/google-cloud-sdk/bin
   zsh-defer source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
   zsh-defer source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
@@ -208,7 +208,7 @@ if (( $+commands[fzf] )); then
 fi
 
 function ghq-fzf() {
-  local src=$(ghq list | fzf --preview "ls -laTp $(ghq root)/{} | tail -n+4 | awk '{print \$9\"/\"\$6\"/\"\$7 \" \" \$10}'")
+  local src=$(ghq list | fzf --preview "ls -lap $(ghq root)/{} | tail -n+4 | awk '{print \$9\"/\"\$6\"/\"\$7 \" \" \$8}'")
   if [ -n "$src" ]; then
     BUFFER="cd $(ghq root)/$src"
     zle accept-line
