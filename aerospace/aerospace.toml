@@ -22,7 +22,7 @@ default-root-container-orientation = 'horizontal'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
 # 永続ワークスペース
-persistent-workspaces = ["1", "2", "3"]
+persistent-workspaces = ["1", "dev", "3", "4"]
 
 # ウィンドウ間のギャップ
 [gaps]
@@ -60,13 +60,15 @@ persistent-workspaces = ["1", "2", "3"]
 
     # ワークスペース切り替え
     alt-1 = 'workspace 1'
-    alt-2 = 'workspace 2'
+    alt-2 = 'workspace dev'
     alt-3 = 'workspace 3'
+    alt-4 = 'workspace 4'
 
     # ウィンドウをワークスペースへ移動
     alt-shift-1 = 'move-node-to-workspace 1'
-    alt-shift-2 = 'move-node-to-workspace 2'
+    alt-shift-2 = 'move-node-to-workspace dev'
     alt-shift-3 = 'move-node-to-workspace 3'
+    alt-shift-4 = 'move-node-to-workspace 4'
 
     # 直前のワークスペースに戻る
     alt-tab = 'workspace-back-and-forth'
@@ -91,20 +93,25 @@ persistent-workspaces = ["1", "2", "3"]
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = 'move-node-to-workspace 1'
 
-# WezTerm → ワークスペース1
+# WezTerm → ワークスペースdev
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
-run = 'move-node-to-workspace 1'
+run = 'move-node-to-workspace dev'
 
-# Cursor (VS Code系) → ワークスペース1
+# Cursor (VS Code系) → ワークスペースdev
 [[on-window-detected]]
 if.app-id = 'com.todesktop.230313mzl4w4u92'
-run = 'move-node-to-workspace 1'
+run = 'move-node-to-workspace dev'
 
-# VS Code → ワークスペース1
+# VS Code → ワークスペースdev
 [[on-window-detected]]
 if.app-id = 'com.microsoft.VSCode'
-run = 'move-node-to-workspace 1'
+run = 'move-node-to-workspace dev'
+
+# Antigravity → ワークスペースdev
+[[on-window-detected]]
+if.app-id = 'com.sdegutis.Antigravity'
+run = 'move-node-to-workspace dev'
 
 # Notion → ワークスペース1
 [[on-window-detected]]

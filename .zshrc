@@ -7,7 +7,7 @@ typeset -U PATH path
 umask 022
 
 bindkey -e # emacs bind
-export EDITOR='vim'
+export EDITOR='hx'
 
 setopt auto_cd
 setopt auto_pushd
@@ -56,12 +56,6 @@ then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
-if [ -x "$(which zoxide)" ]; then
-  eval "$(zoxide init zsh)"
-  # alias cd='z'
-  alias d='zi'
-fi
-
 function git-nb() {
   if [ $# -eq 2 ]; then
     branch="${USER}/$1/$2"
@@ -74,6 +68,12 @@ function git-nb() {
 
   echo "Creating branch: $branch"
   git switch -c "$branch"
+}
+
+function  gwt() {
+  local dir
+  dir=$(git worktree list | fzf | awk '{print $1}')
+  [ -n "$dir" ] && cd "$dir"
 }
 
 alias g='git'
@@ -102,7 +102,6 @@ alias cdu='cd $(git rev-parse --git-common-dir | sed "s/\/\.git$//")'
 alias gca='gcloud auth login --update-adc'
 
 alias update-serena='uvx --from git+https://github.com/oraios/serena serena project index $(pwd)'
-alias anti='open -a /Applications/Antigravity.app --args --ignore-gpu-blacklist --enable-gpu-rasterization --enable-zero-copy --disable-gpu-driver-bug-workarounds --enable-native-gpu-memory-buffers'
 
 # if WSL
 if [[ -f /proc/version ]] && grep -iq Microsoft /proc/version; then
@@ -127,11 +126,17 @@ fi
 # sheldon
 eval "$(sheldon source)"
 
+# zoxide (遅延読み込み)
+if (( $+commands[zoxide] )); then
+  zsh-defer eval "$(zoxide init zsh)"
+  alias d='zi'
+fi
+
 if [ -e $HOME/.cargo/env ]; then
   source $HOME/.cargo/env
 fi
 
-if [ -x "$(which eza)" ]; then
+if (( $+commands[eza] )); then
   alias la="eza -a --oneline"
   alias ll="eza -l --git -g -h"
   alias l="eza -l --git -h --no-user --no-permissions --no-time"
@@ -139,29 +144,35 @@ if [ -x "$(which eza)" ]; then
 else
   alias l="ls -l"
   alias ls='ls -GF'
-  alias ll='ls -lAF'  # Show long file information
-  alias la='ls -AF'   # Show hidden files
+  alias ll='ls -lAF'
+  alias la='ls -AF'
 fi
 
-if [ -x "$(which gcloud)" ]; then
+# gcloud (遅延読み込み)
+if (( $+commands[gcloud] )); then
   PATH=$PATH:$(brew --prefix)/share/google-cloud-sdk/bin
-  source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
-  source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+  zsh-defer source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
+  zsh-defer source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
 fi
 
 #if [ -x "$(which podman)" ]; then
 #  alias docker="podman"
 #fi
 
-if [ -x "$(which kubectl)" ]; then
-  alias k="nocorrect kubectl"
-  alias kg="kubectl get "
-  alias kgy="kubectl get -o yaml "
-  alias kd="kubectl describe "
-  source <(kubectl completion zsh)
-  complete -o default -F __start_kubectl k
-  #RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
-fi
+# kubectl (completionをキャッシュ化) - 現在未使用
+# if (( $+commands[kubectl] )); then
+#   alias k="nocorrect kubectl"
+#   alias kg="kubectl get "
+#   alias kgy="kubectl get -o yaml "
+#   alias kd="kubectl describe "
+#   _kubectl_cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/kubectl_completion.zsh"
+#   if [[ ! -f "$_kubectl_cache" ]]; then
+#     mkdir -p "${_kubectl_cache:h}"
+#     kubectl completion zsh > "$_kubectl_cache"
+#   fi
+#   zsh-defer source "$_kubectl_cache"
+#   zsh-defer complete -o default -F __start_kubectl k
+# fi
 
 #if [ -x "$(which atuin)" ]; then
 #  eval "$(atuin init zsh)"
@@ -169,32 +180,27 @@ fi
 
 
 
-if [ -x "$(which bat)" ]; then
+if (( $+commands[bat] )); then
   alias cat='bat'
 fi
 
-if [ -x "$(which gojq)" ]; then
+if (( $+commands[gojq] )); then
   alias jq='gojq'
   alias yq='gojq --yaml-input --yaml-output'
 fi
 
-if [ -x "$(which mise)" ]; then
-  eval "$(mise activate zsh)"
+# mise (遅延読み込み)
+if (( $+commands[mise] )); then
+  zsh-defer eval "$(mise activate zsh)"
 fi
 
-if [ -x "$(which tenv)" ]; then
-  source "$HOME/.tenv/completion.zsh"
+if (( $+commands[tenv] )); then
+  zsh-defer source "$HOME/.tenv/completion.zsh"
 fi
 
-if [ -x "$(which pyenv)" ]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="${PYENV_ROOT}/bin:$HOME/.local/bin:$PATH"
-  eval "$(pyenv init --path)"
-  eval "$(pyenv init -)"
-fi
-
-if [ -x "$(which direnv)" ]; then
-  eval "$(direnv hook zsh)"
+# direnv (遅延読み込み)
+if (( $+commands[direnv] )); then
+  zsh-defer eval "$(direnv hook zsh)"
 fi
 
 # if [ -e "/opt/homebrew/opt/libpq/bin" ];then
@@ -209,7 +215,7 @@ if [ -e "${HOME}/.local/bin" ]; then
   export PATH="${HOME}/.local/bin:$PATH"
 fi
 
-if [ -x "$(which fzf)" ]; then
+if (( $+commands[fzf] )); then
   export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
   export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
 fi
@@ -242,6 +248,15 @@ function parse_git_branch() {
 
 function prompt_color() {
   PS1=$'\n'"%F{yellow}%~%f %F{grey}\$(parse_git_branch)%f"$'\n'"→ "
+}
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
 }
 
 if [ -n "$PS1" ]; then

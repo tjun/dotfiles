@@ -145,10 +145,22 @@ config.keys = {
     },
   },
   {
-    key = 'n', mods = 'LEADER', action = act.ActivatePaneDirection 'Right',
+    key = 'v', mods = 'LEADER',
+    action = act.SplitPane {
+      direction = 'Down', size = { Percent = 50 },
+    },
   },
   {
-    key = 'p', mods = 'LEADER', action = act.ActivatePaneDirection 'Left',
+    key = 'l', mods = 'LEADER', action = act.ActivatePaneDirection 'Right',
+  },
+  {
+    key = 'h', mods = 'LEADER', action = act.ActivatePaneDirection 'Left',
+  },
+  {
+    key = 'j', mods = 'LEADER', action = act.ActivatePaneDirection 'Down',
+  },
+  {
+    key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection 'Up',
   },
 }
 -- and finally, return the configuration to wezterm
