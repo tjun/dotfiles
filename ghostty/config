@@ -7,15 +7,14 @@
 # font-family = "SF Mono"
 font-family = "HackGen Console NF"
 
+# dlig, liga are disabled by default since 1.2.0
 font-feature = "-calt"
-font-feature = "-dlig"
-font-feature = "-liga"
 
 
 # theme
 # list themes: ghostty +list-themes
 # theme = xcodedarkhc
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 
 background-opacity = 0.9
 background-blur-radius = 20
@@ -26,8 +25,8 @@ cursor-color = #fabd2f
 cursor-opacity = 0.5
 cursor-style-blink = true
 
-shell-integration = zsh
-shell-integration-features = no-cursor
+shell-integration = detect
+shell-integration-features = cursor,sudo,title
 
 window-inherit-working-directory = true
 mouse-hide-while-typing = true

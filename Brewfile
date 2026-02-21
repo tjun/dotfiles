@@ -1,5 +1,6 @@
 tap "homebrew/bundle"
 tap "FelixKratz/formulae" # for sketchybar, borders
+tap "manaflow-ai/cmux"
 tap "nikitabobko/tap"
 
 brew "actionlint"
@@ -75,6 +76,7 @@ cask "raycast"
 cask "slack"
 cask "visual-studio-code"
 cask "wezterm@nightly"
+cask "manaflow-ai/cmux/cmux"
 cask "zoom"
 
 if File.exist?("#{ENV['HOME']}/.Brewfile.local")
