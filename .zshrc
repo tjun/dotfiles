@@ -234,7 +234,12 @@ function parse_git_branch() {
 }
 
 function prompt_color() {
-  PS1=$'\n'"%F{yellow}%~%f %F{grey}\$(parse_git_branch)%f"$'\n'"→ "
+  if [ -n "$SSH_CONNECTION" ]; then
+    # SSH接続時はホスト名を表示し、色を変えて区別しやすくする
+    PS1=$'\n'"%F{cyan}[%m]%f %F{yellow}%~%f %F{grey}\$(parse_git_branch)%f"$'\n'"⇒ "
+  else
+    PS1=$'\n'"%F{yellow}%~%f %F{grey}\$(parse_git_branch)%f"$'\n'"→ "
+  fi
 }
 
 function y() {
