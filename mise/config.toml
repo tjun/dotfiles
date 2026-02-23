@@ -2,7 +2,7 @@
 "npm:pnpm" = "10.9.0"
 python = "latest"
 rust = "latest"
-uv = "0.8.13"
+uv = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["python"]
