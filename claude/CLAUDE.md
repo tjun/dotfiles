@@ -6,9 +6,9 @@ Write comments that explain intent and rationale, not obvious facts or descripti
 
 ## Git
 
- - [IMPORTANT] use git commit with one line simple message, conventional commit style
+[IMPORTANT] use git commit with one line simple message, conventional commit style
 
- ## Terraform
+# ExecPlans
 
- - Refer Terraform MCP Server to write Terraform codes
+When writing complex features or significant refactors, use an ExecPlan (as described in .claude/PLANS.md) from design to implementation.
 

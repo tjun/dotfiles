@@ -13,3 +13,6 @@
 - Write commit message with 1 line
 - Write PR description in Japanese and keep it simple
 
+# ExecPlans
+
+When writing complex features or significant refactors, use an ExecPlan (as described in .claude/PLANS.md) from design to implementation.
