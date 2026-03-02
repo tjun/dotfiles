@@ -60,13 +60,13 @@ persistent-workspaces = ["1", "dev", "3", "4"]
 
     # ワークスペース切り替え
     alt-1 = 'workspace 1'
-    alt-2 = 'workspace dev'
+    alt-2 = 'workspace 2'
     alt-3 = 'workspace 3'
     alt-4 = 'workspace 4'
 
     # ウィンドウをワークスペースへ移動
     alt-shift-1 = 'move-node-to-workspace 1'
-    alt-shift-2 = 'move-node-to-workspace dev'
+    alt-shift-2 = 'move-node-to-workspace 2'
     alt-shift-3 = 'move-node-to-workspace 3'
     alt-shift-4 = 'move-node-to-workspace 4'
 
@@ -93,22 +93,22 @@ persistent-workspaces = ["1", "dev", "3", "4"]
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = 'move-node-to-workspace 1'
 
-# WezTerm → ワークスペースdev
+# WezTerm → ワークスペース2
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
 run = 'move-node-to-workspace dev'
 
-# Cursor (VS Code系) → ワークスペースdev
+# Cursor (VS Code系) → ワークスペース2
 [[on-window-detected]]
 if.app-id = 'com.todesktop.230313mzl4w4u92'
 run = 'move-node-to-workspace dev'
 
-# VS Code → ワークスペースdev
+# VS Code → ワークスペース2
 [[on-window-detected]]
 if.app-id = 'com.microsoft.VSCode'
 run = 'move-node-to-workspace dev'
 
-# Antigravity → ワークスペースdev
+# Antigravity → ワークスペース2
 [[on-window-detected]]
 if.app-id = 'com.sdegutis.Antigravity'
 run = 'move-node-to-workspace dev'
