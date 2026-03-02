@@ -57,6 +57,7 @@
       }
     ]
   },
+  "includeCoAuthoredBy": false,
   "statusLine": {
     "type": "command",
     "command": "bash /Users/tjun/.claude/statusline-command.sh",
