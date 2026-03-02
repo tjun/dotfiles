@@ -34,6 +34,11 @@ config.window_decorations = "RESIZE"
 
 config.scrollback_lines = 10000
 
+-- 非アクティブなペインを少し暗くして、フォーカス中のペインを区別しやすくする
+config.inactive_pane_hsb = {
+  brightness = 0.85,
+}
+
 -- タブバーの透過
 config.window_frame = {
   inactive_titlebar_bg = "none",
