@@ -1,4 +1,6 @@
 [tools]
+node = "23.11.1"
+npm = "11.11.0"
 "npm:pnpm" = "10.9.0"
 python = "latest"
 rust = "latest"
