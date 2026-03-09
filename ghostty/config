@@ -31,7 +31,7 @@ cursor-opacity = 0.5
 cursor-style-blink = true
 
 shell-integration = detect
-shell-integration-features = cursor,sudo,title
+shell-integration-features = sudo,title
 
 window-inherit-working-directory = true
 mouse-hide-while-typing = true

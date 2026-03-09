@@ -22,7 +22,7 @@ default-root-container-orientation = 'horizontal'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
 # 永続ワークスペース
-persistent-workspaces = ["1", "dev", "3", "4"]
+persistent-workspaces = ["1", "2", "3", "4"]
 
 # ウィンドウ間のギャップ
 [gaps]
@@ -96,22 +96,22 @@ run = 'move-node-to-workspace 1'
 # WezTerm → ワークスペース2
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
-run = 'move-node-to-workspace dev'
+run = 'move-node-to-workspace 2'
 
 # Cursor (VS Code系) → ワークスペース2
 [[on-window-detected]]
 if.app-id = 'com.todesktop.230313mzl4w4u92'
-run = 'move-node-to-workspace dev'
+run = 'move-node-to-workspace 2'
 
 # VS Code → ワークスペース2
 [[on-window-detected]]
 if.app-id = 'com.microsoft.VSCode'
-run = 'move-node-to-workspace dev'
+run = 'move-node-to-workspace 2'
 
 # Antigravity → ワークスペース2
 [[on-window-detected]]
 if.app-id = 'com.sdegutis.Antigravity'
-run = 'move-node-to-workspace dev'
+run = 'move-node-to-workspace 2'
 
 # Notion → ワークスペース1
 [[on-window-detected]]
