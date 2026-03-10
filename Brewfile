@@ -65,6 +65,7 @@ brew "zoxide"
 brew "zsh"
 
 cask "1password"
+cask "1password-cli"
 cask "antigravity"
 cask "appcleaner"
 cask "eul"

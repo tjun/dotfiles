@@ -68,5 +68,16 @@
     "type": "command",
     "command": "bash /Users/tjun/.claude/statusline-command.sh"
   },
-  "effortLevel": "high"
+  "extraKnownMarketplaces": {
+    "anthropic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/skills"
+      }
+    }
+  },
+  "effortLevel": "high",
+  "enabledPlugins": {
+    "skill-creator@claude-plugins-official": true
+  }
 }
