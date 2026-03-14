@@ -63,6 +63,25 @@ config.show_close_tab_button_in_tabs = false
 --   },
 -- }
 
+-- Claude Codeが入力待ちかどうかをマーカーファイルで判定する
+local function is_claude_waiting(cwd_path)
+  -- 末尾スラッシュを除去してbash側と一致させる
+  local trimmed = cwd_path:gsub("/$", "")
+  local safe_cwd = trimmed:gsub("[^%a%d]", "_")
+  local marker_path = "/tmp/claude-code-waiting/" .. safe_cwd
+  local f = io.open(marker_path, "r")
+  if not f then
+    return false
+  end
+  local timestamp = tonumber(f:read("*a"))
+  f:close()
+  if timestamp and (os.time() - timestamp) < 120 then
+    return true
+  end
+  os.remove(marker_path)
+  return false
+end
+
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
   local background = "#5c6d74"
   local foreground = "#FFFFFF"
@@ -79,6 +98,8 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
   -- Check if SSH is the foreground process
   local process_name = tab.active_pane.foreground_process_name
   local is_ssh = process_name and string.find(process_name, "ssh$")
+  -- Claude Codeのバイナリはバージョン番号がプロセス名になる (例: /Users/.../claude/versions/2.1.76)
+  local is_claude = process_name and string.find(process_name, "claude/versions/")
 
   if is_ssh then
     -- Extract hostname from pane title when SSH is running
@@ -105,6 +126,14 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 
       -- Get the last directory name
       title = string.match(path, "([^/]+)/?$") or path
+    end
+
+    if is_claude then
+      if is_claude_waiting(path) then
+        title = "💬 " .. title
+      else
+        title = "🤖 " .. title
+      end
     end
   else
     -- Fallback to pane title if cwd is not available
