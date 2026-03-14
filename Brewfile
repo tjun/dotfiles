@@ -2,6 +2,7 @@ tap "homebrew/bundle"
 tap "FelixKratz/formulae" # for sketchybar, borders
 tap "manaflow-ai/cmux"
 tap "nikitabobko/tap"
+tap "olets/tap"
 tap "k1LoW/tap"
 
 brew "actionlint"
@@ -62,6 +63,7 @@ brew "xh"
 brew "yazi"
 brew "zola"
 brew "zoxide"
+brew "olets/tap/zsh-abbr"
 brew "zsh"
 
 cask "1password"

@@ -1,67 +1,82 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "includeCoAuthoredBy": false,
+  "env": {
+    "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
+    "OTEL_METRICS_EXPORTER": "otlp",
+    "OTEL_EXPORTER_OTLP_PROTOCOL": "http/protobuf",
+    "OTEL_EXPORTER_OTLP_ENDPOINT": "https://otlp.us5.datadoghq.com",
+    "OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE": "delta"
+  },
+  "otelHeadersHelper": "/Users/tjun/.claude/scripts/dd-otel-headers.sh",
   "permissions": {
     "allow": [
-      "Bash(cd:*)",
-      "Bash(fd:*)",
-      "Bash(find:*)",
-      "Bash(grep:*)",
-      "Bash(ls:*)",
-      "Bash(open:*)",
-      "Bash(rg:*)",
-      "Bash(time:*)",
-      "Bash(tree:*)",
-      "Bash(gh pr diff:*)",
-      "Bash(gh pr view:*)",
-      "WebFetch(domain:github.com)",
+      "List(*)",
+      "Fetch(https://*)",
+      "WebFetch(domain:*)",
       "WebSearch",
-      "mcp__serena__find_file",
-      "mcp__serena__get_symbols_overview",
-      "mcp__serena__list_dir",
-      "mcp__serena__search_for_pattern",
-      "mcp__serena__think_about_collected_information"
+      "Bash(ls:*)",
+      "Bash(cd:*)",
+      "Bash(rg:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(find:*)",
+      "Bash(fd:*)",
+      "Bash(grep:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(less:*)",
+      "Bash(more:*)",
+      "Bash(wc:*)",
+      "Bash(sort:*)",
+      "Bash(uniq:*)",
+      "Bash(cut:*)",
+      "Bash(awk:*)",
+      "Bash(sed:*)",
+      "Bash(tar:*)",
+      "Bash(gzip:*)",
+      "Bash(gunzip:*)",
+      "Bash(zip:*)",
+      "Bash(unzip:*)",
+      "Bash(ps:*)",
+      "Bash(top:*)",
+      "Bash(which:*)",
+      "Bash(whoami:*)",
+      "Bash(pwd:*)",
+      "Bash(date:*)",
+      "Bash(echo:*)",
+      "Bash(printf:*)",
+      "Bash(history:*)",
+      "Bash(alias:*)",
+      "Bash(env:*)",
+      "Bash(source:*)",
+      "Bash(touch:*)",
+      "Bash(file:*)",
+      "Bash(stat:*)",
+      "Bash(diff:*)",
+      "Bash(cmp:*)",
+      "Bash(ping:*)",
+      "Bash(time:*)",
+      "Bash(open:*)",
+      "Bash(tree:*)",
+      "Bash(gcloud config list:*)",
+      "Bash(gcloud auth list:*)",
+      "Bash(go test:*)",
+      "Bash(go build:*)",
+      "Bash(go fmt:*)",
+      "Bash(gofmt:*)",
+      "Bash(pnpm list:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh run view:*)",
+      "Bash(git pull:*)"
     ],
     "deny": [
       "Bash(git add .:*)",
       "Bash(git add -A:*)",
-      "Bash(git add --all:*)",
-      "Bash(git checkout:*)"
-    ]
-  },
-  "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/dev/bin/claude-notification.sh"
-          }
-        ]
-      }
-    ],
-    "PreCompact": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/dev/bin/claude-notification.sh"
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/dev/bin/claude-notification.sh"
-          }
-        ]
-      }
+      "Bash(git add --all:*)"
     ]
   },
   "statusLine": {

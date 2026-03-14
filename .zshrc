@@ -76,29 +76,7 @@ function  gwt() {
   [ -n "$dir" ] && cd "$dir"
 }
 
-alias g='git'
-alias ga='git add -p'
-alias gdc='git dc'
-alias gcm='git ci -m'
-alias gs='git status'
-alias gr='git restore'
-alias gsw='git switch'
-alias gp='git pull -S origin $(git rev-parse --abbrev-ref HEAD)'
-alias gps='git push origin HEAD'
-alias gpso='gps && gh pr create --web'
-alias gl='git log -p'
-alias gm='git co $(git main)'
-alias gnb='git-nb'
-alias gnbf='git bf'
-alias gcb='git current-branch'
-alias gsee='gh repo view --web'
-alias gf='git fetch origin'
-alias gb='git recent-branch'
-alias gpr='git fw'
-alias gwl='git worktree list'
-alias gwa='git wa'
-alias cdu='cd $(git rev-parse --git-common-dir | sed "s/\/\.git$//")'
-alias gca='gcloud auth login --update-adc'
+# git abbreviations は zsh-abbr で管理 (~/.config/zsh-abbr/user-abbreviations)
 
 # if WSL
 if [[ -f /proc/version ]] && grep -iq Microsoft /proc/version; then
@@ -122,6 +100,10 @@ fi
 
 # sheldon
 eval "$(sheldon source)"
+
+# zsh-abbr
+export ABBR_QUIETER=1
+source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
 
 # zoxide (遅延読み込み)
 if (( $+commands[zoxide] )); then
