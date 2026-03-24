@@ -47,6 +47,10 @@ github = "zsh-users/zsh-completions"
 apply = ["defer"]
 proto = "ssh"
 
+# サブモジュールがあり sheldon の libgit2 では取得できないため local で管理
+[plugins.zsh-abbr]
+local = "~/.config/sheldon/plugin/zsh-abbr"
+
 # [plugins.zsh-kubectl-prompt]
 # github = "superbrothers/zsh-kubectl-prompt"
 # apply = ["defer"]

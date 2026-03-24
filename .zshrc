@@ -93,6 +93,10 @@ else
   export GODEBUG=asyncpreemptoff=1 # To fix terraform issue
 fi
 
+if [[ -f $HOME/.local/bin ]]; then
+  PATH=$PATH:~/.local/bin
+fi
+
 # ssh-agent
 if [ -z "$SSH_AUTH_SOCK" ]; then
     eval "$(ssh-agent -s)"
@@ -101,9 +105,8 @@ fi
 # sheldon
 eval "$(sheldon source)"
 
-# zsh-abbr
+# zsh-abbr (sheldon で管理、ABBR_QUIETER は source 前に設定が必要)
 export ABBR_QUIETER=1
-source /opt/homebrew/share/zsh-abbr/zsh-abbr.zsh
 
 # zoxide (遅延読み込み)
 if (( $+commands[zoxide] )); then
