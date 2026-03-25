@@ -1,4 +1,4 @@
-tap "FelixKratz/formulae" # for sketchybar, borders
+tap "FelixKratz/formulae" # for borders
 tap "homebrew/bundle"
 tap "k1LoW/tap"
 tap "manaflow-ai/cmux"
@@ -52,7 +52,6 @@ brew "protobuf"
 brew "ripgrep"
 brew "shellcheck"
 brew "sheldon"
-brew "sketchybar"
 brew "step"
 brew "tenv"
 brew "terminal-notifier"
