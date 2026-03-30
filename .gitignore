@@ -6,4 +6,7 @@
 Brewfile.lock.json
 .mise.toml
 CLAUDE.md
-
+codex/config.local.toml
+codex/config.effective.toml
+codex/rules/default.local.rules
+codex/rules/default.effective.rules

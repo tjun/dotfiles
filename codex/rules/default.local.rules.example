@@ -1,0 +1,2 @@
+prefix_rule(pattern=["gh", "pr", "view", "<number>", "--repo", "owner/private-repo", "--json", "title,number,state,author,baseRefName,headRefName,body,url"], decision="allow")
+prefix_rule(pattern=["gh", "pr", "diff", "<number>", "--repo", "owner/private-repo"], decision="allow")

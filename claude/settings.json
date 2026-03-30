@@ -79,7 +79,11 @@
     "deny": [
       "Bash(git add .:*)",
       "Bash(git add -A:*)",
-      "Bash(git add --all:*)"
+      "Bash(git add --all:*)",
+      "Read(~/.ssh/*)",
+      "Edit(~/.ssh/*)",
+      "Read(~/.gitconfig-local)",
+      "Edit(~/.gitconfig-local)"
     ]
   },
   "hooks": {

@@ -1,7 +1,34 @@
-model_reasoning_effort = "high"
-hide_agent_reasoning = true
-show_raw_agent_reasoning = false
+profile = "default"
+project_doc_fallback_filenames = ["CLAUDE.md"]
+notify = ["bash", "/Users/tjun/.claude/scripts/notify.sh"]
 
-[mcp_servers.deepwiki]
-command = "npx"
-args = ["-y", "mcp-deepwiki@latest"]
+[sandbox_workspace_write]
+network_access = true
+
+[mcp_servers.openaiDeveloperDocs]
+url = "https://developers.openai.com/mcp"
+
+[profiles.default]
+model = "gpt-5.4"
+model_reasoning_effort = "high"
+personality = "pragmatic"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+[profiles.research]
+model = "gpt-5.4"
+model_reasoning_effort = "high"
+personality = "pragmatic"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+web_search = "live"
+
+[profiles.deep-review]
+model = "gpt-5.4"
+model_reasoning_effort = "xhigh"
+personality = "pragmatic"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+[notice.model_migrations]
+gpt-5-codex = "gpt-5.2-codex"

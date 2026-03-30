@@ -28,6 +28,16 @@ TBD
 ln -s ~/dev/src/github.com/tjun/dotfiles/{.zshrc,.zprofile,.inputrc,.vimrc,.gitconfig,.gitignore,.wezterm.lua} ~/
 ln -s ~/dev/src/github.com/tjun/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json # after launching karabiner-elements
 
+# Claude Code
+mkdir -p ~/.claude
+ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/CLAUDE.md ~/.claude/CLAUDE.md
+ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/settings.json ~/.claude/settings.json
+ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/PLANS.md ~/.claude/PLANS.md
+ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/scripts ~/.claude/scripts
+ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/skills ~/.claude/skills
+ln -sfn ~/dev/src/github.com/tjun/dotfiles/claude/commands ~/.claude/commands
+ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/statusline-command.sh ~/.claude/statusline-command.sh
+
 # copy and update files
 cp .gitconfig.local ~/ # and add sigining key path
 cp .ssh/config ~/.ssh/ # and add ssh key path
