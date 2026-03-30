@@ -11,12 +11,17 @@
 - Do not write comments that only describe the code or explain the change itself.
 - Preserve unrelated user changes.
 - Run relevant verification after changes and report what was checked.
+- For large investigation tasks, use subagents to keep the main context clean.
 
 ## Git/PR conventions
 - Use `gh` command to get contents on github.com
 - Use Conventional commits for PR title
 - Write commit message with 1 line
 - Write PR description in Japanese and keep it simple
+
+## Context Management
+- When compacting, preserve the full list of modified files and current task progress.
+- Use `/clear` between unrelated tasks to reset context.
 
 # ExecPlans
 

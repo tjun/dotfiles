@@ -87,6 +87,39 @@
     ]
   },
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /Users/tjun/.claude/scripts/pre-bash-safety.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /Users/tjun/.claude/scripts/post-edit-format.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Did this session involve code changes? If so, were relevant tests or verification steps run? If verification was skipped, remind the user briefly."
+          }
+        ]
+      }
+    ],
     "Notification": [
       {
         "matcher": "",
