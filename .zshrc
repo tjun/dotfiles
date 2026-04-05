@@ -93,8 +93,8 @@ else
   export GODEBUG=asyncpreemptoff=1 # To fix terraform issue
 fi
 
-if [[ -f $HOME/.local/bin ]]; then
-  PATH=$PATH:~/.local/bin
+if [[ -d $HOME/.local/bin ]]; then
+  export PATH="$HOME/.local/bin:$PATH"
 fi
 
 # ssh-agent
@@ -183,9 +183,6 @@ if [ -e "/opt/homebrew/opt/postgresql@16/bin" ];then
   export PATH="${PATH}:/opt/homebrew/opt/postgresql@16/bin"
 fi
 
-if [ -e "${HOME}/.local/bin" ]; then
-  export PATH="${HOME}/.local/bin:$PATH"
-fi
 
 if (( $+commands[fzf] )); then
   export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
