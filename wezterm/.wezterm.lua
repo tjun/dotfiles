@@ -84,6 +84,14 @@ local function is_claude_waiting(cwd_path)
   return false
 end
 
+local function normalize_tab_title(title)
+  if title == "autonomous-driving" then
+    return "ad"
+  end
+
+  return (title:gsub("^autonomous%-driving%-", "ad-"))
+end
+
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
   local background = "#5c6d74"
   local foreground = "#FFFFFF"
@@ -142,6 +150,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     title = tab.active_pane.title
   end
 
+  title = normalize_tab_title(title)
   title = "   " .. wezterm.truncate_right(title, max_width - 1) .. "   "
 
   return {
