@@ -88,9 +88,10 @@
     wa = "!f() { git worktree add .git/wts/$1 -b $1 main; }; f"
 
 [filter "lfs"]
-    clean = git-lfs clean %f
-    smudge = git-lfs smudge %f
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
     required = true
+    process = git-lfs filter-process
 
 [url "github.com:"]
     insteadOf = https://github.com

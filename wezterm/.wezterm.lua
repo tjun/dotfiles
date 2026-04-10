@@ -24,9 +24,11 @@ config.freetype_load_target = "Light"
 config.default_cursor_style = "BlinkingBlock"
 
 -- config.color_scheme = 'nord'
-config.color_scheme = 'Tokyo Night Storm'
+-- config.color_scheme = 'Tokyo Night Storm'
 -- config.color_scheme = 'Edge Dark (base16)'
 -- config.color_scheme = 'AdventureTime'
+local theme = require 'colors.0x96f'
+config.colors = theme
 config.window_background_opacity = 0.9
 config.macos_window_background_blur = 20
 
@@ -36,7 +38,7 @@ config.scrollback_lines = 10000
 
 -- 非アクティブなペインを少し暗くして、フォーカス中のペインを区別しやすくする
 config.inactive_pane_hsb = {
-  brightness = 0.85,
+  brightness = 0.45,
 }
 
 -- タブバーの透過
