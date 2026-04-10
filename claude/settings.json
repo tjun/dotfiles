@@ -1,6 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
+    "ENABLE_TOOL_SEARCH": "true",
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
     "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
     "OTEL_METRICS_EXPORTER": "otlp",
     "OTEL_EXPORTER_OTLP_PROTOCOL": "http/protobuf",
@@ -109,17 +111,6 @@
         ]
       }
     ],
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "prompt",
-            "prompt": "Did this session involve code changes? If so, were relevant tests or verification steps run? If verification was skipped, remind the user briefly."
-          }
-        ]
-      }
-    ],
     "Notification": [
       {
         "matcher": "",
@@ -137,7 +128,8 @@
     "command": "bash /Users/tjun/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
-    "skill-creator@claude-plugins-official": true
+    "skill-creator@claude-plugins-official": true,
+    "codex@openai-codex": true
   },
   "extraKnownMarketplaces": {
     "anthropic-agent-skills": {
@@ -145,8 +137,15 @@
         "source": "github",
         "repo": "anthropics/skills"
       }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
     }
   },
   "otelHeadersHelper": "/Users/tjun/.claude/scripts/dd-otel-headers.sh",
+  "showThinkingSummaries": true,
   "effortLevel": "high"
 }

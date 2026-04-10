@@ -5,6 +5,7 @@
 - Explain what and why before suggesting or applying code changes.
 - Keep responses concise and practical.
 - When working with OpenAI APIs, ChatGPT, or Codex, prefer the OpenAI developer documentation MCP server if available.
+- Research the codebase before editing. Never change code you haven't read.
 
 ## Coding
 - Write comments only when they explain intent or non-obvious rationale.
