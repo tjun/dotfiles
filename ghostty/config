@@ -5,7 +5,9 @@
 # Empty values reset the configuration to the default value
 # font-family = Comic Mono
 # font-family = "SF Mono"
-font-family = "HackGen Console NF"
+font-family = JetBrains Mono
+font-family = BIZ UDGothic
+# font-family = "HackGen Console NF"
 
 # SSH先にxterm-ghosttyのterminfoがない場合のwarning回避
 term = xterm-256color
