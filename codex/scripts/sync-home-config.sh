@@ -5,6 +5,7 @@ set -euo pipefail
 SCRIPT_DIR=${0:A:h}
 CODEX_DIR=${SCRIPT_DIR:h}
 RULES_DIR=${CODEX_DIR}/rules
+HOOKS_DIR=${CODEX_DIR}/hooks
 
 BASE_CONFIG=${CODEX_DIR}/config.toml
 LOCAL_CONFIG=${CODEX_DIR}/config.local.toml
@@ -16,6 +17,7 @@ EFFECTIVE_RULES=${RULES_DIR}/default.effective.rules
 
 HOME_CODEX_DIR=${HOME}/.codex
 HOME_RULES_DIR=${HOME_CODEX_DIR}/rules
+HOME_HOOKS_DIR=${HOME_CODEX_DIR}/hooks
 
 tmp_config=$(mktemp)
 cp "${BASE_CONFIG}" "${tmp_config}"
@@ -36,3 +38,4 @@ mv "${tmp_rules}" "${EFFECTIVE_RULES}"
 mkdir -p "${HOME_RULES_DIR}"
 ln -sfn "${EFFECTIVE_CONFIG}" "${HOME_CODEX_DIR}/config.toml"
 ln -sfn "${EFFECTIVE_RULES}" "${HOME_RULES_DIR}/default.rules"
+ln -sfn "${HOOKS_DIR}" "${HOME_HOOKS_DIR}"

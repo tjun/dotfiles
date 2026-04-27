@@ -16,6 +16,11 @@ cd dotfiles
 # Install packages
 brew bundle
 
+# Install runtimes and global npm packages
+mkdir -p ~/.config/mise
+ln -sf ~/dev/src/github.com/tjun/dotfiles/mise/config.toml ~/.config/mise/config.toml
+mise install
+
 # set up ssh for github
 TBD
 
@@ -46,6 +51,9 @@ sheldon lock
 
 ```console
 brew bundle --cleanup
+
+mise install
+mise outdated
 
 sheldon lock --update
 ```

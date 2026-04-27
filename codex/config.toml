@@ -5,18 +5,19 @@ notify = ["bash", "/Users/tjun/.claude/scripts/notify.sh"]
 [sandbox_workspace_write]
 network_access = true
 
+[features]
+codex_hooks = true
+
 [mcp_servers.openaiDeveloperDocs]
 url = "https://developers.openai.com/mcp"
 
 [profiles.default]
-model = "gpt-5.4"
 model_reasoning_effort = "high"
 personality = "pragmatic"
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
 
 [profiles.research]
-model = "gpt-5.4"
 model_reasoning_effort = "high"
 personality = "pragmatic"
 approval_policy = "on-request"
@@ -24,11 +25,14 @@ sandbox_mode = "workspace-write"
 web_search = "live"
 
 [profiles.deep-review]
-model = "gpt-5.4"
 model_reasoning_effort = "xhigh"
 personality = "pragmatic"
 approval_policy = "on-request"
 sandbox_mode = "workspace-write"
 
-[notice.model_migrations]
-gpt-5-codex = "gpt-5.2-codex"
+[[hooks.UserPromptSubmit]]
+
+[[hooks.UserPromptSubmit.hooks]]
+type = "command"
+command = "/bin/zsh /Users/tjun/.codex/hooks/user_prompt_submit_agent_guidance.sh"
+timeout = 5
