@@ -2,9 +2,8 @@
 
 ## Setup
 
-Install nanobrew or homebrew first.
+Install homebrew first.
 
-- nanobrew: https://github.com/justrach/nanobrew
 - homebrew: https://brew.sh/
 
 ```console
@@ -14,12 +13,8 @@ cd ~/dev/src/github.com/tjun/
 git clone
 cd dotfiles
 
-# Install packages (nanobrew)
-nb bundle install Nanobrew
-nb bundle install .Nanobrew.local
-
-# or with homebrew
-# brew bundle
+# Install packages
+brew bundle
 
 # set up ssh for github
 TBD
@@ -50,13 +45,7 @@ sheldon lock
 ## Update
 
 ```console
-# nanobrew (no brew bundle --cleanup equivalent yet)
-nb bundle install Nanobrew
-nb bundle install .Nanobrew.local
-nb upgrade
-
-# or homebrew
-# brew bundle --cleanup
+brew bundle --cleanup
 
 sheldon lock --update
 ```
