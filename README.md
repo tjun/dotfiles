@@ -21,12 +21,22 @@ mkdir -p ~/.config/mise
 ln -sf ~/dev/src/github.com/tjun/dotfiles/mise/config.toml ~/.config/mise/config.toml
 mise install
 
+# cmux
+mkdir -p ~/.config/cmux
+ln -sf ~/dev/src/github.com/tjun/dotfiles/cmux/settings.json ~/.config/cmux/settings.json
+
 # set up ssh for github
 TBD
 
 # link dotfiles
 ln -s ~/dev/src/github.com/tjun/dotfiles/{.zshrc,.zprofile,.inputrc,.vimrc,.gitconfig,.gitignore,.wezterm.lua} ~/
 ln -s ~/dev/src/github.com/tjun/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json # after launching karabiner-elements
+
+# zsh plugins and abbreviations
+mkdir -p ~/.config/sheldon ~/.config/zsh-abbr
+ln -sf ~/dev/src/github.com/tjun/dotfiles/sheldon/plugins.toml ~/.config/sheldon/plugins.toml
+ln -sf ~/dev/src/github.com/tjun/dotfiles/zsh-abbr/user-abbreviations ~/.config/zsh-abbr/user-abbreviations
+sheldon lock
 
 # Claude Code
 mkdir -p ~/.claude
@@ -42,8 +52,6 @@ ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/statusline-command.sh ~/.claude
 cp .gitconfig.local ~/ # and add sigining key path
 cp .ssh/config ~/.ssh/ # and add ssh key path
 
-# install zsh plugins
-sheldon lock
 ```
 
 

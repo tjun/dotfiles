@@ -47,9 +47,17 @@ github = "zsh-users/zsh-completions"
 apply = ["defer"]
 proto = "ssh"
 
-# サブモジュールがあり sheldon の libgit2 では取得できないため local で管理
+# zsh-abbr 本体は Brewfile でインストールし、略語だけ dotfiles で管理する
 [plugins.zsh-abbr]
-local = "~/.config/sheldon/plugin/zsh-abbr"
+inline = '''
+if (( $+commands[brew] )); then
+  zsh_abbr_dir="$(brew --prefix zsh-abbr 2>/dev/null)/share/zsh-abbr"
+  if [[ -r "${zsh_abbr_dir}/zsh-abbr.zsh" ]]; then
+    fpath+=("${zsh_abbr_dir}")
+    source "${zsh_abbr_dir}/zsh-abbr.zsh"
+  fi
+fi
+'''
 
 # [plugins.zsh-kubectl-prompt]
 # github = "superbrothers/zsh-kubectl-prompt"

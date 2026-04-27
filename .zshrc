@@ -102,11 +102,11 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     eval "$(ssh-agent -s)"
 fi
 
-# sheldon
-eval "$(sheldon source)"
-
 # zsh-abbr (sheldon で管理、ABBR_QUIETER は source 前に設定が必要)
 export ABBR_QUIETER=1
+
+# sheldon
+eval "$(sheldon source)"
 
 # zoxide (遅延読み込み)
 if (( $+commands[zoxide] )); then
