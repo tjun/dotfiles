@@ -2,7 +2,7 @@
 
 ## Setup
 
-Install homebrew first.
+Install homebrew first. `brew bundle` is for macOS.
 
 - homebrew: https://brew.sh/
 
@@ -52,6 +52,30 @@ ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/statusline-command.sh ~/.claude
 cp .gitconfig.local ~/ # and add sigining key path
 cp .ssh/config ~/.ssh/ # and add ssh key path
 
+```
+
+## Ubuntu
+
+Use Linuxbrew for zsh tools. Do not run `brew bundle` on Ubuntu because this
+repo's Brewfile includes macOS casks.
+
+```console
+# Install Linuxbrew
+sudo apt-get update
+sudo apt-get install -y build-essential procps curl file git zsh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# Install zsh runtime dependencies used by this repo
+brew tap olets/tap
+brew install go sheldon zsh-abbr
+
+# Link zsh dotfiles and abbreviations
+ln -s ~/dev/src/github.com/tjun/dotfiles/{.zshrc,.zprofile,.inputrc,.vimrc,.gitconfig,.gitignore} ~/
+mkdir -p ~/.config/sheldon ~/.config/zsh-abbr
+ln -sf ~/dev/src/github.com/tjun/dotfiles/sheldon/plugins.toml ~/.config/sheldon/plugins.toml
+ln -sf ~/dev/src/github.com/tjun/dotfiles/zsh-abbr/user-abbreviations ~/.config/zsh-abbr/user-abbreviations
+sheldon lock
 ```
 
 
