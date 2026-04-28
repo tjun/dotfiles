@@ -45,7 +45,6 @@ ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/settings.json ~/.claude/setting
 ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/PLANS.md ~/.claude/PLANS.md
 ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/scripts ~/.claude/scripts
 ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/skills ~/.claude/skills
-ln -sfn ~/dev/src/github.com/tjun/dotfiles/claude/commands ~/.claude/commands
 ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/statusline-command.sh ~/.claude/statusline-command.sh
 
 # copy and update files
