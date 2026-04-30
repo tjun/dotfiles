@@ -29,7 +29,7 @@ ln -sf ~/dev/src/github.com/tjun/dotfiles/cmux/settings.json ~/.config/cmux/sett
 TBD
 
 # link dotfiles
-ln -s ~/dev/src/github.com/tjun/dotfiles/{.zshrc,.zprofile,.inputrc,.vimrc,.gitconfig,.gitignore,.wezterm.lua} ~/
+ln -s ~/dev/src/github.com/tjun/dotfiles/{.zshenv,.zshrc,.zprofile,.inputrc,.vimrc,.gitconfig,.gitignore,.wezterm.lua} ~/
 ln -s ~/dev/src/github.com/tjun/dotfiles/karabiner.json ~/.config/karabiner/karabiner.json # after launching karabiner-elements
 
 # zsh plugins and abbreviations
@@ -70,7 +70,7 @@ brew tap olets/tap
 brew install go sheldon zsh-abbr
 
 # Link zsh dotfiles and abbreviations
-ln -s ~/dev/src/github.com/tjun/dotfiles/{.zshrc,.zprofile,.inputrc,.vimrc,.gitconfig,.gitignore} ~/
+ln -s ~/dev/src/github.com/tjun/dotfiles/{.zshenv,.zshrc,.zprofile,.inputrc,.vimrc,.gitconfig,.gitignore} ~/
 mkdir -p ~/.config/sheldon ~/.config/zsh-abbr
 ln -sf ~/dev/src/github.com/tjun/dotfiles/sheldon/plugins.toml ~/.config/sheldon/plugins.toml
 ln -sf ~/dev/src/github.com/tjun/dotfiles/zsh-abbr/user-abbreviations ~/.config/zsh-abbr/user-abbreviations

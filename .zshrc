@@ -1,13 +1,7 @@
 #!/bin/zsh
-
-# PATHの重複を防ぐ
-typeset -U PATH path
-
-# ファイル作成時のデフォルトパーミッション設定
-umask 022
+# 環境変数 / PATH は .zshenv に集約。.zshrc は対話シェル専用の設定のみ。
 
 bindkey -e # emacs bind
-export EDITOR='hx'
 
 setopt auto_cd
 setopt auto_pushd
@@ -86,15 +80,10 @@ if [[ -f /proc/version ]] && grep -iq Microsoft /proc/version; then
   export GOPATH=$HOME/dev
   export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 else
-  export HOMEBREW_ANALYTICS_DEBUG=1
   export GOROOT=$(go env GOROOT)
   export GOPATH=$HOME/dev
   export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
   export GODEBUG=asyncpreemptoff=1 # To fix terraform issue
-fi
-
-if [[ -d $HOME/.local/bin ]]; then
-  export PATH="$HOME/.local/bin:$PATH"
 fi
 
 # ssh-agent
