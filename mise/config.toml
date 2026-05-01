@@ -1,13 +1,13 @@
 [tools]
 node = "23.11.1"
 npm = "11.11.1"
-"npm:@openai/codex" = "0.125.0"
-"npm:@sakasegawa/ncli" = "0.3.3"
+"npm:@openai/codex" = "latest"
+"npm:@sakasegawa/ncli" = "latest"
 "npm:corepack" = "0.34.7"
-"npm:difit" = "4.0.4"
-"npm:nano-banana-mcp" = "1.0.3"
+"npm:difit" = "latest"
+"npm:nano-banana-mcp" = "latest"
 "npm:pnpm" = "10.9.0"
-python = "latest"
+python = "3.13"
 rust = "latest"
 uv = "latest"
 

@@ -1,38 +1,117 @@
 profile = "default"
 project_doc_fallback_filenames = ["CLAUDE.md"]
-notify = ["bash", "/Users/tjun/.claude/scripts/notify.sh"]
-
-[sandbox_workspace_write]
-network_access = true
 
 [features]
 codex_hooks = true
 
+
+[[hooks.PreToolUse]]
+matcher = "Bash"
+
+[[hooks.PreToolUse.hooks]]
+command = "bash /Users/tjun/.claude/scripts/pre-bash-safety.sh"
+type = "command"
+
+[[hooks.PostToolUse]]
+matcher = "Edit|Write"
+
+[[hooks.PostToolUse.hooks]]
+command = "bash /Users/tjun/.claude/scripts/post-edit-format.sh"
+type = "command"
+
+[marketplaces.openai-bundled]
+last_updated = "2026-05-01T20:48:08Z"
+source = "/Users/tjun/.codex/.tmp/bundled-marketplaces/openai-bundled"
+source_type = "local"
+
+[marketplaces.claude-plugins-official]
+last_updated = "2026-05-01T21:32:08Z"
+last_revision = "b392f51899343f35a203260a4b344803de236d13"
+source_type = "git"
+source = "https://github.com/anthropics/claude-plugins-official.git"
+
+[marketplaces.openai-codex]
+last_updated = "2026-05-01T21:32:14Z"
+last_revision = "807e03ac9d5aa23bc395fdec8c3767500a86b3cf"
+source_type = "git"
+source = "https://github.com/openai/codex-plugin-cc.git"
+
+[marketplaces.openai-primary-runtime]
+last_updated = "2026-05-01T20:48:46Z"
+source_type = "local"
+source = "/Users/tjun/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+
 [mcp_servers.openaiDeveloperDocs]
 url = "https://developers.openai.com/mcp"
 
+[plugins."browser-use@openai-bundled"]
+enabled = true
+
+[plugins."github@openai-curated"]
+enabled = true
+
+[plugins."google-calendar@openai-curated"]
+enabled = true
+
+[plugins."notion@openai-curated"]
+enabled = true
+
+[plugins."skill-creator@claude-plugins-official"]
+enabled = true
+
+[plugins."codex@openai-codex"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."github@claude-plugins-official"]
+enabled = true
+
+[profiles.deep-review]
+approval_policy = "on-request"
+model_reasoning_effort = "xhigh"
+personality = "pragmatic"
+sandbox_mode = "workspace-write"
+
 [profiles.default]
+approval_policy = "on-request"
 model_reasoning_effort = "high"
 personality = "pragmatic"
-approval_policy = "on-request"
 sandbox_mode = "workspace-write"
 
 [profiles.research]
+approval_policy = "on-request"
 model_reasoning_effort = "high"
 personality = "pragmatic"
-approval_policy = "on-request"
 sandbox_mode = "workspace-write"
 web_search = "live"
 
-[profiles.deep-review]
-model_reasoning_effort = "xhigh"
-personality = "pragmatic"
-approval_policy = "on-request"
-sandbox_mode = "workspace-write"
+[sandbox_workspace_write]
+network_access = true
+writable_roots = ["/Users/tjun/.codex/tmp"]
 
-[[hooks.UserPromptSubmit]]
+[shell_environment_policy]
+inherit = "core"
 
-[[hooks.UserPromptSubmit.hooks]]
-type = "command"
-command = "/bin/zsh /Users/tjun/.codex/hooks/user_prompt_submit_agent_guidance.sh"
-timeout = 5
+[shell_environment_policy.set]
+CLAUDE_CODE_ATTRIBUTION_HEADER = "0"
+CLAUDE_CODE_DISABLE_1M_CONTEXT = "1"
+CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING = "1"
+CLAUDE_CODE_DISABLE_AUTO_MEMORY = "1"
+CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1"
+CLAUDE_CODE_ENABLE_TELEMETRY = "1"
+ENABLE_TOOL_SEARCH = "true"
+OTEL_EXPORTER_OTLP_ENDPOINT = "https://otlp.us5.datadoghq.com"
+OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE = "delta"
+OTEL_EXPORTER_OTLP_PROTOCOL = "http/protobuf"
+OTEL_METRICS_EXPORTER = "otlp"
+
+[tui]
+status_line = ["model-with-reasoning", "current-dir", "git-branch", "context-remaining"]
