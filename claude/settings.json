@@ -92,6 +92,7 @@
       "Edit(~/.gitconfig-local)"
     ]
   },
+  "model": "claude-opus-4-7",
   "hooks": {
     "PreToolUse": [
       {
@@ -152,5 +153,6 @@
   "otelHeadersHelper": "/Users/tjun/.claude/scripts/dd-otel-headers.sh",
   "effortLevel": "high",
   "showThinkingSummaries": true,
-  "model": "claude-opus-4-7"
+  "preferredNotifChannel": "terminal_bell",
+  "remoteControlAtStartup": true
 }
