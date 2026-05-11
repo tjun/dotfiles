@@ -1,6 +1,6 @@
 [tools]
 node = "23.11.1"
-npm = "11.11.1"
+npm = "latest"
 "npm:@openai/codex" = "latest"
 "npm:@sakasegawa/ncli" = "latest"
 "npm:corepack" = "0.34.7"
