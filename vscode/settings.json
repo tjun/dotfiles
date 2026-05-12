@@ -1,126 +1,43 @@
 {
+  "editor.tabSize": 2,
+  "editor.cursorStyle": "block",
+  "editor.guides.indentation": true,
+  "editor.renderControlCharacters": true,
+  "editor.renderWhitespace": "boundary",
+  "editor.wordWrapColumn": 200,
+  "editor.wrappingIndent": "indent",
+  "editor.formatOnSave": false,
+  "editor.formatOnPaste": false,
+  "editor.inlineSuggest.enabled": false,
+  "editor.minimap.enabled": false,
+  "editor.codeLens": false,
+  "editor.lightbulb.enabled": "off",
+  "explorer.autoReveal": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.insertFinalNewline": true,
+  "git.autofetch": false,
+  "git.openRepositoryInParentFolders": "never",
+  "makefile.configureOnOpen": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "telemetry.telemetryLevel": "off",
+  "workbench.colorTheme": "Tokyo Night",
+  "workbench.editor.enablePreview": false,
+  "workbench.iconTheme": null,
+  "workbench.startupEditor": "none",
+  "[yaml]": {
+    "editor.insertSpaces": true,
     "editor.tabSize": 2,
-    "editor.cursorStyle": "block",
-    "editor.guides.indentation": true,
-    "editor.renderControlCharacters": true,
-    "editor.renderWhitespace": "boundary",
-    "editor.wordWrapColumn": 200,
-    "editor.wrappingIndent": "indent",
-    "editor.formatOnSave": true,
-    "editor.inlineSuggest.enabled": true,
-    "editor.formatOnPaste": true,
-    "editor.defaultFormatter": "GitHub.copilot",
-    "explorer.autoReveal": false,
-    "explorer.confirmDelete": false,
-    "explorer.confirmDragAndDrop": false,
-    "files.insertFinalNewline": true,
-    "git.openRepositoryInParentFolders": "always",
-    "vsicons.dontShowNewVersionMessage": true,
-    "workbench.iconTheme": "vscode-icons",
-    "workbench.colorTheme": "Tokyo Night",
-    "security.workspace.trust.untrustedFiles": "open",
-    "C_Cpp.formatting": "disabled",
-    "go.lintOnSave": "file",
-    "go.lintTool": "golangci-lint",
-    "go.useLanguageServer": true,
-    "go.alternateTools": {
-        "go-langserver": "gopls"
-    },
-    "[go]": {
-        "editor.snippetSuggestions": "none",
-        "editor.formatOnSave": true,
-        "editor.codeActionsOnSave": {
-            "source.organizeImports": "explicit"
-        }
-    },
-    "gopls": {
-        "usePlaceholders": true
-    },
-    "go.toolsManagement.autoUpdate": true,
-    "[dockerfile]": {
-        "editor.defaultFormatter": "ms-azuretools.vscode-docker"
-    },
-    "[python]": {
-        "editor.formatOnType": true
-    },
-    "[terraform]": {
-        "editor.defaultFormatter": "hashicorp.terraform",
-        "editor.formatOnSave": true,
-        "editor.formatOnSaveMode": "file"
-    },
-    "[terraform-vars]": {
-        "editor.defaultFormatter": "hashicorp.terraform",
-        "editor.formatOnSave": true,
-        "editor.formatOnSaveMode": "file"
-    },
-    "terraform.languageServer.enable": true,
-    "terminal.integrated.env.osx": {
-        "FIG_NEW_SESSION": "1"
-    },
-    "debug.allowBreakpointsEverywhere": true,
-    "http.proxyAuthorization": null,
-    "makefile.configureOnOpen": false,
-    "github.copilot.chat.localeOverride": "ja",
-     "github.copilot.enable": {
-        "*": true,
-        "plaintext": false,
-    },
-    "github.copilot.nextEditSuggestions.enabled": true,
-    "github.copilot.chat.agent.thinkingTool": true,
-    "github.copilot.advanced": {  },
-    "chat.mcp.discovery.enabled": {
-        "claude-desktop": true,
-        "windsurf": true,
-        "cursor-global": true,
-        "cursor-workspace": true
-    },
-    "redhat.telemetry.enabled": true,
-    "[yaml]": {
-        "editor.defaultFormatter": "redhat.vscode-yaml",
-        "editor.autoIndent": "full",
-        "editor.insertSpaces": true,
-        "editor.tabSize": 2,
-        "editor.detectIndentation": false, // 他ファイルの設定に引っ張られないように
-        "editor.formatOnSave": true,
-        "editor.formatOnPaste": true
-    },
-    "yaml.schemas": {
-        "https://json.schemastore.org/github-workflow.json": ".github/workflows/*.{yml,yaml}"
-    },
-    "linter-actionlint.config": {
-        "capabilities": [],
-        "command": [
-            "actionlint",
-            "-format",
-            "'{{json .}}'",
-            "--stdin-filename",
-            "$file",
-            "-"
-        ],
-        "configFiles": [
-            "actionlint.yaml",
-            "actionlint.yml"
-        ],
-        "enabled": true,
-        "languages": [
-            "yaml"
-        ],
-        "name": "actionlint",
-        "url": "https://github.com/rhysd/actionlint"
-    },
-    "docker.extension.enableComposeLanguageServer": false,
-    "[dockercompose]": {
-        "editor.insertSpaces": true,
-        "editor.tabSize": 2,
-        "editor.autoIndent": "advanced",
-        "editor.quickSuggestions": {
-            "other": true,
-            "comments": false,
-            "strings": true
-        },
-        "editor.defaultFormatter": "redhat.vscode-yaml"
-    },
-    "[github-actions-workflow]": {
-        "editor.defaultFormatter": "redhat.vscode-yaml"
-    }
+    "editor.detectIndentation": false
+  },
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+  "chat.mcp.discovery.enabled": {
+    "claude-desktop": true,
+    "windsurf": true,
+    "cursor-global": true,
+    "cursor-workspace": true
+  }
 }

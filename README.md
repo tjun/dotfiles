@@ -25,6 +25,13 @@ mise install
 mkdir -p ~/.config/cmux
 ln -sf ~/dev/src/github.com/tjun/dotfiles/cmux/settings.json ~/.config/cmux/settings.json
 
+# VS Code
+mkdir -p ~/Library/Application\ Support/Code/User/snippets
+ln -sf ~/dev/src/github.com/tjun/dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
+ln -sf ~/dev/src/github.com/tjun/dotfiles/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
+ln -sf ~/dev/src/github.com/tjun/dotfiles/vscode/mcp.json ~/Library/Application\ Support/Code/User/mcp.json
+ln -sf ~/dev/src/github.com/tjun/dotfiles/vscode/snippets/rust.json ~/Library/Application\ Support/Code/User/snippets/rust.json
+
 # set up ssh for github
 TBD
 

@@ -1,25 +1,4 @@
 {
-	"servers": {
-		"mcp-server-time": {
-			"command": "python",
-			"args": [
-				"-m",
-				"mcp_server_time",
-				"--local-timezone=America/Los_Angeles"
-			],
-			"env": {},
-			"type": "stdio"
-		},
-		"terraform": {
-			"command": "docker",
-			"args": [
-				"run",
-				"-i",
-				"--rm",
-				"hashicorp/terraform-mcp-server"
-			],
-			"type": "stdio"
-		}
-	},
-	"inputs": []
+  "servers": {},
+  "inputs": []
 }

@@ -52,9 +52,5 @@
     "key": "ctrl+space",
     "command": "-editor.action.triggerSuggest",
     "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
-  },
-  {
-    "key": "cmd+l",
-    "command": "workbench.panel.chat.view.copilot.focus"
   }
 ]
