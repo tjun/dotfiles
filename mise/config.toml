@@ -1,5 +1,5 @@
 [tools]
-node = "23.11.1"
+node = "24"
 npm = "latest"
 "npm:@openai/codex" = "latest"
 "npm:@sakasegawa/ncli" = "latest"

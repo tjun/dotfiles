@@ -2,8 +2,8 @@ profile = "default"
 project_doc_fallback_filenames = ["CLAUDE.md"]
 
 [features]
-codex_hooks = true
-
+hooks = true
+remote_connections = true
 
 [[hooks.PreToolUse]]
 matcher = "Bash"
@@ -19,36 +19,39 @@ matcher = "Edit|Write"
 command = "bash /Users/tjun/.claude/scripts/post-edit-format.sh"
 type = "command"
 
+[hooks.state]
+
+[hooks.state."/Users/tjun/.codex/config.toml:post_tool_use:0:0"]
+trusted_hash = "sha256:30c721017ca1efdf7a2473fdf558d71ed22c3e965ed8ace8ec149e59c0235431"
+
+[hooks.state."/Users/tjun/.codex/config.toml:pre_tool_use:0:0"]
+enabled = true
+trusted_hash = "sha256:ee78a61f04c68a09eb63d2673654b1fbe268b9db51131600224ad14487a84f0f"
+
 [marketplaces.openai-bundled]
-last_updated = "2026-05-01T20:48:08Z"
-source = "/Users/tjun/.codex/.tmp/bundled-marketplaces/openai-bundled"
+last_updated = "2026-05-10T04:25:39Z"
 source_type = "local"
+source = "/Users/tjun/.codex/.tmp/bundled-marketplaces/openai-bundled"
 
 [marketplaces.claude-plugins-official]
-last_updated = "2026-05-01T21:32:08Z"
-last_revision = "b392f51899343f35a203260a4b344803de236d13"
+last_updated = "2026-05-13T13:01:10Z"
+last_revision = "1a2f18b05cf5652fd25403e8d229fc884fb84103"
 source_type = "git"
 source = "https://github.com/anthropics/claude-plugins-official.git"
 
 [marketplaces.openai-codex]
-last_updated = "2026-05-01T21:32:14Z"
+last_updated = "2026-05-13T13:01:15Z"
 last_revision = "807e03ac9d5aa23bc395fdec8c3767500a86b3cf"
 source_type = "git"
 source = "https://github.com/openai/codex-plugin-cc.git"
 
 [marketplaces.openai-primary-runtime]
-last_updated = "2026-05-01T20:48:46Z"
+last_updated = "2026-05-09T17:47:01Z"
 source_type = "local"
 source = "/Users/tjun/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
 [mcp_servers.openaiDeveloperDocs]
 url = "https://developers.openai.com/mcp"
-
-[plugins."browser-use@openai-bundled"]
-enabled = true
-
-[plugins."github@openai-curated"]
-enabled = true
 
 [plugins."google-calendar@openai-curated"]
 enabled = true
@@ -71,7 +74,7 @@ enabled = true
 [plugins."presentations@openai-primary-runtime"]
 enabled = true
 
-[plugins."github@claude-plugins-official"]
+[plugins."browser-use@openai-bundled"]
 enabled = true
 
 [profiles.deep-review]
@@ -82,9 +85,17 @@ sandbox_mode = "workspace-write"
 
 [profiles.default]
 approval_policy = "on-request"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 personality = "pragmatic"
 sandbox_mode = "workspace-write"
+model = "gpt-5.5"
+
+[profiles.default.features]
+terminal_resize_reflow = true
+memories = false
+external_migration = false
+goals = true
+prevent_idle_sleep = true
 
 [profiles.research]
 approval_policy = "on-request"
@@ -115,3 +126,15 @@ OTEL_METRICS_EXPORTER = "otlp"
 
 [tui]
 status_line = ["model-with-reasoning", "current-dir", "git-branch", "context-remaining"]
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4
+
+[projects."/Users/tjun/dev/src/github.com/tjun/sendzu"]
+trust_level = "trusted"
+
+[projects."/Users/tjun/dev/src/github.com/tjun/stepface"]
+trust_level = "trusted"
+
+[projects."/Users/tjun/dev/src/github.com/tjun/dotfiles"]
+trust_level = "trusted"

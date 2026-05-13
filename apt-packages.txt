@@ -1,0 +1,7 @@
+curl
+zsh
+git
+openssh-server
+ripgrep
+gh
+fd-find

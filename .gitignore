@@ -11,3 +11,5 @@ codex/config.local.toml
 codex/config.effective.toml
 codex/rules/default.local.rules
 codex/rules/default.effective.rules
+cursor/argv.json
+cursor/extensions.json
