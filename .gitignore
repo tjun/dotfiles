@@ -5,6 +5,7 @@
 .config/*
 Brewfile.lock.json
 .mise.toml
+mise.toml
 CLAUDE.md
 AGENTS.md
 codex/config.local.toml

@@ -1,7 +1,7 @@
 [tools]
+codex = "latest"
 node = "24"
 npm = "latest"
-"npm:@openai/codex" = "latest"
 "npm:@sakasegawa/ncli" = "latest"
 "npm:corepack" = "0.34.7"
 "npm:difit" = "latest"
@@ -9,7 +9,7 @@ npm = "latest"
 "npm:pnpm" = "10.9.0"
 python = "3.13"
 rust = "latest"
-uv = "latest"
+uv = "0.10.6"
 
 [settings]
 idiomatic_version_file_enable_tools = ["python"]

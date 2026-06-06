@@ -46,7 +46,7 @@ source_type = "git"
 source = "https://github.com/openai/codex-plugin-cc.git"
 
 [marketplaces.openai-primary-runtime]
-last_updated = "2026-05-09T17:47:01Z"
+last_updated = "2026-05-11T05:45:08Z"
 source_type = "local"
 source = "/Users/tjun/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
@@ -54,7 +54,7 @@ source = "/Users/tjun/.cache/codex-runtimes/codex-primary-runtime/plugins/openai
 url = "https://developers.openai.com/mcp"
 
 [plugins."google-calendar@openai-curated"]
-enabled = true
+enabled = false
 
 [plugins."notion@openai-curated"]
 enabled = true
