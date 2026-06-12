@@ -92,7 +92,6 @@
       "Edit(~/.gitconfig-local)"
     ]
   },
-  "model": "claude-opus-4-7",
   "hooks": {
     "PreToolUse": [
       {
@@ -154,5 +153,6 @@
   "effortLevel": "high",
   "showThinkingSummaries": true,
   "preferredNotifChannel": "terminal_bell",
-  "remoteControlAtStartup": true
+  "remoteControlAtStartup": true,
+  "model": "claude-fable-5[1m]"
 }
