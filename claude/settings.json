@@ -4,9 +4,7 @@
     "ENABLE_TOOL_SEARCH": "true",
     "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
     "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1",
-    "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING": "1",
     "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
-    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
     "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
     "OTEL_METRICS_EXPORTER": "otlp",
     "OTEL_EXPORTER_OTLP_PROTOCOL": "http/protobuf",
@@ -153,6 +151,5 @@
   "effortLevel": "high",
   "showThinkingSummaries": true,
   "preferredNotifChannel": "terminal_bell",
-  "remoteControlAtStartup": true,
-  "model": "claude-fable-5[1m]"
+  "remoteControlAtStartup": true
 }

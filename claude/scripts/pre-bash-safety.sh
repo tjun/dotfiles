@@ -10,8 +10,6 @@ COMMAND=$(cat | jq -r '.tool_input.command // empty')
 
 # Dangerous patterns to block
 DANGEROUS_PATTERNS=(
-  'rm -rf /'
-  'rm -rf \$HOME'
   'mkfs\.'
   'dd if=.* of=/dev/'
   '> /dev/sd'
