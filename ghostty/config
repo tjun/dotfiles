@@ -50,7 +50,7 @@ window-padding-balance = true
 # quick-terminal-screen = main
 # quick-terminal-animation-duration = 0
 
-keybind = global:f12=toggle_quick_terminal
+keybind = global:f13=toggle_quick_terminal
 keybind = super+shift+right=new_split:right
 keybind = super+shift+down=new_split:down
 keybind = super+right=goto_split:right
