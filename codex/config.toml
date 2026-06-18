@@ -1,9 +1,18 @@
-profile = "default"
 project_doc_fallback_filenames = ["CLAUDE.md"]
+approval_policy = "on-request"
+model_reasoning_effort = "medium"
+personality = "pragmatic"
+sandbox_mode = "workspace-write"
+model = "gpt-5.5"
 
 [features]
 hooks = true
 remote_connections = true
+terminal_resize_reflow = true
+memories = false
+external_migration = false
+goals = true
+prevent_idle_sleep = true
 
 [[hooks.PreToolUse]]
 matcher = "Bash"
@@ -76,33 +85,6 @@ enabled = true
 
 [plugins."browser-use@openai-bundled"]
 enabled = true
-
-[profiles.deep-review]
-approval_policy = "on-request"
-model_reasoning_effort = "xhigh"
-personality = "pragmatic"
-sandbox_mode = "workspace-write"
-
-[profiles.default]
-approval_policy = "on-request"
-model_reasoning_effort = "medium"
-personality = "pragmatic"
-sandbox_mode = "workspace-write"
-model = "gpt-5.5"
-
-[profiles.default.features]
-terminal_resize_reflow = true
-memories = false
-external_migration = false
-goals = true
-prevent_idle_sleep = true
-
-[profiles.research]
-approval_policy = "on-request"
-model_reasoning_effort = "high"
-personality = "pragmatic"
-sandbox_mode = "workspace-write"
-web_search = "live"
 
 [sandbox_workspace_write]
 network_access = true

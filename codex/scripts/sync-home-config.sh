@@ -18,6 +18,8 @@ EFFECTIVE_RULES=${RULES_DIR}/default.effective.rules
 HOME_CODEX_DIR=${HOME}/.codex
 HOME_RULES_DIR=${HOME_CODEX_DIR}/rules
 HOME_HOOKS_DIR=${HOME_CODEX_DIR}/hooks
+HOME_SKILLS_DIR=${HOME_CODEX_DIR}/skills
+CLAUDE_SKILLS_DIR=${HOME}/.claude/skills
 
 tmp_config=$(mktemp)
 cp "${BASE_CONFIG}" "${tmp_config}"
@@ -39,3 +41,20 @@ mkdir -p "${HOME_RULES_DIR}"
 ln -sfn "${EFFECTIVE_CONFIG}" "${HOME_CODEX_DIR}/config.toml"
 ln -sfn "${EFFECTIVE_RULES}" "${HOME_RULES_DIR}/default.rules"
 ln -sfn "${HOOKS_DIR}" "${HOME_HOOKS_DIR}"
+
+for profile_config in "${CODEX_DIR}"/*.config.toml(N.); do
+  ln -sfn "${profile_config}" "${HOME_CODEX_DIR}/${profile_config:t}"
+done
+
+if [[ -d "${CLAUDE_SKILLS_DIR}" ]]; then
+  mkdir -p "${HOME_SKILLS_DIR}"
+
+  for skill_dir in "${CLAUDE_SKILLS_DIR}"/*(N/); do
+    skill_name=${skill_dir:t}
+    target=${HOME_SKILLS_DIR}/${skill_name}
+
+    if [[ -e "${skill_dir}/SKILL.md" && ( ! -e "${target}" || -L "${target}" ) ]]; then
+      ln -sfn "${skill_dir}" "${target}"
+    fi
+  done
+fi

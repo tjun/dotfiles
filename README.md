@@ -54,6 +54,10 @@ ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/scripts ~/.claude/scripts
 ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/skills ~/.claude/skills
 ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/statusline-command.sh ~/.claude/statusline-command.sh
 
+# Codex
+mkdir -p ~/.codex
+zsh ~/dev/src/github.com/tjun/dotfiles/codex/scripts/sync-home-config.sh
+
 # copy and update files
 cp .gitconfig.local ~/ # and add sigining key path
 cp .ssh/config ~/.ssh/ # and add ssh key path
