@@ -6,7 +6,7 @@
   },
   "security": {
     "auth": {
-      "selectedType": "oauth-personal"
+      "selectedType": "gemini-api-key"
     },
     "allowedCommands": [
       "ls",
@@ -17,7 +17,7 @@
     ]
   },
   "ui": {
-    "theme": "Ayu Light",
+    "theme": "Tokyo Night",
     "footer": {
       "hideContextPercentage": false
     }
