@@ -1,8 +1,6 @@
 [tools]
-codex = "latest"
 node = "24"
 npm = "latest"
-"npm:@sakasegawa/ncli" = "latest"
 "npm:corepack" = "0.34.7"
 "npm:difit" = "latest"
 "npm:nano-banana-mcp" = "latest"
@@ -12,4 +10,4 @@ rust = "latest"
 uv = "0.10.6"
 
 [settings]
-idiomatic_version_file_enable_tools = ["python"]
+idiomatic_version_file_enable_tools = ["python", "uv", "node"]

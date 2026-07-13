@@ -6,6 +6,8 @@
     "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1",
     "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
     "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
+    "CLAUDE_CODE_SUBAGENT_MODEL":"gpt-5.6-sol",
+    "CLAUDE_AFK_TIMEOUT_MS": "6000000",
     "OTEL_METRICS_EXPORTER": "otlp",
     "OTEL_EXPORTER_OTLP_PROTOCOL": "http/protobuf",
     "OTEL_EXPORTER_OTLP_ENDPOINT": "https://otlp.us5.datadoghq.com",
@@ -90,7 +92,7 @@
       "Edit(~/.gitconfig-local)"
     ]
   },
-  "model": "claude-opus-4-6",
+  "model": "claude-fable-5[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -152,5 +154,7 @@
   "effortLevel": "high",
   "showThinkingSummaries": true,
   "preferredNotifChannel": "terminal_bell",
-  "remoteControlAtStartup": true
+  "remoteControlAtStartup": true,
+  "fallbackModel": ["claude-opus-4-6"],
+  "agentPushNotifEnabled": true
 }

@@ -92,9 +92,6 @@
     smudge = git-lfs smudge -- %f
     required = true
     process = git-lfs filter-process
-
-[url "github.com:"]
-    insteadOf = https://github.com
 [http]
     sslVerify = true
 [http "https://gopkg.in"]
@@ -109,3 +106,5 @@
     autocorrect = prompt
 [advice]
 	statusHints = false
+[url "git@github.com:"]
+	insteadOf = https://github.com/

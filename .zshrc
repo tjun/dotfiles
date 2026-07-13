@@ -120,10 +120,10 @@ else
 fi
 
 # gcloud (遅延読み込み)
-if (( $+commands[gcloud] )) && type brew &>/dev/null; then
-  PATH=$PATH:$(brew --prefix)/share/google-cloud-sdk/bin
-  zsh-defer source "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
-  zsh-defer source "$(brew --prefix)/share/google-cloud-sdk/completion.zsh.inc"
+if (( $+commands[gcloud] )) && [[ -n "$BREW_PREFIX" ]]; then
+  PATH=$PATH:${BREW_PREFIX}/share/google-cloud-sdk/bin
+  zsh-defer source "${BREW_PREFIX}/share/google-cloud-sdk/path.zsh.inc"
+  zsh-defer source "${BREW_PREFIX}/share/google-cloud-sdk/completion.zsh.inc"
 fi
 
 # kubectl (completionをキャッシュ化) - 現在未使用
@@ -226,5 +226,6 @@ if [ -n "$PS1" ]; then
   prompt_color
 fi
 
-# Added by Antigravity
-export PATH="/Users/tjun/.antigravity/antigravity/bin:$PATH"
+codex() {
+  /Users/tjun/.agents/skills/agmsg/scripts/drivers/types/codex/codex-shim.sh "$@"
+}

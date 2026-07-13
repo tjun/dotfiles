@@ -1,11 +1,8 @@
-tap "cue-lang/tap"
-tap "helix-editor/helix"
-tap "minamijoyo/hcledit"
-tap "suzuki-shunsuke/pinact"
+tap "helix-editor/helix", trusted: true
+tap "minamijoyo/hcledit", trusted: true
 brew "awscli"
-brew "azure-cli"
-brew "cue-lang/tap/cue"
 brew "ffmpeg"
+brew "sdl3"
 brew "helix"
 brew "minamijoyo/hcledit/hcledit"
 brew "mcap"

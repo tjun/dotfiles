@@ -1,16 +1,18 @@
-tap "FelixKratz/formulae" # for borders
+tap "FelixKratz/formulae", trusted: true # for borders
 tap "homebrew/bundle"
-tap "k1LoW/tap"
-tap "manaflow-ai/cmux"
-tap "olets/tap"
+tap "k1LoW/tap", trusted: true
+tap "manaflow-ai/cmux", trusted: true
+tap "olets/tap", trusted: true
+tap "suzuki-shunsuke/pinact", trusted: true
 
 brew "actionlint"
 brew "aqua"
 brew "atuin"
 brew "bat"
 brew "borders"
+brew "cliproxyapi"
 #brew "codex"
-brew "colima"
+#brew "colima"
 brew "curl"
 brew "difftastic"
 brew "direnv"
@@ -48,6 +50,7 @@ brew "mise"
 brew "mpdecimal" # required by google-cloud-sdk
 brew "node"
 brew "olets/tap/zsh-abbr"
+brew "pinact"
 brew "protobuf"
 brew "ripgrep"
 brew "shellcheck"
@@ -74,7 +77,7 @@ cask "gcloud-cli"
 cask "ghostty"
 cask "imageoptim"
 cask "karabiner-elements"
-cask "manaflow-ai/cmux/cmux"
+cask "cmux"
 cask "qlmarkdown"
 cask "raycast"
 cask "slack"
