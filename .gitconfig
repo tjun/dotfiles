@@ -28,15 +28,15 @@
 # read https://tech.mirrativ.stream/entry/2025/02/25/100000
 
 [push]
-    default = tracking
+    default = simple
     autoSetupRemote = true
     followTags = true
 [pull]
     rebase = merges
 [fetch]
-        prune = true
-        pruneTags = true
-        all = true
+    prune = true
+    pruneTags = true
+    all = true
 
 [init]
 	defaultBranch = main
