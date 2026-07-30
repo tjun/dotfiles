@@ -21,6 +21,9 @@ HOME_HOOKS_DIR=${HOME_CODEX_DIR}/hooks
 HOME_SKILLS_DIR=${HOME_CODEX_DIR}/skills
 CLAUDE_SKILLS_DIR=${HOME}/.claude/skills
 
+# Skills that delegate work to Codex are Claude-only and must not be linked back into Codex.
+CLAUDE_ONLY_SKILLS=(codex-cli)
+
 tmp_config=$(mktemp)
 cp "${BASE_CONFIG}" "${tmp_config}"
 if [[ -f "${LOCAL_CONFIG}" ]]; then
@@ -52,6 +55,13 @@ if [[ -d "${CLAUDE_SKILLS_DIR}" ]]; then
   for skill_dir in "${CLAUDE_SKILLS_DIR}"/*(N/); do
     skill_name=${skill_dir:t}
     target=${HOME_SKILLS_DIR}/${skill_name}
+
+    if (( ${CLAUDE_ONLY_SKILLS[(Ie)$skill_name]} )); then
+      if [[ -L "${target}" && "${target:A}" == "${skill_dir:A}" ]]; then
+        rm "${target}"
+      fi
+      continue
+    fi
 
     if [[ -e "${skill_dir}/SKILL.md" && ( ! -e "${target}" || -L "${target}" ) ]]; then
       ln -sfn "${skill_dir}" "${target}"

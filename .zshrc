@@ -226,6 +226,3 @@ if [ -n "$PS1" ]; then
   prompt_color
 fi
 
-codex() {
-  /Users/tjun/.agents/skills/agmsg/scripts/drivers/types/codex/codex-shim.sh "$@"
-}
