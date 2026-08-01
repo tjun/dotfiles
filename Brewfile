@@ -1,4 +1,3 @@
-tap "FelixKratz/formulae", trusted: true # for borders
 tap "homebrew/bundle"
 tap "k1LoW/tap", trusted: true
 tap "manaflow-ai/cmux", trusted: true
@@ -9,10 +8,7 @@ brew "actionlint"
 brew "aqua"
 brew "atuin"
 brew "bat"
-brew "borders"
 brew "cliproxyapi"
-#brew "codex"
-#brew "colima"
 brew "curl"
 brew "difftastic"
 brew "direnv"
