@@ -1,6 +1,18 @@
 prefix_rule(pattern=["git", "add", "."], decision="forbidden", justification="Stage files explicitly instead of using broad staging.")
 prefix_rule(pattern=["git", "add", "-A"], decision="forbidden", justification="Stage files explicitly instead of using broad staging.")
 prefix_rule(pattern=["git", "add", "--all"], decision="forbidden", justification="Stage files explicitly instead of using broad staging.")
+
+# Keep routine shell command approvals aligned with claude/settings.json.
+prefix_rule(pattern=[["alias", "awk", "cat", "cd", "cmp", "cp", "cut", "date", "diff", "echo", "env", "fd", "file", "find", "gofmt", "grep", "gunzip", "gzip", "head", "history", "less", "ls", "mkdir", "more", "open", "ping", "printf", "ps", "pwd", "rg", "sed", "sort", "source", "stat", "tail", "tar", "time", "top", "touch", "tree", "uniq", "unzip", "wc", "which", "whoami", "zip"]], decision="allow")
+prefix_rule(pattern=["gcloud", "auth", "list"], decision="allow")
+prefix_rule(pattern=["gcloud", "config", "list"], decision="allow")
+prefix_rule(pattern=["gh", "run", "rerun"], decision="allow")
+prefix_rule(pattern=["git", "pull"], decision="allow")
+prefix_rule(pattern=["git", "status"], decision="allow")
+prefix_rule(pattern=["go", "build"], decision="allow")
+prefix_rule(pattern=["go", "fmt"], decision="allow")
+prefix_rule(pattern=["go", "test"], decision="allow")
+prefix_rule(pattern=["uv", "run", "ruff"], decision="allow")
 prefix_rule(pattern=["gh", "pr", "checks"], decision="allow")
 prefix_rule(pattern=["gh", "pr", "list"], decision="allow")
 prefix_rule(pattern=["gh", "pr", "view"], decision="allow")

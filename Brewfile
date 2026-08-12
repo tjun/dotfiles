@@ -1,6 +1,6 @@
 tap "homebrew/bundle"
 tap "k1LoW/tap", trusted: true
-tap "manaflow-ai/cmux", trusted: true
+#tap "manaflow-ai/cmux", trusted: true
 tap "olets/tap", trusted: true
 tap "suzuki-shunsuke/pinact", trusted: true
 
@@ -47,6 +47,7 @@ brew "mpdecimal" # required by google-cloud-sdk
 brew "node"
 brew "olets/tap/zsh-abbr"
 brew "pinact"
+brew "poppler"
 brew "protobuf"
 brew "ripgrep"
 brew "shellcheck"
@@ -71,7 +72,7 @@ cask "gcloud-cli"
 cask "ghostty"
 cask "imageoptim"
 cask "karabiner-elements"
-cask "cmux"
+#cask "cmux"
 cask "qlmarkdown"
 cask "raycast"
 cask "slack"
