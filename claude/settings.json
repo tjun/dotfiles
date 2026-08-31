@@ -1,20 +1,130 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "agentPushNotifEnabled": true,
+  "effortLevel": "medium",
+  "enabledPlugins": {
+    "codex@openai-codex": true,
+    "skill-creator@claude-plugins-official": true
+  },
   "env": {
-    "ENABLE_TOOL_SEARCH": "true",
     "AGMSG_TERMINAL": "~/.claude/scripts/cmux-agent-terminal.sh {cmd}",
-    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
-    "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1",
+    "CLAUDE_AFK_TIMEOUT_MS": "6000000",
+    "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "400000",
     "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
     "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
-    "CLAUDE_CODE_SUBAGENT_MODEL":"gpt-5.6-sol",
-    "CLAUDE_AFK_TIMEOUT_MS": "6000000",
-    "OTEL_METRICS_EXPORTER": "otlp",
-    "OTEL_EXPORTER_OTLP_PROTOCOL": "http/protobuf",
+    "CLAUDE_CODE_PROMPT_CACHE_TTL": "1h",
+    "CLAUDE_CODE_SUBAGENT_PROMPT_CACHE_TTL": "5m",
     "OTEL_EXPORTER_OTLP_ENDPOINT": "https://otlp.us5.datadoghq.com",
-    "OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE": "delta"
+    "OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE": "delta",
+    "OTEL_EXPORTER_OTLP_PROTOCOL": "http/protobuf",
+    "OTEL_METRICS_EXPORTER": "otlp"
+  },
+  "extraKnownMarketplaces": {
+    "anthropic-agent-skills": {
+      "source": {
+        "repo": "anthropics/skills",
+        "source": "github"
+      }
+    },
+    "openai-codex": {
+      "source": {
+        "repo": "openai/codex-plugin-cc",
+        "source": "github"
+      }
+    }
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "command": "bash /Users/tjun/.claude/scripts/notify.sh",
+            "type": "command"
+          },
+          {
+            "async": true,
+            "command": "python3 /Users/tjun/dev/src/github.com/tjun/stackchan/codexpet/bridge/codex_stackchan_bridge/claude_code_hook.py",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "bash /Users/tjun/.claude/scripts/post-edit-format.sh",
+            "type": "command"
+          }
+        ],
+        "matcher": "Edit|Write"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "bash /Users/tjun/.claude/scripts/pre-bash-safety.sh",
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "async": true,
+            "command": "python3 /Users/tjun/dev/src/github.com/tjun/stackchan/codexpet/bridge/codex_stackchan_bridge/claude_code_hook.py",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "async": true,
+            "command": "python3 /Users/tjun/dev/src/github.com/tjun/stackchan/codexpet/bridge/codex_stackchan_bridge/claude_code_hook.py",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "async": true,
+            "command": "python3 /Users/tjun/dev/src/github.com/tjun/stackchan/codexpet/bridge/codex_stackchan_bridge/claude_code_hook.py",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "WorktreeCreate": [
+      {
+        "hooks": [
+          {
+            "command": "bash /Users/tjun/.claude/scripts/worktree-create-setup.sh",
+            "statusMessage": "Creating worktree (mise install + make setup)...",
+            "timeout": 300,
+            "type": "command"
+          }
+        ]
+      }
+    ]
   },
   "includeCoAuthoredBy": false,
+  "modelSettings": {
+    "claude-fable-5": {
+      "effortLevel": "medium"
+    }
+  },
+  "otelHeadersHelper": "/Users/tjun/.claude/scripts/dd-otel-headers.sh",
   "permissions": {
     "allow": [
       "Bash(alias:*)",
@@ -33,13 +143,14 @@
       "Bash(find:*)",
       "Bash(gcloud auth list:*)",
       "Bash(gcloud config list:*)",
+      "Bash(gh auth status)",
       "Bash(gh pr checks:*)",
       "Bash(gh pr diff:*)",
       "Bash(gh pr list:*)",
       "Bash(gh pr view:*)",
       "Bash(gh run list:*)",
-      "Bash(gh run view:*)",
       "Bash(gh run rerun:*)",
+      "Bash(gh run view:*)",
       "Bash(git pull:*)",
       "Bash(git status:*)",
       "Bash(go build:*)",
@@ -51,11 +162,15 @@
       "Bash(gzip:*)",
       "Bash(head:*)",
       "Bash(history:*)",
+      "Bash(hunk session:*)",
+      "Bash(hunk skill:*)",
       "Bash(less:*)",
       "Bash(ls:*)",
       "Bash(mkdir:*)",
       "Bash(more:*)",
+      "Bash(mutool:*)",
       "Bash(open:*)",
+      "Bash(pdftotext:*)",
       "Bash(ping:*)",
       "Bash(printf:*)",
       "Bash(ps:*)",
@@ -78,88 +193,37 @@
       "Bash(which:*)",
       "Bash(whoami:*)",
       "Bash(zip:*)",
-      "Bash(~/.claude/scripts/mo-preview.sh:*)",
       "Bash(~/.claude/scripts/hunk-review.sh:*)",
-      "Bash(hunk session:*)",
-      "Bash(hunk skill:*)",
+      "Bash(~/.claude/scripts/mo-preview.sh:*)",
       "Fetch(https://*)",
       "List(*)",
       "WebFetch(domain:*)",
       "WebSearch"
     ],
     "deny": [
-      "Bash(git add .:*)",
-      "Bash(git add -A:*)",
       "Bash(git add --all:*)",
-      "Read(~/.ssh/*)",
+      "Bash(git add -A:*)",
+      "Bash(git add .:*)",
+      "Edit(~/.gitconfig-local)",
       "Edit(~/.ssh/*)",
+      "Edit(~/.zshrc-local)",
       "Read(~/.gitconfig-local)",
-      "Edit(~/.gitconfig-local)"
+      "Read(~/.ssh/*)",
+      "Read(~/.zshrc-local)"
     ]
   },
-  "model": "claude-fable-5[1m]",
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash /Users/tjun/.claude/scripts/pre-bash-safety.sh"
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Edit|Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash /Users/tjun/.claude/scripts/post-edit-format.sh"
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash /Users/tjun/.claude/scripts/notify.sh"
-          }
-        ]
-      }
-    ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "bash /Users/tjun/.claude/statusline-command.sh"
-  },
-  "enabledPlugins": {
-    "skill-creator@claude-plugins-official": true,
-    "codex@openai-codex": true
-  },
-  "extraKnownMarketplaces": {
-    "anthropic-agent-skills": {
-      "source": {
-        "source": "github",
-        "repo": "anthropics/skills"
-      }
-    },
-    "openai-codex": {
-      "source": {
-        "source": "github",
-        "repo": "openai/codex-plugin-cc"
-      }
-    }
-  },
-  "otelHeadersHelper": "/Users/tjun/.claude/scripts/dd-otel-headers.sh",
-  "effortLevel": "high",
-  "showThinkingSummaries": true,
   "preferredNotifChannel": "terminal_bell",
   "remoteControlAtStartup": true,
-  "fallbackModel": ["claude-opus-4-6"],
-  "agentPushNotifEnabled": true
+  "showThinkingSummaries": true,
+  "skillOverrides": {
+    "difit": "off",
+    "difit-review": "off",
+    "empirical-prompt-tuning": "off",
+    "hard-tasks": "off"
+  },
+  "statusLine": {
+    "command": "input=$(cat); printf '%s' \"$input\" | python3 /Users/tjun/.claude/scripts/runcat-statusline.py >/dev/null 2>&1; printf '%s' \"$input\" | bash /Users/tjun/.claude/statusline-command.sh",
+    "type": "command"
+  },
+  "theme": "dark"
 }
