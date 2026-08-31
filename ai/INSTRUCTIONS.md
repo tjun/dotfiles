@@ -18,6 +18,10 @@
 - Run relevant verification after changes and report what was checked.
 - For large investigation tasks, use subagents to keep the main context clean.
 
+## Showing work in cmux
+- Markdown to read: `~/.claude/scripts/mo-preview.sh <file>...` (`-t <group>`, `--close`). Never preview Markdown another way.
+- Diff to review: `~/.claude/scripts/hunk-review.sh [diff|show] [args]` (`--focus`, `--close`). Never run `hunk diff`/`show` yourself; drive the live session with `hunk session ...`.
+
 ## Git/PR conventions
 - Use `gh` command to get contents on github.com
 - Use Conventional commits for PR title

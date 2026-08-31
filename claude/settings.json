@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
     "ENABLE_TOOL_SEARCH": "true",
+    "AGMSG_TERMINAL": "~/.claude/scripts/cmux-agent-terminal.sh {cmd}",
     "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
     "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1",
     "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
@@ -77,6 +78,10 @@
       "Bash(which:*)",
       "Bash(whoami:*)",
       "Bash(zip:*)",
+      "Bash(~/.claude/scripts/mo-preview.sh:*)",
+      "Bash(~/.claude/scripts/hunk-review.sh:*)",
+      "Bash(hunk session:*)",
+      "Bash(hunk skill:*)",
       "Fetch(https://*)",
       "List(*)",
       "WebFetch(domain:*)",

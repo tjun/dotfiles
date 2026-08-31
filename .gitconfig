@@ -25,6 +25,7 @@
     safecrlf = true
     fsmonitor = true
     untrackedcache = true
+    pager = hunk pager
 # read https://tech.mirrativ.stream/entry/2025/02/25/100000
 
 [push]
@@ -39,7 +40,7 @@
     all = true
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
 
 [commit]
     verbose = true
@@ -99,12 +100,12 @@
 [ghq]
     root = ~/dev/src
 [gpg]
-	format = ssh
+    format = ssh
 [tag]
     sort = version:refname
 [help]
     autocorrect = prompt
 [advice]
-	statusHints = false
+    statusHints = false
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+    insteadOf = https://github.com/
