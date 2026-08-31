@@ -24,9 +24,12 @@
 - Write commit message with 1 line
 - Write PR description in Japanese and keep it simple
 
+## Worktree-Isolated Sessions
+- In a worktree-isolated session, the harness statically verifies every Bash command and refuses ones it cannot trace ("too complex to verify"). Keep commands plain: no redirects (`>`), pipes into files, brace expansion, heredocs, `cd`, or command substitution around git operations.
+- Run one simple command at a time from inside the worktree; split compound commands instead of chaining them.
+
 ## Context Management
 - When compacting, preserve the full list of modified files and current task progress.
-- Use `/clear` between unrelated tasks to reset context.
 
 # ExecPlans
 
