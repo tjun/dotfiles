@@ -9,15 +9,13 @@
   "env": {
     "AGMSG_TERMINAL": "~/.claude/scripts/cmux-agent-terminal.sh {cmd}",
     "CLAUDE_AFK_TIMEOUT_MS": "6000000",
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
     "CLAUDE_CODE_AUTO_COMPACT_WINDOW": "400000",
+    "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1",
     "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
-    "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
     "CLAUDE_CODE_PROMPT_CACHE_TTL": "1h",
     "CLAUDE_CODE_SUBAGENT_PROMPT_CACHE_TTL": "5m",
-    "OTEL_EXPORTER_OTLP_ENDPOINT": "https://otlp.us5.datadoghq.com",
-    "OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE": "delta",
-    "OTEL_EXPORTER_OTLP_PROTOCOL": "http/protobuf",
-    "OTEL_METRICS_EXPORTER": "otlp"
+    "ENABLE_TOOL_SEARCH": "true"
   },
   "extraKnownMarketplaces": {
     "anthropic-agent-skills": {
@@ -38,12 +36,12 @@
       {
         "hooks": [
           {
-            "command": "bash /Users/tjun/.claude/scripts/notify.sh",
+            "command": "bash ~/.claude/scripts/notify.sh",
             "type": "command"
           },
           {
             "async": true,
-            "command": "python3 /Users/tjun/dev/src/github.com/tjun/stackchan/codexpet/bridge/codex_stackchan_bridge/claude_code_hook.py",
+            "command": "bash ~/.claude/scripts/stackchan-bridge.sh",
             "type": "command"
           }
         ],
@@ -54,7 +52,7 @@
       {
         "hooks": [
           {
-            "command": "bash /Users/tjun/.claude/scripts/post-edit-format.sh",
+            "command": "bash ~/.claude/scripts/post-edit-format.sh",
             "type": "command"
           }
         ],
@@ -65,7 +63,7 @@
       {
         "hooks": [
           {
-            "command": "bash /Users/tjun/.claude/scripts/pre-bash-safety.sh",
+            "command": "bash ~/.claude/scripts/pre-bash-safety.sh",
             "type": "command"
           }
         ],
@@ -77,7 +75,7 @@
         "hooks": [
           {
             "async": true,
-            "command": "python3 /Users/tjun/dev/src/github.com/tjun/stackchan/codexpet/bridge/codex_stackchan_bridge/claude_code_hook.py",
+            "command": "bash ~/.claude/scripts/stackchan-bridge.sh",
             "type": "command"
           }
         ]
@@ -88,7 +86,7 @@
         "hooks": [
           {
             "async": true,
-            "command": "python3 /Users/tjun/dev/src/github.com/tjun/stackchan/codexpet/bridge/codex_stackchan_bridge/claude_code_hook.py",
+            "command": "bash ~/.claude/scripts/stackchan-bridge.sh",
             "type": "command"
           }
         ]
@@ -99,7 +97,7 @@
         "hooks": [
           {
             "async": true,
-            "command": "python3 /Users/tjun/dev/src/github.com/tjun/stackchan/codexpet/bridge/codex_stackchan_bridge/claude_code_hook.py",
+            "command": "bash ~/.claude/scripts/stackchan-bridge.sh",
             "type": "command"
           }
         ]
@@ -109,7 +107,7 @@
       {
         "hooks": [
           {
-            "command": "bash /Users/tjun/.claude/scripts/worktree-create-setup.sh",
+            "command": "bash ~/.claude/scripts/worktree-create-setup.sh",
             "statusMessage": "Creating worktree (mise install + make setup)...",
             "timeout": 300,
             "type": "command"
@@ -124,7 +122,7 @@
       "effortLevel": "medium"
     }
   },
-  "otelHeadersHelper": "/Users/tjun/.claude/scripts/dd-otel-headers.sh",
+  "otelHeadersHelper": "/Users/tjun/.claude/local/dd-otel-headers.sh",
   "permissions": {
     "allow": [
       "Bash(alias:*)",
@@ -222,7 +220,7 @@
     "hard-tasks": "off"
   },
   "statusLine": {
-    "command": "input=$(cat); printf '%s' \"$input\" | python3 /Users/tjun/.claude/scripts/runcat-statusline.py >/dev/null 2>&1; printf '%s' \"$input\" | bash /Users/tjun/.claude/statusline-command.sh",
+    "command": "input=$(cat); printf '%s' \"$input\" | python3 ~/.claude/scripts/runcat-statusline.py >/dev/null 2>&1; printf '%s' \"$input\" | bash ~/.claude/statusline-command.sh",
     "type": "command"
   },
   "theme": "dark"

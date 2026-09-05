@@ -18,46 +18,15 @@ prevent_idle_sleep = true
 matcher = "Bash"
 
 [[hooks.PreToolUse.hooks]]
-command = "bash /Users/tjun/.claude/scripts/pre-bash-safety.sh"
+command = "bash ~/.claude/scripts/pre-bash-safety.sh"
 type = "command"
 
 [[hooks.PostToolUse]]
 matcher = "Edit|Write"
 
 [[hooks.PostToolUse.hooks]]
-command = "bash /Users/tjun/.claude/scripts/post-edit-format.sh"
+command = "bash ~/.claude/scripts/post-edit-format.sh"
 type = "command"
-
-[hooks.state]
-
-[hooks.state."/Users/tjun/.codex/config.toml:post_tool_use:0:0"]
-trusted_hash = "sha256:30c721017ca1efdf7a2473fdf558d71ed22c3e965ed8ace8ec149e59c0235431"
-
-[hooks.state."/Users/tjun/.codex/config.toml:pre_tool_use:0:0"]
-enabled = true
-trusted_hash = "sha256:ee78a61f04c68a09eb63d2673654b1fbe268b9db51131600224ad14487a84f0f"
-
-[marketplaces.openai-bundled]
-last_updated = "2026-05-10T04:25:39Z"
-source_type = "local"
-source = "/Users/tjun/.codex/.tmp/bundled-marketplaces/openai-bundled"
-
-[marketplaces.claude-plugins-official]
-last_updated = "2026-05-13T13:01:10Z"
-last_revision = "1a2f18b05cf5652fd25403e8d229fc884fb84103"
-source_type = "git"
-source = "https://github.com/anthropics/claude-plugins-official.git"
-
-[marketplaces.openai-codex]
-last_updated = "2026-05-13T13:01:15Z"
-last_revision = "807e03ac9d5aa23bc395fdec8c3767500a86b3cf"
-source_type = "git"
-source = "https://github.com/openai/codex-plugin-cc.git"
-
-[marketplaces.openai-primary-runtime]
-last_updated = "2026-05-11T05:45:08Z"
-source_type = "local"
-source = "/Users/tjun/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
 [mcp_servers.openaiDeveloperDocs]
 url = "https://developers.openai.com/mcp"
@@ -86,37 +55,11 @@ enabled = true
 [plugins."browser-use@openai-bundled"]
 enabled = true
 
-[sandbox_workspace_write]
-network_access = true
-writable_roots = ["/Users/tjun/.codex/tmp"]
-
 [shell_environment_policy]
+# 実際の環境変数は codex/config.local.toml.example を config.local.toml にコピーして設定する。
+# (TOML は同じテーブルを 2 回定義できないため、[shell_environment_policy.set] は
+#  マシンごとの config.local.toml 側にまとめて置いている)
 inherit = "core"
-
-[shell_environment_policy.set]
-CLAUDE_CODE_ATTRIBUTION_HEADER = "0"
-CLAUDE_CODE_DISABLE_1M_CONTEXT = "1"
-CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING = "1"
-CLAUDE_CODE_DISABLE_AUTO_MEMORY = "1"
-CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1"
-CLAUDE_CODE_ENABLE_TELEMETRY = "1"
-ENABLE_TOOL_SEARCH = "true"
-OTEL_EXPORTER_OTLP_ENDPOINT = "https://otlp.us5.datadoghq.com"
-OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE = "delta"
-OTEL_EXPORTER_OTLP_PROTOCOL = "http/protobuf"
-OTEL_METRICS_EXPORTER = "otlp"
 
 [tui]
 status_line = ["model-with-reasoning", "current-dir", "git-branch", "context-remaining"]
-
-[tui.model_availability_nux]
-"gpt-5.5" = 4
-
-[projects."/Users/tjun/dev/src/github.com/tjun/sendzu"]
-trust_level = "trusted"
-
-[projects."/Users/tjun/dev/src/github.com/tjun/stepface"]
-trust_level = "trusted"
-
-[projects."/Users/tjun/dev/src/github.com/tjun/dotfiles"]
-trust_level = "trusted"

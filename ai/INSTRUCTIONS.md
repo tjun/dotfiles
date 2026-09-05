@@ -4,6 +4,7 @@
 - Provide all answers in Japanese.
 - Explain what and why before suggesting or applying code changes.
 - Keep responses concise and practical.
+- When working with OpenAI APIs, ChatGPT, or Codex, prefer the OpenAI developer documentation MCP server if available.
 - Research the codebase before editing. Never change code you haven't read.
 - For important or hard-to-reverse decisions, take a long-term view and critically reassess the root objective, expected benefits, trade-offs, and broader impact.
 - Optimize for the underlying objective, not merely the immediate task or its stated implementation.
@@ -18,7 +19,8 @@
 - Run relevant verification after changes and report what was checked.
 - For large investigation tasks, use subagents to keep the main context clean.
 
-## Showing work in cmux
+## Showing work in cmux (macOS の cmux 上で作業しているときだけ)
+- 以下のスクリプトは cmux に依存する。`~/.claude/scripts/mo-preview.sh` が無いか cmux 外で動いている場合はこの節を無視して通常どおり出力する。
 - Markdown to read: `~/.claude/scripts/mo-preview.sh <file>...` (`-t <group>`, `--close`). Never preview Markdown another way.
 - Diff to review: `~/.claude/scripts/hunk-review.sh [diff|show] [args]` (`--focus`, `--close`). Never run `hunk diff`/`show` yourself; drive the live session with `hunk session ...`.
 
@@ -27,10 +29,6 @@
 - Use Conventional commits for PR title
 - Write commit message with 1 line
 - Write PR description in Japanese and keep it simple
-
-## Worktree-Isolated Sessions
-- In a worktree-isolated session, the harness statically verifies every Bash command and refuses ones it cannot trace ("too complex to verify"). Keep commands plain: no redirects (`>`), pipes into files, brace expansion, heredocs, `cd`, or command substitution around git operations.
-- Run one simple command at a time from inside the worktree; split compound commands instead of chaining them.
 
 ## Context Management
 - When compacting, preserve the full list of modified files and current task progress.

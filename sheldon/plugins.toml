@@ -47,17 +47,14 @@ github = "zsh-users/zsh-completions"
 apply = ["defer"]
 proto = "ssh"
 
-# zsh-abbr 本体は Brewfile でインストールし、略語だけ dotfiles で管理する
+# zsh-abbr 本体も sheldon で管理する。submodule (zsh-job-queue) も一緒に取得されるため
+# Homebrew に依存せず macOS / Linux で同じ記述が使える。
+# 略語の定義は ~/.config/zsh-abbr/user-abbreviations にある。
+# 入力中に展開されるので defer せず即時読み込みする。
 [plugins.zsh-abbr]
-inline = '''
-if (( $+commands[brew] )); then
-  zsh_abbr_dir="$(brew --prefix zsh-abbr 2>/dev/null)/share/zsh-abbr"
-  if [[ -r "${zsh_abbr_dir}/zsh-abbr.zsh" ]]; then
-    fpath+=("${zsh_abbr_dir}")
-    source "${zsh_abbr_dir}/zsh-abbr.zsh"
-  fi
-fi
-'''
+github = "olets/zsh-abbr"
+use = ["zsh-abbr.zsh"]
+proto = "ssh"
 
 # [plugins.zsh-kubectl-prompt]
 # github = "superbrothers/zsh-kubectl-prompt"

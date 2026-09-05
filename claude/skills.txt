@@ -1,0 +1,12 @@
+# gh skill install で入れる外部スキルの一覧。
+# claude/scripts/install-skills.sh がこのファイルを読んで user scope に導入する。
+#
+# 書式: <repository> [<skill>[@<version>]]
+#   - skill を省くとリポジトリ内の全スキルを入れる (--all)
+#   - @<version> で git tag / commit SHA に固定できる
+#   - skill は入れ子パス (skills/foo/bar) でも良い。ディレクトリ名が最終的なスキル名になる
+#   - # 以降はコメント、空行は無視
+#
+# 例:
+# github/awesome-copilot  git-commit
+# github/awesome-copilot  code-review@v1.2.0

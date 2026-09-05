@@ -1,7 +1,6 @@
 tap "homebrew/bundle"
 tap "k1LoW/tap", trusted: true
 #tap "manaflow-ai/cmux", trusted: true
-tap "olets/tap", trusted: true
 tap "suzuki-shunsuke/pinact", trusted: true
 
 brew "actionlint"
@@ -46,7 +45,6 @@ brew "mcap"
 brew "mise"
 brew "mpdecimal" # required by google-cloud-sdk
 brew "node"
-brew "olets/tap/zsh-abbr"
 brew "pinact"
 brew "poppler"
 brew "protobuf"

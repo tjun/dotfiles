@@ -1,0 +1,4 @@
+# macOS 用の追加ツール。~/.config/mise/conf.d/darwin.toml へ symlink して macOS でのみ読み込む。
+[tools]
+rust = "latest"
+"npm:nano-banana-mcp" = "latest"

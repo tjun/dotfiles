@@ -1,0 +1,24 @@
+# マシン固有の Codex 設定のテンプレート。
+# codex/config.local.toml にコピーして書き換える (config.local.toml は gitignore 済み)。
+# codex/scripts/sync-home-config.sh が config.toml の末尾へ連結する。
+
+[sandbox_workspace_write]
+network_access = true
+# 絶対パスで書く。macOS は /Users/<user>/.codex/tmp
+writable_roots = ["/home/tjun/.codex/tmp"]
+
+[shell_environment_policy.set]
+CLAUDE_CODE_ATTRIBUTION_HEADER = "0"
+CLAUDE_CODE_DISABLE_1M_CONTEXT = "1"
+CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING = "1"
+CLAUDE_CODE_DISABLE_AUTO_MEMORY = "1"
+CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC = "1"
+ENABLE_TOOL_SEARCH = "true"
+
+# Datadog へのテレメトリ送信。ヘッダ生成に ~/.claude/local/dd-otel-headers.sh が
+# 必要なので、それを置いているマシン (macOS) でのみコメントを外す。
+# CLAUDE_CODE_ENABLE_TELEMETRY = "1"
+# OTEL_METRICS_EXPORTER = "otlp"
+# OTEL_EXPORTER_OTLP_PROTOCOL = "http/protobuf"
+# OTEL_EXPORTER_OTLP_ENDPOINT = "https://otlp.us5.datadoghq.com"
+# OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE = "delta"

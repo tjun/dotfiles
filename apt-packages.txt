@@ -1,7 +1,11 @@
+bubblewrap
+build-essential
+ca-certificates
 curl
-zsh
+file
 git
 openssh-server
-ripgrep
-gh
-fd-find
+procps
+tmux
+unzip
+zsh

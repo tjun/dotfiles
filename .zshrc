@@ -45,11 +45,6 @@ autoload -Uz bashcompinit && bashcompinit
 # auto complate with case insensitive
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-fi
-
 function git-nb() {
   if [ $# -eq 2 ]; then
     branch="${USER}/$1/$2"
@@ -80,9 +75,12 @@ if [[ -f /proc/version ]] && grep -iq Microsoft /proc/version; then
   export GOPATH=$HOME/dev
   export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 else
-  export GOROOT=$(go env GOROOT)
+  if (( $+commands[go] )); then
+    export GOROOT=$(go env GOROOT)
+    export PATH="$GOROOT/bin:$PATH"
+  fi
   export GOPATH=$HOME/dev
-  export PATH="$GOROOT/bin:$GOPATH/bin:$PATH"
+  export PATH="$GOPATH/bin:$PATH"
   export GODEBUG=asyncpreemptoff=1 # To fix terraform issue
 fi
 
@@ -94,8 +92,22 @@ fi
 # zsh-abbr (sheldon で管理、ABBR_QUIETER は source 前に設定が必要)
 export ABBR_QUIETER=1
 
-# sheldon
-eval "$(sheldon source)"
+# sheldon (未導入のマシンでも起動できるようにガードする)
+if (( $+commands[sheldon] )); then
+  eval "$(sheldon source)"
+fi
+
+# zsh-defer は sheldon 経由でしか入らないため、無い場合は即時実行にフォールバックする
+if ! (( $+functions[zsh-defer] )); then
+  zsh-defer() { "$@" }
+fi
+
+# OS 別設定 (Homebrew 依存や Linux 固有の設定はこちらに置く)。
+# zsh-defer を使うため sheldon の後で読む必要がある。
+case "$OSTYPE" in
+  darwin*) [[ -r "${DOTFILES}/zsh/os-darwin.zsh" ]] && source "${DOTFILES}/zsh/os-darwin.zsh" ;;
+  linux*)  [[ -r "${DOTFILES}/zsh/os-linux.zsh" ]] && source "${DOTFILES}/zsh/os-linux.zsh" ;;
+esac
 
 # zoxide (遅延読み込み)
 if (( $+commands[zoxide] )); then
@@ -119,28 +131,6 @@ else
   alias la='ls -AF'
 fi
 
-# gcloud (遅延読み込み)
-if (( $+commands[gcloud] )) && [[ -n "$BREW_PREFIX" ]]; then
-  PATH=$PATH:${BREW_PREFIX}/share/google-cloud-sdk/bin
-  zsh-defer source "${BREW_PREFIX}/share/google-cloud-sdk/path.zsh.inc"
-  zsh-defer source "${BREW_PREFIX}/share/google-cloud-sdk/completion.zsh.inc"
-fi
-
-# kubectl (completionをキャッシュ化) - 現在未使用
-# if (( $+commands[kubectl] )); then
-#   alias k="nocorrect kubectl"
-#   alias kg="kubectl get "
-#   alias kgy="kubectl get -o yaml "
-#   alias kd="kubectl describe "
-#   _kubectl_cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/kubectl_completion.zsh"
-#   if [[ ! -f "$_kubectl_cache" ]]; then
-#     mkdir -p "${_kubectl_cache:h}"
-#     kubectl completion zsh > "$_kubectl_cache"
-#   fi
-#   zsh-defer source "$_kubectl_cache"
-#   zsh-defer complete -o default -F __start_kubectl k
-# fi
-
 if (( $+commands[bat] )); then
   alias cat='bat'
 fi
@@ -163,15 +153,6 @@ fi
 if (( $+commands[direnv] )); then
   zsh-defer eval "$(direnv hook zsh)"
 fi
-
-# if [ -e "/opt/homebrew/opt/libpq/bin" ];then
-#   export PATH="${PATH}:/opt/homebrew/opt/libpq/bin"
-# fi
-
-if [ -e "/opt/homebrew/opt/postgresql@16/bin" ];then
-  export PATH="${PATH}:/opt/homebrew/opt/postgresql@16/bin"
-fi
-
 
 if (( $+commands[fzf] )); then
   export FZF_CTRL_T_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
@@ -213,16 +194,23 @@ function prompt_color() {
   fi
 }
 
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
+if (( $+commands[yazi] )); then
+  function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+      builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+  }
+fi
 
 if [ -n "$PS1" ]; then
   prompt_color
+fi
+
+# SSH でログインしたときは tmux セッション "main" に入る (既に tmux 内なら何もしない)
+if [[ -o interactive ]] && [[ -n "$SSH_CONNECTION" ]] && [[ -z "$TMUX" ]] && (( $+commands[tmux] )); then
+  exec tmux new-session -A -s main
 fi
 

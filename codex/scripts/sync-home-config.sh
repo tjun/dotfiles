@@ -43,7 +43,10 @@ mv "${tmp_rules}" "${EFFECTIVE_RULES}"
 mkdir -p "${HOME_RULES_DIR}"
 ln -sfn "${EFFECTIVE_CONFIG}" "${HOME_CODEX_DIR}/config.toml"
 ln -sfn "${EFFECTIVE_RULES}" "${HOME_RULES_DIR}/default.rules"
-ln -sfn "${HOOKS_DIR}" "${HOME_HOOKS_DIR}"
+# hooks ディレクトリは任意。無いまま symlink すると壊れたリンクが残る。
+if [[ -d "${HOOKS_DIR}" ]]; then
+  ln -sfn "${HOOKS_DIR}" "${HOME_HOOKS_DIR}"
+fi
 
 for profile_config in "${CODEX_DIR}"/*.config.toml(N.); do
   ln -sfn "${profile_config}" "${HOME_CODEX_DIR}/${profile_config:t}"
@@ -52,7 +55,9 @@ done
 if [[ -d "${CLAUDE_SKILLS_DIR}" ]]; then
   mkdir -p "${HOME_SKILLS_DIR}"
 
-  for skill_dir in "${CLAUDE_SKILLS_DIR}"/*(N/); do
+  # (-/) は symlink を辿ってディレクトリ判定する。~/.claude/skills の中身は
+  # スキルごとの symlink なので、(/) だと 1 つも拾えない。
+  for skill_dir in "${CLAUDE_SKILLS_DIR}"/*(N-/); do
     skill_name=${skill_dir:t}
     target=${HOME_SKILLS_DIR}/${skill_name}
 

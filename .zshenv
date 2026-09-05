@@ -9,7 +9,18 @@ typeset -U PATH path
 # ファイル作成時のデフォルトパーミッション設定
 umask 022
 
-export EDITOR='hx'
+# OS 別設定ファイル (zsh/os-*.zsh) の参照元
+export DOTFILES="${HOME}/dev/src/github.com/tjun/dotfiles"
+
+# マシンによって入っているエディタが違うので、見つかった順に採用する
+for _editor in hx nvim vim; do
+  if (( $+commands[$_editor] )); then
+    export EDITOR=$_editor
+    break
+  fi
+done
+unset _editor
+
 export HOMEBREW_ANALYTICS_DEBUG=1
 
 # Homebrew (macOS)

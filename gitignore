@@ -1,0 +1,13 @@
+# 全リポジトリ共通の除外設定。~/.gitignore へ symlink し、
+# .gitconfig の core.excludesfile から参照する。
+# このリポジトリ自身の除外設定は .gitignore にある（別物なので注意）。
+.DS_Store
+.envrc
+*~
+.vscode
+
+# AI エージェントの作業ファイル
+CLAUDE.md
+AGENTS.md
+EXECPLAN.md
+**/.claude/settings.local.json
