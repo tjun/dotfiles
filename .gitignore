@@ -18,3 +18,6 @@ cursor/extensions.json
 
 **/.claude/settings.local.json
 claude/settings.json.bak
+
+# agmsg が ~/.claude/commands (= claude/commands) に自動生成・更新するので追跡しない
+claude/commands/agmsg.md
