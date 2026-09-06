@@ -2,8 +2,10 @@
 
 macOS と Ubuntu の両方で使う。共通の設定はリポジトリ直下に置き、OS 固有のものは
 `zsh/os-darwin.zsh` / `zsh/os-linux.zsh`、`mise/config.darwin.toml` / `mise/config.linux.toml`
-に分けている。マシン固有の値 (署名鍵、サンドボックスのパス等) は gitignore された
-`~/.gitconfig-local` `~/.zshrc-local` `codex/config.local.toml` に置く。
+に分けている。マシン固有の値 (署名鍵等) は gitignore された `~/.gitconfig-local`
+`~/.zshrc-local` に置く。`~/.claude/settings.json` と `~/.codex/config.toml` は Claude Code /
+Codex / Orca が書き戻すので symlink にせず実体を置く (settings.json だけは雛形を
+`claude/settings.json` に持ち、`claude/scripts/sync-settings.sh` で揃える)。
 
 パッケージの入手元は OS で異なる。
 
@@ -79,9 +81,9 @@ zsh ~/dev/src/github.com/tjun/dotfiles/claude/scripts/link-skills.sh
 # 外部スキル (claude/skills.txt に列挙したもの) を gh skill install で入れる
 zsh ~/dev/src/github.com/tjun/dotfiles/claude/scripts/install-skills.sh
 
-# Codex
+# Codex (config.toml 本体は管理しない。既存マシンから写して機械依存の値を直す)
 mkdir -p ~/.codex/tmp
-cp codex/config.local.toml.example codex/config.local.toml # and edit writable_roots
+scp <existing-host>:~/.codex/config.toml ~/.codex/config.toml # then fix absolute paths, remove hooks.state / projects
 zsh ~/dev/src/github.com/tjun/dotfiles/codex/scripts/sync-home-config.sh
 
 # copy and update files
@@ -112,15 +114,15 @@ mv ~/.claude/scripts/dd-otel-headers.sh ~/.claude/local/dd-otel-headers.sh
 #    (旧構成のディレクトリ symlink はスクリプトが自動で外す)
 zsh ~/dev/src/github.com/tjun/dotfiles/claude/scripts/link-skills.sh
 
-# 5. ~/.claude/settings.json と ~/.codex/config.toml を symlink からコピーに置き換える
-#    (symlink を見つけると自動で置き換える)
+# 5. ~/.claude/settings.json と ~/.codex/config.toml を symlink から実体に置き換える
+#    (どちらのスクリプトも symlink を見つけると自動で置き換える)
 zsh ~/dev/src/github.com/tjun/dotfiles/claude/scripts/sync-settings.sh
 zsh ~/dev/src/github.com/tjun/dotfiles/codex/scripts/sync-home-config.sh
 ```
 
-さらに `codex/config.local.toml` を作り、`config.local.toml.example` のテレメトリ関連 5 行
-(`CLAUDE_CODE_ENABLE_TELEMETRY` と `OTEL_*`) のコメントを外す。zsh のテレメトリ設定は
-`zsh/os-darwin.zsh` に入っているので追加の作業は要らない。
+Codex のテレメトリ (`CLAUDE_CODE_ENABLE_TELEMETRY` と `OTEL_*`) は `~/.codex/config.toml` の
+`shell_environment_policy.set` に直接書く。zsh のテレメトリ設定は `zsh/os-darwin.zsh` に
+入っているので追加の作業は要らない。
 
 `zsh/os-darwin.zsh` の gcloud ブロックは `$BREW_PREFIX` を参照する。これはリポジトリ内では
 定義していないので、必要なら `~/.zshrc-local` で設定する。
@@ -184,9 +186,9 @@ zsh ~/dev/src/github.com/tjun/dotfiles/claude/scripts/link-skills.sh
 # 外部スキル (claude/skills.txt に列挙したもの) を gh skill install で入れる
 zsh ~/dev/src/github.com/tjun/dotfiles/claude/scripts/install-skills.sh
 
-# Codex
+# Codex (config.toml 本体は管理しない。既存マシンから写して機械依存の値を直す)
 mkdir -p ~/.codex/tmp
-cp codex/config.local.toml.example codex/config.local.toml # テレメトリ行はコメントのままにする
+scp <existing-host>:~/.codex/config.toml ~/.codex/config.toml # /Users → /home、hooks.state / projects / mac 専用 mcp_servers を削る
 zsh ~/dev/src/github.com/tjun/dotfiles/codex/scripts/sync-home-config.sh
 
 # machine-local git settings
@@ -197,8 +199,8 @@ Ubuntu で意図的に入れていないもの:
 
 - **Homebrew / Brewfile** — `Brewfile` は macOS の cask を含むので実行しない。
 - **rust, npm:nano-banana-mcp** — `mise/config.darwin.toml` にあり、Linux では読み込まない。
-- **テレメトリ** — Datadog への送信設定は `zsh/os-darwin.zsh` と `codex/config.local.toml` の
-  コメントアウト部分にあり、Ubuntu では有効にならない。
+- **テレメトリ** — Datadog への送信設定は `zsh/os-darwin.zsh` と mac の `~/.codex/config.toml`
+  にあり、Ubuntu では有効にならない。
 - **cmux, karabiner, wezterm, VS Code** — GUI 前提のため対象外。`hunk` 本体は mise で入る。
   `claude/scripts/hunk-review.sh` / `mo-preview.sh` / `agent-terminal.sh` は Orca か cmux の
   ペイン操作が前提 (`claude/scripts/lib/ui-pane.sh` で切り替える) なので、Orca の中なら Ubuntu でも動く。
@@ -252,8 +254,7 @@ sheldon lock --update
 # tmux プラグイン (tmux 内で prefix + U でも可)
 ~/.tmux/plugins/tpm/bin/update_plugins all
 
-# Codex (config.toml か config.local.toml を変えたとき)
-# ~/.codex/config.toml はコピーなので、差分が出たら手で反映するか --push で上書きする
+# Codex (rules やプロファイル用 *.config.toml、スキルを変えたとき)
 zsh codex/scripts/sync-home-config.sh
 
 # Claude Code の settings.json (雛形 claude/settings.json と ~/.claude/settings.json の意味差分)
