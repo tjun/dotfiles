@@ -212,7 +212,12 @@ fi
 # SSH でログインしたときは tmux セッション "main" に入る (既に tmux 内なら何もしない)。
 # 端末が無い `ssh host zsh -ic ...` のような呼び出しでは tmux が起動できずシェルごと
 # 落ちるので、tty があるときだけ。
-if [[ -o interactive ]] && [[ -t 0 ]] && [[ -n "$SSH_CONNECTION" ]] && [[ -z "$TMUX" ]] && (( $+commands[tmux] )); then
+# Orca の SSH worktree が開く端末も SSH_CONNECTION を継承するが、こちらは relay が
+# PTY を保持して切断耐性を担うため tmux は不要。全端末が同じ session の鏡になり、
+# ORCA_TERMINAL_HANDLE も最初の端末のものに固定されてしまうので除外する。
+# TERM_PROGRAM は tmux 内で上書きされるため、起動時に Orca が渡す handle も併せて見る。
+if [[ -o interactive ]] && [[ -t 0 ]] && [[ -n "$SSH_CONNECTION" ]] && [[ -z "$TMUX" ]] \
+   && [[ -z "$ORCA_TERMINAL_HANDLE" ]] && [[ "$TERM_PROGRAM" != Orca ]] && (( $+commands[tmux] )); then
   exec tmux new-session -A -s main
 fi
 
