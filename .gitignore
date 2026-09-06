@@ -21,3 +21,6 @@ claude/settings.json.bak
 
 # agmsg が ~/.claude/commands (= claude/commands) に自動生成・更新するので追跡しない
 claude/commands/agmsg.md
+
+# agmsg がプロジェクト用に生成する (絶対パス入り)
+.codex/hooks.json

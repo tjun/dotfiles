@@ -64,9 +64,13 @@ tmux source-file ~/.tmux.conf && ~/.tmux/plugins/tpm/bin/install_plugins
 
 # Claude Code
 mkdir -p ~/.claude/local
-for f in CLAUDE.md settings.json PLANS.md scripts commands statusline-command.sh; do
+for f in CLAUDE.md PLANS.md scripts commands statusline-command.sh; do
   ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/$f ~/.claude/$f
 done
+
+# settings.json は Claude Code と Orca が書き戻すので symlink にせずコピーを置く
+# (以後は同じスクリプトで意味差分を確認し、--push / --pull で揃える)
+zsh ~/dev/src/github.com/tjun/dotfiles/claude/scripts/sync-settings.sh
 
 # skills はディレクトリごとではなくスキルごとに symlink する
 # (hunk 同梱のスキルも PATH 上の hunk から解決して同じ場所に並べるため)
@@ -107,6 +111,11 @@ mv ~/.claude/scripts/dd-otel-headers.sh ~/.claude/local/dd-otel-headers.sh
 # 4. ~/.claude/skills をスキルごとの symlink に張り替える
 #    (旧構成のディレクトリ symlink はスクリプトが自動で外す)
 zsh ~/dev/src/github.com/tjun/dotfiles/claude/scripts/link-skills.sh
+
+# 5. ~/.claude/settings.json と ~/.codex/config.toml を symlink からコピーに置き換える
+#    (symlink を見つけると自動で置き換える)
+zsh ~/dev/src/github.com/tjun/dotfiles/claude/scripts/sync-settings.sh
+zsh ~/dev/src/github.com/tjun/dotfiles/codex/scripts/sync-home-config.sh
 ```
 
 さらに `codex/config.local.toml` を作り、`config.local.toml.example` のテレメトリ関連 5 行
@@ -161,9 +170,12 @@ tmux source-file ~/.tmux.conf && ~/.tmux/plugins/tpm/bin/install_plugins
 
 # Claude Code
 mkdir -p ~/.claude
-for f in CLAUDE.md settings.json PLANS.md scripts commands statusline-command.sh; do
+for f in CLAUDE.md PLANS.md scripts commands statusline-command.sh; do
   ln -sf ~/dev/src/github.com/tjun/dotfiles/claude/$f ~/.claude/$f
 done
+
+# settings.json は Claude Code と Orca が書き戻すので symlink にせずコピーを置く
+zsh ~/dev/src/github.com/tjun/dotfiles/claude/scripts/sync-settings.sh
 
 # skills はディレクトリごとではなくスキルごとに symlink する
 # (hunk 同梱のスキルも PATH 上の hunk から解決して同じ場所に並べるため)
@@ -241,7 +253,13 @@ sheldon lock --update
 ~/.tmux/plugins/tpm/bin/update_plugins all
 
 # Codex (config.toml か config.local.toml を変えたとき)
+# ~/.codex/config.toml はコピーなので、差分が出たら手で反映するか --push で上書きする
 zsh codex/scripts/sync-home-config.sh
+
+# Claude Code の settings.json (雛形 claude/settings.json と ~/.claude/settings.json の意味差分)
+zsh claude/scripts/sync-settings.sh          # 差分を見る
+zsh claude/scripts/sync-settings.sh --push   # 雛形を ~/.claude に反映
+zsh claude/scripts/sync-settings.sh --pull   # ~/.claude 側の変更を雛形に取り込んで commit
 
 # スキルを増やしたとき / hunk を上げたとき
 # (`hunk skill path` はバージョン固定のパスを返すのでリンクの張り直しが要る)
