@@ -21,6 +21,12 @@ ui_kind() {
   fi
 }
 
+# The Linux package installs the CLI as `orca-ide` because GNOME's screen reader
+# already owns `orca`; prefer it whenever present so we never invoke the wrong tool.
+_ui_orca() {
+  if command -v orca-ide >/dev/null 2>&1; then orca-ide "$@"; else orca "$@"; fi
+}
+
 # Orca scopes browser tabs, and optionally terminals, to a worktree.
 _ui_orca_wt() {
   [[ -n "${ORCA_WORKTREE_ID:-}" ]] && printf -- '--worktree\n%s\n' "$ORCA_WORKTREE_ID"
@@ -33,7 +39,7 @@ ui_term_start() {
   case "$(ui_kind)" in
     orca)
       mapfile -t wt < <(_ui_orca_wt)
-      out=$(orca terminal create "${wt[@]}" --title "$title" --command "$cmd" 2>&1) || return 1
+      out=$(_ui_orca terminal create "${wt[@]}" --title "$title" --command "$cmd" 2>&1) || return 1
       # "Created terminal term_xxx (title: ...)"
       printf '%s\n' "$out" | grep -oE 'term_[0-9a-f-]+' | head -1
       ;;
@@ -80,7 +86,7 @@ ui_term_find() {
   case "$(ui_kind)" in
     orca)
       mapfile -t wt < <(_ui_orca_wt)
-      orca terminal list "${wt[@]}" --json 2>/dev/null |
+      _ui_orca terminal list "${wt[@]}" --json 2>/dev/null |
         jq -r --arg t "$title" '[.result.terminals[]? | select(.title == $t and .connected)] | .[0].handle // empty'
       ;;
     cmux)
@@ -94,7 +100,7 @@ ui_term_find() {
 ui_term_read() {
   local handle=$1 lines=${2:-20}
   case "$(ui_kind)" in
-    orca) orca terminal read --terminal "$handle" --screen --limit "$lines" 2>/dev/null ;;
+    orca) _ui_orca terminal read --terminal "$handle" --screen --limit "$lines" 2>/dev/null ;;
     cmux) cmux read-screen --surface "$handle" --lines "$lines" 2>/dev/null ;;
     *) return 1 ;;
   esac
@@ -104,7 +110,7 @@ ui_term_read() {
 ui_term_key() {
   local handle=$1 key=$2
   case "$(ui_kind)" in
-    orca) orca terminal send --terminal "$handle" --text "$key" >/dev/null 2>&1 ;;
+    orca) _ui_orca terminal send --terminal "$handle" --text "$key" >/dev/null 2>&1 ;;
     cmux) cmux send-key --surface "$handle" "$key" >/dev/null 2>&1 ;;
     *) return 1 ;;
   esac
@@ -113,7 +119,7 @@ ui_term_key() {
 ui_term_close() {
   local handle=$1
   case "$(ui_kind)" in
-    orca) orca terminal close --terminal "$handle" >/dev/null 2>&1 ;;
+    orca) _ui_orca terminal close --terminal "$handle" >/dev/null 2>&1 ;;
     cmux) cmux close-surface --surface "$handle" --workspace "$CMUX_WORKSPACE_ID" >/dev/null 2>&1 ;;
     *) return 1 ;;
   esac
@@ -122,7 +128,7 @@ ui_term_close() {
 ui_term_focus() {
   local handle=$1 pane
   case "$(ui_kind)" in
-    orca) orca terminal switch --terminal "$handle" >/dev/null 2>&1 ;;
+    orca) _ui_orca terminal switch --terminal "$handle" >/dev/null 2>&1 ;;
     cmux)
       pane=$(cmux tree --workspace "$CMUX_WORKSPACE_ID" --json 2>/dev/null |
         jq -r --arg s "$handle" '[.. | objects | select(.ref? == $s)] | .[0].pane_ref // empty')
@@ -139,7 +145,7 @@ ui_browser_find() {
   case "$(ui_kind)" in
     orca)
       mapfile -t wt < <(_ui_orca_wt)
-      orca tab list "${wt[@]}" --json 2>/dev/null |
+      _ui_orca tab list "${wt[@]}" --json 2>/dev/null |
         jq -r --arg u "$prefix" '[.result.tabs[]? | select((.url // "") | startswith($u))] | .[0].pageId // .[0].id // empty'
       ;;
     cmux)
@@ -155,7 +161,7 @@ ui_browser_open() {
   case "$(ui_kind)" in
     orca)
       mapfile -t wt < <(_ui_orca_wt)
-      orca tab create "${wt[@]}" --url "$url" >/dev/null 2>&1
+      _ui_orca tab create "${wt[@]}" --url "$url" >/dev/null 2>&1
       ;;
     cmux) cmux browser open-split "$url" --workspace "$CMUX_WORKSPACE_ID" >/dev/null 2>&1 ;;
     *) return 1 ;;
@@ -167,8 +173,8 @@ ui_browser_goto() {
   case "$(ui_kind)" in
     orca)
       mapfile -t wt < <(_ui_orca_wt)
-      orca tab switch "${wt[@]}" --page "$handle" >/dev/null 2>&1 || return 1
-      orca goto "${wt[@]}" --url "$url" >/dev/null 2>&1
+      _ui_orca tab switch "${wt[@]}" --page "$handle" >/dev/null 2>&1 || return 1
+      _ui_orca goto "${wt[@]}" --url "$url" >/dev/null 2>&1
       ;;
     cmux) cmux browser "$handle" goto "$url" >/dev/null 2>&1 ;;
     *) return 1 ;;
@@ -180,8 +186,8 @@ ui_browser_close() {
   case "$(ui_kind)" in
     orca)
       mapfile -t wt < <(_ui_orca_wt)
-      orca tab switch "${wt[@]}" --page "$handle" >/dev/null 2>&1 || return 1
-      orca tab close "${wt[@]}" >/dev/null 2>&1
+      _ui_orca tab switch "${wt[@]}" --page "$handle" >/dev/null 2>&1 || return 1
+      _ui_orca tab close "${wt[@]}" >/dev/null 2>&1
       ;;
     cmux) cmux close-surface --surface "$handle" --workspace "$CMUX_WORKSPACE_ID" >/dev/null 2>&1 ;;
     *) return 1 ;;

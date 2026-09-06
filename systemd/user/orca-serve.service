@@ -1,0 +1,20 @@
+# Headless Orca runtime (https://www.onorca.dev/docs/remote-servers).
+# Runs as a user service so agents keep working after the SSH session or the
+# desktop login goes away; requires `loginctl enable-linger $USER`.
+# The advertised address is the Tailscale MagicDNS name so mac/iPhone clients
+# can pair by hostname; the port is never exposed outside the tailnet.
+[Unit]
+Description=Orca headless runtime server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/bin/orca-ide serve --port 6768 --pairing-address tjun-legion.nmhs.internal
+Restart=on-failure
+RestartSec=5
+# Orca's Electron runtime needs a HOME-relative state dir and a sane PATH for
+# the agents it launches (claude/codex live in ~/.local/bin, mise shims too).
+Environment=PATH=%h/.local/bin:%h/.local/share/mise/shims:/usr/local/bin:/usr/bin:/bin
+
+[Install]
+WantedBy=default.target

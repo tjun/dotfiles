@@ -195,6 +195,37 @@ Ubuntu で意図的に入れていないもの:
 既知の注意点: Ubuntu 24.04 は既定で `kernel.apparmor_restrict_unprivileged_userns = 1` のため、
 Codex の bubblewrap サンドボックスが警告を出す (動作はする)。
 
+### Remote Orca Server (任意)
+
+mac や iPhone の Orca から接続する常駐ランタイム (https://www.onorca.dev/docs/remote-servers)。
+Linux 版の CLI は GNOME のスクリーンリーダー `orca` と衝突しないよう `orca-ide` という名前で入る
+(`orca serve` 初回起動時に `~/.local/bin/orca` の dispatcher も作られる)。
+
+```console
+# Orca 本体 (.deb)。mac 側と同じバージョンを入れる
+gh release download --repo stablyai/orca --pattern 'orca-ide_*_amd64.deb' --dir ~/Downloads
+sudo apt install -y ~/Downloads/orca-ide_*_amd64.deb
+
+# ログアウト後もユーザーサービスを生かす
+sudo loginctl enable-linger "$USER"
+
+# systemd user unit (Tailscale の MagicDNS 名を advertise する。ホスト名はユニット内で固定)
+mkdir -p ~/.config/systemd/user
+ln -sf ~/dev/src/github.com/tjun/dotfiles/systemd/user/orca-serve.service ~/.config/systemd/user/orca-serve.service
+systemctl --user daemon-reload
+systemctl --user enable --now orca-serve.service
+journalctl --user -u orca-serve.service -n 30   # 出力される orca://pair?... は認証情報。共有しない
+
+# サーバー側でエージェントの認証を登録する (エージェントは legion 上で走る)
+orca-ide account add --agent claude
+orca-ide account add --agent codex
+orca-ide skills install --skill orca-cli --skill orchestration
+```
+
+クライアント側 (mac) は `orca environment add --name tjun-legion --pairing-code 'orca://pair?...'`
+か Settings → Remote Orca Servers → Add Server で登録する。iPhone は `--mobile-pairing` 付きで起動
+したときの QR を読む。ポート 6768 は tailnet の外に公開しない。
+
 ## Update
 
 ```console
