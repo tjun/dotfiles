@@ -187,9 +187,10 @@ Ubuntu で意図的に入れていないもの:
 - **rust, npm:nano-banana-mcp** — `mise/config.darwin.toml` にあり、Linux では読み込まない。
 - **テレメトリ** — Datadog への送信設定は `zsh/os-darwin.zsh` と `codex/config.local.toml` の
   コメントアウト部分にあり、Ubuntu では有効にならない。
-- **cmux, karabiner, wezterm, VS Code** — GUI 前提のため対象外。`hunk` 本体は mise で入るが、
-  `claude/scripts/hunk-review.sh` は cmux のペイン操作が前提なので Ubuntu では使えない
-  (`CMUX_WORKSPACE_ID` が無いと `hunk ... --watch` を自分で実行するよう促して終了する)。
+- **cmux, karabiner, wezterm, VS Code** — GUI 前提のため対象外。`hunk` 本体は mise で入る。
+  `claude/scripts/hunk-review.sh` / `mo-preview.sh` / `agent-terminal.sh` は Orca か cmux の
+  ペイン操作が前提 (`claude/scripts/lib/ui-pane.sh` で切り替える) なので、Orca の中なら Ubuntu でも動く。
+  どちらも無い端末では `hunk ... --watch` を自分で実行するよう促して終了する。
 
 既知の注意点: Ubuntu 24.04 は既定で `kernel.apparmor_restrict_unprivileged_userns = 1` のため、
 Codex の bubblewrap サンドボックスが警告を出す (動作はする)。

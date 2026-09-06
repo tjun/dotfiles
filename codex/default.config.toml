@@ -1,0 +1,12 @@
+approval_policy = "on-request"
+model_reasoning_effort = "medium"
+personality = "pragmatic"
+sandbox_mode = "workspace-write"
+model = "gpt-5.5"
+
+[features]
+terminal_resize_reflow = true
+memories = false
+external_migration = false
+goals = true
+prevent_idle_sleep = true

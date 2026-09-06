@@ -17,3 +17,4 @@ cursor/argv.json
 cursor/extensions.json
 
 **/.claude/settings.local.json
+claude/settings.json.bak

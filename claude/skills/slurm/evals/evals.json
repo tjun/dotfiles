@@ -1,0 +1,57 @@
+{
+  "skill_name": "slurm",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Planner の transformers バックエンドで VLM モデルの学習ジョブを mdx2 クラスタで実行したい。学習コードは OpenMMLab に依存しないので planner-train image を使う。チェックポイントは /checkpoints/vlm-exp-001 に保存する。sbatch スクリプトを書いて。",
+      "expected_output": "apps/planner/scripts/sbatch/ に配置する想定の sbatch スクリプト。set -euo pipefail、slurm-run 経由前提、ホスト/コンテナの役割分離。コンテナイメージは Dockerfile を build せず $CACHE_ROOT/sqsh/planner-train.<VERSION>.sqsh を --container-image で参照する。/datasets, /models, /checkpoints, /cache は静的マウントが効くので --container-mounts は明示しない。チェックポイントは /checkpoints/vlm-exp-001 に書く。",
+      "assertions": [
+        "スクリプトに set -euo pipefail があり、slurm-run 経由で呼ばれる前提のホスト/コンテナ役割分離パターンに従っている",
+        "コンテナイメージは Dockerfile を build せず ${CACHE_ROOT}/sqsh/planner-train.<VERSION>.sqsh を --container-image で参照している（planner-train-mm ではない）",
+        "/datasets, /models, /checkpoints, /cache の静的マウントを前提とし、不要な --container-mounts 明示をしていない",
+        "チェックポイント出力先がコンテナ内パス /checkpoints/vlm-exp-001 になっている",
+        "投入コマンドが ssh newmo10@mdx2-002 (または mdx2-006) からの sbatch /usr/local/bin/slurm-run 経由で、--job-name が指定されている"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "beryl ノードで planner の推論 API を起動して手元からテストリクエストを送りたい。vllm バックエンドで Qwen2.5-VL-3B-Instruct をベースにファインチューニングしたモデルのチェックポイントが /shared/checkpoints/my-model にある。ad-hoc でやりたいのでスクリプトは書かなくていい。手順を教えて。",
+      "expected_output": "srun を使った beryl ノードでの推論 API 起動手順。--gres=gpu:1 -w beryl の指定、コンテナイメージの指定、マウント設定（チェックポイントのマウント）、環境変数の設定、ヘルスチェック方法、curl でのテストリクエスト例。tmux か sbatch --wrap での切断耐性、手元からは SSH ポートフォワードで到達。チェックポイントが beryl のローカルディスクにあることの確認も含む。",
+      "assertions": [
+        "honajob@amber (lab ヘッドノード) に SSH してから srun --gres=gpu:1 -w beryl で起動する手順になっている",
+        "--container-image が指定され、コンテナで API を実行している",
+        "チェックポイント /shared/checkpoints/my-model がコンテナ内から参照できること（静的マウントまたは明示マウント）を正しく説明している",
+        "API のヘルスチェック方法と curl でのテストリクエスト例が含まれている",
+        "手元（ローカル）から beryl 上の API に到達する方法（SSH ポートフォワード等）が具体的に示されている"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "HuggingFace からシーンデータをダウンロードして、そのデータで GT replay を実行して、結果を GCS にアップロードする 3 ステップのパイプラインを組みたい。ブランチは feat/sim-eval で、lab クラスタを使う。",
+      "expected_output": "sbatch --parsable + --dependency=afterok を使ったパイプライン構築コマンド。3つのジョブが正しい順序で実行される。-p オプションで PIPELINE_ID を共有。ダウンロードジョブは --gres=gpu:0。lab は共有ストレージが無いため全ステップを -w で同一ノードに固定する。既存の download-scenes.sh を活用し、出力が JOB_OUTPUT_DIR に入るよう構成する。",
+      "assertions": [
+        "sbatch --parsable と --dependency=afterok を使って 3 ジョブが正しい順序で連鎖している",
+        "-p オプションで 3 ジョブが同じ PIPELINE_ID を共有している",
+        "ダウンロードステップ（および GPU 不要なステップ）が --gres=gpu:0 になっている",
+        "lab の共有ストレージ未構成を踏まえ、全ステップを -w で同一ノードに固定している",
+        "全ジョブが -b feat/sim-eval を指定し、honajob@amber から投入する手順になっている"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "kgc クラスタで GB200 GPU を1枚使って main ブランチの簡単な nvidia-smi ジョブを slurm-run 経由で投げたい。投入コマンドを教えて。",
+      "expected_output": "ssh kgc-bcm から sbatch --job-name=<id> --gres=gpu:1 /usr/local/bin/slurm-run -- nvidia-smi（-b main は省略可）。data_paths.conf と静的マウントは compute ノードに整備済みのため、環境変数や PYXIS_CONTAINER_MOUNTS の明示は不要。kgc-bcm では /mnt/weka が見えないため cd /mnt/weka/... はしない。-w でノード指定する場合は ssh alias ではなく正式ノード名 (kgc-west-z01-gpu01-r05-17/18) を使う。",
+      "assertions": [
+        "ssh kgc-bcm から sbatch する手順になっている",
+        "data_paths.conf / 静的マウントが整備済みであることを前提に、環境変数や PYXIS_CONTAINER_MOUNTS を不要に明示していない",
+        "head ノード (kgc-bcm) では /mnt/weka が見えないことを前提にしており、cd /mnt/weka/... をしていない",
+        "-w でノード指定する場合は ssh alias ではなく正式ノード名 (kgc-west-z01-gpu01-r05-17/18) を使っている",
+        "--job-name 指定と --gres=gpu:1 があり、main ブランチ（-b main またはデフォルト）のジョブになっている"
+      ],
+      "files": []
+    }
+  ]
+}

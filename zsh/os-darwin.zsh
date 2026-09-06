@@ -3,7 +3,8 @@
 # Homebrew や macOS 専用ツール (herdr/cmux, gcloud, postgresql) に依存する設定はここに置く。
 
 # herdr が ctrl+t をプレフィックスとして受け取れるよう解除
-stty status undef
+# (stty は端末が無い `zsh -ic ...` では失敗して警告を出すので tty があるときだけ)
+[[ -t 0 ]] && stty status undef
 bindkey -r '^T'
 
 if type brew &>/dev/null; then

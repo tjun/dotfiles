@@ -60,7 +60,12 @@ setup_agmsg_team() {
   local failed=0
   AGMSG_RESOLVE_PROJECT=0 "$scripts/join.sh" "$team" claude claude-code "$worktree_path" >&2 || failed=1
   AGMSG_RESOLVE_PROJECT=0 "$scripts/join.sh" "$team" codex codex "$worktree_path" >&2 || failed=1
-  "$scripts/delivery.sh" set monitor claude-code "$worktree_path" >&2 || failed=1
+  # Asymmetric on purpose. A spawned codex is a worker that must react to
+  # messages unprompted, so it watches continuously. The Claude side is the one
+  # driving, and most sessions never involve codex at all -- a watcher there is
+  # pure overhead, so its inbox is subscribed on demand instead
+  # (`delivery.sh set monitor claude-code <path>`).
+  "$scripts/delivery.sh" set off claude-code "$worktree_path" >&2 || failed=1
   "$scripts/delivery.sh" set monitor codex "$worktree_path" >&2 || failed=1
 
   # Not fatal -- a worktree without messaging is still a usable worktree -- but

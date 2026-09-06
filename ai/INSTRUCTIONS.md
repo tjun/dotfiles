@@ -19,8 +19,8 @@
 - Run relevant verification after changes and report what was checked.
 - For large investigation tasks, use subagents to keep the main context clean.
 
-## Showing work in cmux (macOS の cmux 上で作業しているときだけ)
-- 以下のスクリプトは cmux に依存する。`~/.claude/scripts/mo-preview.sh` が無いか cmux 外で動いている場合はこの節を無視して通常どおり出力する。
+## Showing work in Orca / cmux (Orca か cmux の上で作業しているときだけ)
+- 以下のスクリプトは Orca か cmux のペイン操作に依存する。`~/.claude/scripts/mo-preview.sh` が無いか、どちらの外で動いている場合はこの節を無視して通常どおり出力する。
 - Markdown to read: `~/.claude/scripts/mo-preview.sh <file>...` (`-t <group>`, `--close`). Never preview Markdown another way.
 - Diff to review: `~/.claude/scripts/hunk-review.sh [diff|show] [args]` (`--focus`, `--close`). Never run `hunk diff`/`show` yourself; drive the live session with `hunk session ...`.
 
