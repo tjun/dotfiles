@@ -209,8 +209,10 @@ if [ -n "$PS1" ]; then
   prompt_color
 fi
 
-# SSH でログインしたときは tmux セッション "main" に入る (既に tmux 内なら何もしない)
-if [[ -o interactive ]] && [[ -n "$SSH_CONNECTION" ]] && [[ -z "$TMUX" ]] && (( $+commands[tmux] )); then
+# SSH でログインしたときは tmux セッション "main" に入る (既に tmux 内なら何もしない)。
+# 端末が無い `ssh host zsh -ic ...` のような呼び出しでは tmux が起動できずシェルごと
+# 落ちるので、tty があるときだけ。
+if [[ -o interactive ]] && [[ -t 0 ]] && [[ -n "$SSH_CONNECTION" ]] && [[ -z "$TMUX" ]] && (( $+commands[tmux] )); then
   exec tmux new-session -A -s main
 fi
 
