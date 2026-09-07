@@ -92,6 +92,23 @@ if is_registered_worktree; then
   exit 0
 fi
 
+# A worktree created before this hook existed lives wherever Claude Code's
+# default put it (typically .claude/worktrees/<name>). git refuses to check the
+# same branch out twice, so a resume of such a session must reuse that location
+# instead of trying to add a second worktree for the branch.
+legacy_path=$(git -C "$main_root" worktree list --porcelain |
+  awk -v ref="refs/heads/$name" '
+    /^worktree /{path=substr($0, 10)}
+    $0 == "branch " ref {print path; exit}
+  ')
+if [ -n "$legacy_path" ] && [ -d "$legacy_path" ]; then
+  echo "WorktreeCreate hook: branch $name is already checked out at $legacy_path; reusing it" >&2
+  worktree_path="$legacy_path"
+  setup_agmsg_team
+  echo "$worktree_path"
+  exit 0
+fi
+
 if [ -e "$worktree_path" ]; then
   # Directory survives but git lost track of it (e.g. the repo was moved, or
   # the administrative entry under .git/worktrees was pruned). Try to relink
