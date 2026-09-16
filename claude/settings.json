@@ -234,18 +234,6 @@
           }
         ]
       }
-    ],
-    "WorktreeCreate": [
-      {
-        "hooks": [
-          {
-            "command": "bash ~/.claude/scripts/worktree-create-setup.sh",
-            "statusMessage": "Creating worktree (mise install + make setup)...",
-            "timeout": 300,
-            "type": "command"
-          }
-        ]
-      }
     ]
   },
   "includeCoAuthoredBy": false,
