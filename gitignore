@@ -11,3 +11,11 @@ CLAUDE.md
 AGENTS.md
 EXECPLAN.md
 **/.claude/settings.local.json
+.claude/artifacts/
+.claude/plans/
+.codex/environments/environment.toml
+
+# mise
+.mise.toml
+
+.worktreeinclude
