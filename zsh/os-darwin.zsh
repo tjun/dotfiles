@@ -42,7 +42,7 @@ if [ -e "/opt/homebrew/opt/postgresql@16/bin" ];then
 fi
 
 # Claude Code のテレメトリ送信先 (Datadog)。ヘッダ生成スクリプトは
-# ~/.claude/local/dd-otel-headers.sh にマシンローカルで置く (リポジトリには含めない)。
+# ~/.config/claude/dd-otel-headers.sh にマシンローカルで置く (リポジトリには含めない)。
 export CLAUDE_CODE_ENABLE_TELEMETRY=1
 export OTEL_METRICS_EXPORTER=otlp
 export OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf

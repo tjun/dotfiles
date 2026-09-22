@@ -103,10 +103,11 @@ ln -sf ~/dev/src/github.com/tjun/dotfiles/mise/config.darwin.toml ~/.config/mise
 # 2. グローバル除外ファイルの参照先を .gitignore から gitignore に張り替える
 ln -sfn ~/dev/src/github.com/tjun/dotfiles/gitignore ~/.gitignore
 
-# 3. テレメトリのヘッダ生成スクリプトを local/ へ移す
-#    (~/.claude/scripts がリポジトリへの symlink になるため、そこには置けない)
-mkdir -p ~/.claude/local
-mv ~/.claude/scripts/dd-otel-headers.sh ~/.claude/local/dd-otel-headers.sh
+# 3. テレメトリのヘッダ生成スクリプトを ~/.config/claude/ へ移す
+#    (~/.claude/scripts はリポジトリへの symlink なので置けない。~/.claude/local も
+#     Claude Code 本体が旧インストール先として掃除するので使わない)
+mkdir -p ~/.config/claude
+mv ~/.claude/scripts/dd-otel-headers.sh ~/.config/claude/dd-otel-headers.sh
 ```
 
 ```console
