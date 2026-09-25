@@ -27,19 +27,24 @@ _ui_orca() {
   if command -v orca-ide >/dev/null 2>&1; then orca-ide "$@"; else orca "$@"; fi
 }
 
-# Orca scopes browser tabs, and optionally terminals, to a worktree.
+# Orca scopes browser tabs, and optionally terminals, to a worktree. Sets the
+# caller's `wt` array to the matching CLI flags (empty outside a worktree).
+# Callers expand it as ${wt[@]+"${wt[@]}"}: macOS ships bash 3.2, where `set -u`
+# rejects a plain "${wt[@]}" on an empty array and `mapfile` does not exist.
 _ui_orca_wt() {
-  [[ -n "${ORCA_WORKTREE_ID:-}" ]] && printf -- '--worktree\n%s\n' "$ORCA_WORKTREE_ID"
+  wt=()
+  [[ -n "${ORCA_WORKTREE_ID:-}" ]] && wt=(--worktree "$ORCA_WORKTREE_ID")
+  return 0
 }
 
 # ui_term_start <title> <command> -> handle
 # Runs command in a new pane beside the current one.
 ui_term_start() {
-  local title=$1 cmd=$2 out surface
+  local title=$1 cmd=$2 out surface wt
   case "$(ui_kind)" in
     orca)
-      mapfile -t wt < <(_ui_orca_wt)
-      out=$(_ui_orca terminal create "${wt[@]}" --title "$title" --command "$cmd" 2>&1) || return 1
+      _ui_orca_wt
+      out=$(_ui_orca terminal create ${wt[@]+"${wt[@]}"} --title "$title" --command "$cmd" 2>&1) || return 1
       # "Created terminal term_xxx (title: ...)"
       printf '%s\n' "$out" | grep -oE 'term_[0-9a-f-]+' | head -1
       ;;
@@ -82,11 +87,11 @@ ui_term_start() {
 
 # ui_term_find <title> -> handle, empty when no pane carries that title
 ui_term_find() {
-  local title=$1
+  local title=$1 wt
   case "$(ui_kind)" in
     orca)
-      mapfile -t wt < <(_ui_orca_wt)
-      _ui_orca terminal list "${wt[@]}" --json 2>/dev/null |
+      _ui_orca_wt
+      _ui_orca terminal list ${wt[@]+"${wt[@]}"} --json 2>/dev/null |
         jq -r --arg t "$title" '[.result.terminals[]? | select(.title == $t and .connected)] | .[0].handle // empty'
       ;;
     cmux)
@@ -141,11 +146,11 @@ ui_term_focus() {
 
 # ui_browser_find <url prefix> -> handle of a tab already showing that URL
 ui_browser_find() {
-  local prefix=$1
+  local prefix=$1 wt
   case "$(ui_kind)" in
     orca)
-      mapfile -t wt < <(_ui_orca_wt)
-      _ui_orca tab list "${wt[@]}" --json 2>/dev/null |
+      _ui_orca_wt
+      _ui_orca tab list ${wt[@]+"${wt[@]}"} --json 2>/dev/null |
         jq -r --arg u "$prefix" '[.result.tabs[]? | select((.url // "") | startswith($u))] | .[0].pageId // .[0].id // empty'
       ;;
     cmux)
@@ -157,11 +162,11 @@ ui_browser_find() {
 }
 
 ui_browser_open() {
-  local url=$1
+  local url=$1 wt
   case "$(ui_kind)" in
     orca)
-      mapfile -t wt < <(_ui_orca_wt)
-      _ui_orca tab create "${wt[@]}" --url "$url" >/dev/null 2>&1
+      _ui_orca_wt
+      _ui_orca tab create ${wt[@]+"${wt[@]}"} --url "$url" >/dev/null 2>&1
       ;;
     cmux) cmux browser open-split "$url" --workspace "$CMUX_WORKSPACE_ID" >/dev/null 2>&1 ;;
     *) return 1 ;;
@@ -169,12 +174,12 @@ ui_browser_open() {
 }
 
 ui_browser_goto() {
-  local handle=$1 url=$2
+  local handle=$1 url=$2 wt
   case "$(ui_kind)" in
     orca)
-      mapfile -t wt < <(_ui_orca_wt)
-      _ui_orca tab switch "${wt[@]}" --page "$handle" >/dev/null 2>&1 || return 1
-      _ui_orca goto "${wt[@]}" --url "$url" >/dev/null 2>&1
+      _ui_orca_wt
+      _ui_orca tab switch ${wt[@]+"${wt[@]}"} --page "$handle" >/dev/null 2>&1 || return 1
+      _ui_orca goto ${wt[@]+"${wt[@]}"} --url "$url" >/dev/null 2>&1
       ;;
     cmux) cmux browser "$handle" goto "$url" >/dev/null 2>&1 ;;
     *) return 1 ;;
@@ -182,12 +187,12 @@ ui_browser_goto() {
 }
 
 ui_browser_close() {
-  local handle=$1
+  local handle=$1 wt
   case "$(ui_kind)" in
     orca)
-      mapfile -t wt < <(_ui_orca_wt)
-      _ui_orca tab switch "${wt[@]}" --page "$handle" >/dev/null 2>&1 || return 1
-      _ui_orca tab close "${wt[@]}" >/dev/null 2>&1
+      _ui_orca_wt
+      _ui_orca tab switch ${wt[@]+"${wt[@]}"} --page "$handle" >/dev/null 2>&1 || return 1
+      _ui_orca tab close ${wt[@]+"${wt[@]}"} >/dev/null 2>&1
       ;;
     cmux) cmux close-surface --surface "$handle" --workspace "$CMUX_WORKSPACE_ID" >/dev/null 2>&1 ;;
     *) return 1 ;;
