@@ -69,7 +69,6 @@ function  gwt() {
 
 # if WSL
 if [[ -f /proc/version ]] && grep -iq Microsoft /proc/version; then
-  eval "$(ssh-agent -s)"
   alias pbcopy="/mnt/c/windows/system32/clip.exe"
   export GOROOT=/usr/local/go
   export GOPATH=$HOME/dev
@@ -85,8 +84,22 @@ else
 fi
 
 # ssh-agent
+# env -i などで SSH_AUTH_SOCK が空のシェルが来るたびにエージェントを起動すると、終了しないまま溜まっていく。
+# macOS は launchd がエージェントのソケットを用意しているのでそれを使い、無い環境(WSL など)では
+# 固定パスのソケットを 1 つだけ使い回して、エージェントが応答しないときだけ起動する。
 if [ -z "$SSH_AUTH_SOCK" ]; then
-    eval "$(ssh-agent -s)"
+  if [[ $OSTYPE == darwin* ]]; then
+    export SSH_AUTH_SOCK=$(launchctl getenv SSH_AUTH_SOCK)
+  fi
+  if [ -z "$SSH_AUTH_SOCK" ]; then
+    export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
+    # ssh-add -l は接続できないとき 2 を返す(鍵が無いだけなら 1)
+    ssh-add -l >/dev/null 2>&1
+    if [ $? -eq 2 ]; then
+      rm -f "$SSH_AUTH_SOCK"
+      ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null
+    fi
+  fi
 fi
 
 # zsh-abbr (sheldon で管理、ABBR_QUIETER は source 前に設定が必要)
