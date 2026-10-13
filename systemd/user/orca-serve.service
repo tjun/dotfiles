@@ -10,8 +10,17 @@ Wants=network-online.target
 
 [Service]
 ExecStart=/usr/bin/orca-ide serve --port 6768 --pairing-address tjun-legion.nmhs.internal
-Restart=on-failure
+# The CLI wrapper exits 0 whenever the Electron runtime it supervises goes away
+# cleanly, including when systemd tears down the runtime's own
+# app-orca-<pid>.scope (e.g. OOMPolicy=stop after an OOM kill in an agent
+# process), so on-failure would leave the server down.
+Restart=always
 RestartSec=5
+# Electron moves its main process into its own app-orca-<pid>.scope but leaves
+# the zygote/GPU helpers in this unit's cgroup. Signalling the whole cgroup
+# kills those helpers under the main process, which then aborts with SIGILL.
+# Signal only the CLI wrapper instead; it forwards SIGTERM to the runtime.
+KillMode=mixed
 # Orca's Electron runtime needs a HOME-relative state dir and a sane PATH for
 # the agents it launches (claude/codex live in ~/.local/bin, mise shims too).
 Environment=PATH=%h/.local/bin:%h/.local/share/mise/shims:/usr/local/bin:/usr/bin:/bin

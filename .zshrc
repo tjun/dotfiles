@@ -96,8 +96,15 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     # ssh-add -l は接続できないとき 2 を返す(鍵が無いだけなら 1)
     ssh-add -l >/dev/null 2>&1
     if [ $? -eq 2 ]; then
-      rm -f "$SSH_AUTH_SOCK"
-      ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null
+      # 既存のソケットがあると bind は失敗するので、同時に起動した別のシェルの
+      # エージェントを上書きしない。それでも接続できなければ死んだエージェントの
+      # 残骸なので消して作り直す。
+      ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null 2>&1
+      ssh-add -l >/dev/null 2>&1
+      if [ $? -eq 2 ]; then
+        rm -f "$SSH_AUTH_SOCK"
+        ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null
+      fi
     fi
   fi
 fi
