@@ -1,6 +1,5 @@
 tap "homebrew/bundle"
 tap "k1LoW/tap", trusted: true
-#tap "manaflow-ai/cmux", trusted: true
 tap "suzuki-shunsuke/pinact", trusted: true
 
 brew "actionlint"
@@ -71,7 +70,6 @@ cask "gcloud-cli"
 cask "ghostty"
 cask "imageoptim"
 cask "karabiner-elements"
-#cask "cmux"
 cask "qlmarkdown"
 cask "raycast"
 #cask "slack"

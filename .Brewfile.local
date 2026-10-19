@@ -7,5 +7,4 @@ brew "helix"
 brew "mcap"
 brew "pinact"
 
-cask "discord"
 cask "fayazara/tap/screendrop"
