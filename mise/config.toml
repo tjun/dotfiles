@@ -1,10 +1,8 @@
 [tools]
-node = "24"
+node = "26"
 npm = "latest"
-"npm:corepack" = "0.34.7"
-"npm:pnpm" = "10.9.0"
-python = "3.13"
-uv = "0.12.4"
+python = "3.15"
+uv ="latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["python", "uv", "node"]
