@@ -17,7 +17,6 @@
 - Never add comments explaining why this edit was made, what changed in this PR, or any other historical or temporary context.
 - Preserve unrelated user changes.
 - Run relevant verification after changes and report what was checked.
-- For large investigation tasks, use subagents to keep the main context clean.
 
 ## Showing work in Orca / cmux (Orca か cmux の上で作業しているときだけ)
 - 以下のスクリプトは Orca か cmux のペイン操作に依存する。`~/.claude/scripts/mo-preview.sh` が無いか、どちらの外で動いている場合はこの節を無視して通常どおり出力する。
